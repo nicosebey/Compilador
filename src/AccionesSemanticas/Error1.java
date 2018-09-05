@@ -9,7 +9,7 @@ import AnalizadorLexico.ArchController;
 
 /**
  *
- * @author nicol
+ * @author nicol prueba
  */
 public class Error1 extends AccSemantica{
 
