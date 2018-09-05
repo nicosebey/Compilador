@@ -7,7 +7,7 @@ package AccionesSemanticas;
 
 /**
  *
- * @author nicol
+ * @author nicol merge prueba
  */
 public class Error2 {
     
