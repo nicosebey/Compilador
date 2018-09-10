@@ -159,9 +159,19 @@ public class ArchController {
         
      return 0;   
         
-    };
+    }
     
+    
+    public Token token(){
+        return buffer;
+    }
 
+    public boolean esReservada(String palabra){
+        if (listaPalReservadas.contains(palabra))
+            return true;
+        else
+            return false;
+    }
 
 
 }

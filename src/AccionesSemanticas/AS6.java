@@ -11,11 +11,16 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
+
+//CONCATENA CARACTER = Y DEVULEVE TOKEN
+
 public class AS6 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       ac.token().SetCaracter(c);
+       //TENEMOS QUE HACER EL CHEQUEO QUE NO EXISTA EN LA TABLA DE IDENTIFICADORES Y DEVOLVER EL VALOR.
+       return 0;
     }
     
 }

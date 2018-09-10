@@ -5,10 +5,20 @@
  */
 package AccionesSemanticas;
 
+import AnalizadorLexico.ArchController;
+
 /**
  *
  * @author nicol
  */
+//CONCATENO Y CHEQUEO SI VINO = O OTRO
+
 public class AS7 extends AccSemantica{
+
+    @Override
+    public int ejecutar(char c, ArchController ac) {
+        ac.token().SetCaracter(c);
+        if()
+    }
     
 }

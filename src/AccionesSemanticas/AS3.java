@@ -11,11 +11,13 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
+//CONCATENA CARACTER AL TOKEN 
 public class AS3 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      ac.token().SetCaracter(c);
+      return 0;
     }
     
 }

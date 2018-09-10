@@ -11,11 +11,13 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
+
+//Inicializa el buffer
 public class AS1 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        ac.setBuffer(""+c);
+        ac.token().setBuffer(""+c);
         return 0;
     
     }

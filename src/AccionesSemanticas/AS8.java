@@ -5,10 +5,22 @@
  */
 package AccionesSemanticas;
 
+import AnalizadorLexico.ArchController;
+
 /**
  *
  * @author nicol
  */
+/*
+CONCATENA EN EL BUFFER Y TERMINA
+*/
 public class AS8 extends AccSemantica{
+
+    @Override
+    public int ejecutar(char c, ArchController ac) {
+        ac.token().SetCaracter(c
+        //FALTA HACER EL CHEQUEO SI EXISTE YA EL IDENTIFICADOR
+        return 0;
+    }
     
 }

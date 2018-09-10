@@ -26,4 +26,15 @@ public class Token {
         buffer = "";
         
     }
+    public void setBuffer(String s){
+        buffer = s;
+    }
+    
+    public String getBuffer(){
+        return buffer;
+    }
+    
+    public void SetCaracter(char c){
+        buffer = buffer+c;
+    }
 }
