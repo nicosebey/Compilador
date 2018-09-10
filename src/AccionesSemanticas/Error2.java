@@ -11,7 +11,7 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol merge prueba 7777
  */
-public class Error2 extends AccSemantica{
+public class Error2 extends AccSemantica{//esperaba un digito 
 
     @Override
     public int ejecutar(char c, ArchController ac) {

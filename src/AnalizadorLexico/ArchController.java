@@ -9,6 +9,7 @@ import AccionesSemanticas.AS1;
 import AccionesSemanticas.AS10;
 import AccionesSemanticas.AS11;
 import AccionesSemanticas.AS12;
+import AccionesSemanticas.AS13;
 import AccionesSemanticas.Error1;
 import AccionesSemanticas.AS2;
 import AccionesSemanticas.AS3;
@@ -19,6 +20,11 @@ import AccionesSemanticas.AS7;
 import AccionesSemanticas.AS8;
 import AccionesSemanticas.AS9;
 import AccionesSemanticas.AccSemantica;
+import AccionesSemanticas.Error2;
+import AccionesSemanticas.Error3;
+import AccionesSemanticas.Error4;
+import AccionesSemanticas.Error5;
+import AccionesSemanticas.Error6;
 import java.util.ArrayList;
 
 /**
@@ -44,7 +50,13 @@ public class ArchController {
     private AccSemantica as10 = new AS10();
     private AccSemantica as11 = new AS11();
     private AccSemantica as12 = new AS12();   
-    private AccSemantica as13 = new Error1();
+    private AccSemantica as13 = new AS13();   
+    private AccSemantica err1 = new Error1();
+    private AccSemantica err2 = new Error2();
+    private AccSemantica err3 = new Error3();
+    private AccSemantica err4 = new Error4();
+    private AccSemantica err5 = new Error5();
+    private AccSemantica err6 = new Error6();
 //numero de linea actual
          // private int line;
         //private char actual;
@@ -73,30 +85,30 @@ public class ArchController {
         {10,10,10,10,10,10,15,10,10,10,10,10,10,10,10,10,10,10,10,10,10,-1,10,10},//15
         {14,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},//16
         {14,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},//17
-        {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, F,-1,-1,-1}//18
+        {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, F,-1,-1,-1} //18
          };
     private AccSemantica [][] matrizAS = {
          //d    _    l    +    *    /    -    =    :    (    )    {    }    ;    ,   !    <    >    .     u    l   ´    /n   D
          //0    1    2    3    4    5    6    7    8    9   10    11  12   13   14   15   16   17   18    19  20   21   22  23
-        { as1, as1, as1, as2, as2, as2, as2, as2, as1, as2, as2, as2, as2, as2, as2, as1, as1, as1, as1, as2, as2, as1,  0, as1},//0
+        { as1, as1, as1, as2, as2, as2, as2, as2, as1, as2, as2, as2, as2, as2, as2, as1, as1, as1, as1, as2, as2, as1,as13, as1},//0
         { as3, as3, as3, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4},//1
-        { F, F, 2, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, 2, 2, F, F, 2},//2
-        { 3, 5,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, F,-1, 9,-1,-1,-1,-1,-1},//3
-        {-1,-1,-1,-1,-1,-1,-1, F,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},//4
-        {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,18,-1,-1,-1,-1},//5
-        {-1,-1,-1,-1,-1,-1,-1, F,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},//6
-        { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F},//7
-        { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F},//8
-        { 9, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,13},//9
-        {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10, F,10,10},//10
-        {11, F,11, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,11},//11
-        {12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12, F,12},//12
-        {14,-1,-1,16,-1,-1,17,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},//13
-        {14, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F},//14
-        {10,10,10,10,10,10,15,10,10,10,10,10,10,10,10,10,10,10,10,10,10,-1,10,10},//15
-        {14,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},//16
-        {14,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},//17
-        {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, F,-1,-1,-1}//18
+        { as5, as5, as3, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as3, as3, as5, as5, as3},//2
+        { as3, as3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3},//3
+        {err1,err1,err1,err1,err1,err1,err1, as6,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1},//4
+        {err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4, as3,err4,err4,err4,err4},//5
+        {err1,err1,err1,err1,err1,err1,err1, as6,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1},//6
+        { as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7},//7
+        { as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7},//8
+        { as3,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11, as3},//9
+        { as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as8, as9, as9},//10
+        { as3,as10, as3,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10, as3},//11
+        { as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as8, as9, as9},//12
+        { as3,err5,err5, as3,err5,err5, as3,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5},//13
+        { as3,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11},//14
+        {as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,err6,as13,as13},//15
+        { as3,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2},//16
+        { as3,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2},//17
+        {err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,as12,err4,err4,err4} //18
          };
     private ArrayList <String> listaPalReservadas; //LISTA DE PALABRAS RESERVADAS
     private Token buffer;
@@ -141,57 +153,13 @@ public class ArchController {
             }
         }
      
-        
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            if (sA.ejecutar(c, this) == 0){ //0 consume.
-            	f.increasePosition();
-            }
-            if (!reset){
-  	            estado = mTE [estado][f.getID(c)]; //Dame el nuevo estado
-	            if (estado == F){
-	                return tokenActual;
-	            }
-            }
-            else { //resetea buffer despues de haber reconocido un error
-            	estado = 0;//lo resetea cuando escuentra un error y sigue compilando. NO LE CABE UNA
-            	buffer = "";
-            	reset = false;
-            }
-        }
-        
-        return null; 
+    
          
      }   
         
+     return 0;   
         
-        
-    }
+    };
     
 
 

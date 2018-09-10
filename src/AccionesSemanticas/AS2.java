@@ -15,7 +15,8 @@ public class AS2 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        ac.setBuffer(""+c);
+        ac.updateUnique(ac.getBuffer(),ac.getBuffer());
+        return 0;    }
     
 }

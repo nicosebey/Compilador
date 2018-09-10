@@ -9,9 +9,9 @@ import AnalizadorLexico.ArchController;
 
 /**
  *
- * @author nicol prueba
+ * @author nicol
  */
-public class Error1 extends AccSemantica{// esperaba un =
+public class Error5 extends AccSemantica{//esperaba o un digito o un + o un -
 
     @Override
     public int ejecutar(char c, ArchController ac) {

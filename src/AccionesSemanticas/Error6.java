@@ -9,9 +9,9 @@ import AnalizadorLexico.ArchController;
 
 /**
  *
- * @author nicol prueba
+ * @author nicol
  */
-public class Error1 extends AccSemantica{// esperaba un =
+public class Error6 extends AccSemantica{// un comentario no puede terminar luego de un -
 
     @Override
     public int ejecutar(char c, ArchController ac) {
