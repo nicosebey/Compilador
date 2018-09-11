@@ -110,8 +110,11 @@ public class ArchController {
         { as3,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2},//17
         {err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,as12,err4,err4,err4} //18
          };
-    private ArrayList <String> listaPalReservadas; //LISTA DE PALABRAS RESERVADAS
-    private Token buffer;
+   
+    private ArrayList <String> listaPalReservadas;  //PALABRAS RESERVADAS
+    private Token token;
+    private String buffer = new String();
+    
     
     
     
@@ -121,8 +124,14 @@ public class ArchController {
     
     public ArchController(Fuente codFuente){
         this.codigoF = codFuente;
+        //CARGO PALABRAS RESERVADAS A LA LISTA
+        listaPalReservadas.add("case");
+        listaPalReservadas.add("do");
+        listaPalReservadas.add("void");
+        listaPalReservadas.add("fun");
+        listaPalReservadas.add("return");
        // pos = 0;
-       //  actual = buffer.charAt(pos);
+       
        // line = 1;
        
        
@@ -132,7 +141,7 @@ public class ArchController {
     public int getToken(){
         
      int estado = 0; //Estado inicial.   
-     buffer.reset();//reseteo el buffer por si tenia algo de iteraciones anteriores
+     token = null;
      while ((codigoF.hasFinished())&&(estado != F)){ 
         char c = codigoF.getChar();
         int simbolo = codigoF.getCol(c);
@@ -144,11 +153,11 @@ public class ArchController {
         if(!termino){
             estado = matrizTE[estado][simbolo];
             if(estado == F){// Devuelve el identificador del token
-                return buffer.getIdentificador();
+                return token.getIdentificador();
             }
         else{//resetea el token vuelve el estado a 0(LLEGO ACA POR UN ERROR)
             estado = 0;
-            buffer.reset();
+            buffer= "";
             termino = false;
             }
         }
@@ -163,9 +172,17 @@ public class ArchController {
     
     
     public Token token(){
-        return buffer;
+        return token;
     }
 
+    public String getBuffer(){//devuelve el buffer
+        return buffer;
+    }
+    
+    public void setBuffer(String s){
+        buffer =s;
+    }
+    
     public boolean esReservada(String palabra){
         if (listaPalReservadas.contains(palabra))
             return true;
