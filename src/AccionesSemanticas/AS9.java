@@ -15,7 +15,10 @@ public class AS9 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         int n = 0;
+         return 0;
+        //asdasd
+        
     }
     
 }
