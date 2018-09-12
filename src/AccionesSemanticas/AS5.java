@@ -17,15 +17,11 @@ public class AS5 extends AccSemantica {
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        ac.token().SetCaracter(c);
-        if(ac.esReservada(ac.token().getBuffer())){
-            System.out.println("es una palabra reservada");
-            return 555555;//que tenemos que devolver en cada caso?
-        }
-        else{
-            //aca hay que devolver el identificador proque seria un indentificador 
-            return 0;
-        }
+        
+        if(ac.esReservada(ac.getBuffer()))//si es reservada agrego token sino no
+            ac.creaToken(ac.getBuffer());
+        return 1;
+        
     }
     
 }

@@ -14,7 +14,7 @@ import AnalizadorLexico.ArchController;
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        ac.updateUnique(ac.getBuffer(),ac.getBuffer());
-        return 1;
+       ac.token().setLexema(ac.getBuffer());
+       return 1;
     }
  }

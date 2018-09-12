@@ -15,7 +15,7 @@ public class Error6 extends AccSemantica{// un comentario no puede terminar lueg
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ac.termino();
     }
     
 }

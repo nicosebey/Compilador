@@ -10,31 +10,26 @@ package AnalizadorLexico;
  * @author nicol
  */
 public class Token {
-   private String buffer;
-   private int identificador;
+   private String id;
    
    
    
    
    
    
-   public int getIdentificador(){
-       return identificador;
+   
+   public String getId(){
+       return id;
    }
 
-    void reset() {
-        buffer = "";
-        
+    public void setLexema(String s){
+        id = s;
     }
-    public void setBuffer(String s){
-        buffer = s;
+    public void setLexemaSingular(char c){
+        id = String.valueOf(c);
     }
+            
+   
     
-    public String getBuffer(){
-        return buffer;
-    }
-    
-    public void SetCaracter(char c){
-        buffer = buffer+c;
-    }
+   
 }

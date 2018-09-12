@@ -15,7 +15,7 @@ public class Error2 extends AccSemantica{//esperaba un digito
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ac.termino();
     }
     
 }

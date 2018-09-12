@@ -11,12 +11,12 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
-//CONCATENA CARACTER AL TOKEN 
+//CONCATENA CARACTER AL BUFFER
 public class AS3 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-      ac.token().SetCaracter(c);
+      ac.setBuffer(ac.getBuffer()+c);
       return 0;
     }
     

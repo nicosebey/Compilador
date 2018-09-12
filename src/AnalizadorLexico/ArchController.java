@@ -67,7 +67,7 @@ public class ArchController {
     int [][] matrizTE ={
         //d  _  l  +  *  /  -  =  :  (  )  {  }  ;   ,  !  <  > .  u  l  ´  /n D
         //0  1  2  3  4  5  6  7  8  9 10  11 12 13 14 15 16 17 18 19 20 21 22 23
-        { 3, 1, 2, F, F, F, F, F, 4, F, F, F, F, F, F, 6, 7, 8, 9, F, F,10, 0, 2},//0
+        { 3, 1, 2, F, F, F, F, F, 4, F, F, F, F, F, F, 6, 7, 8, 9, 1, 1,10, 0, 2},//0
         {11,12,11, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F},//1
         { F, F, 2, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, 2, 2, F, F, 2},//2
         { 3, 5,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, F,-1, 9,-1,-1,-1,-1,-1},//3
@@ -114,6 +114,8 @@ public class ArchController {
     private ArrayList <String> listaPalReservadas;  //PALABRAS RESERVADAS
     private Token token;
     private String buffer = new String();
+    private TablaSimbolos tablaS = new TablaSimbolos();
+    private ArrayList<Token> ltokens;
     
     
     
@@ -134,11 +136,13 @@ public class ArchController {
        
        // line = 1;
        
+       ltokens = new ArrayList<Token>();
+       
        
         
     }
     
-    public int getToken(){
+    public String getToken(){
         
      int estado = 0; //Estado inicial.   
      token = null;
@@ -146,14 +150,14 @@ public class ArchController {
         char c = codigoF.getChar();
         int simbolo = codigoF.getCol(c);
         AccSemantica as = matrizAS[estado][simbolo];
-        if(as.ejecutar(c,this)== 0){// si devuelve 0 significa que consumio el 
+        if(as.ejecutar(c,this)== 0){// si devuelve 0 significa que consumio el caracter
             codigoF.siguiente();
             simbolo = codigoF.getCol(c);
         }
         if(!termino){
             estado = matrizTE[estado][simbolo];
             if(estado == F){// Devuelve el identificador del token
-                return token.getIdentificador();
+                return token.getId();
             }
         else{//resetea el token vuelve el estado a 0(LLEGO ACA POR UN ERROR)
             estado = 0;
@@ -190,6 +194,24 @@ public class ArchController {
             return false;
     }
 
+    public void inicBuffer(char c) {
+        buffer = ""+c;
+    }
+
+    public void creaToken(String lexema){
+        Token nuevo = new Token();
+        nuevo.setLexema(lexema);
+        ltokens.add(nuevo);
+    }
+
+    public void añadirTokenTS(String buffer) {
+        tablaS.agregar(buffer);
+        
+    }
+
+    public void termino() {
+        termino = true;
+    }
 
 }
     

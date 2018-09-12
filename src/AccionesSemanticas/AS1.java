@@ -17,7 +17,7 @@ public class AS1 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        ac.token().setBuffer(""+c);
+        ac.inicBuffer(c);
         return 0;
     
     }

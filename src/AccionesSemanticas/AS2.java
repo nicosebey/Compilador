@@ -15,8 +15,10 @@ public class AS2 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        ac.token().setBuffer(""+c);
-        ac.updateUnique(ac.token().getBuffer(),ac.token().getBuffer());
-        return 0;    }
+        ac.inicBuffer(c);
+        ac.token().setLexemaSingular(c);
+        ac.añadirTokenTS(ac.getBuffer());
+        return 0;    
+    }
     
 }
