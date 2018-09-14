@@ -142,33 +142,36 @@ public class ArchController {
         
     }
     
-    public String getToken(){
-        
-     int estado = 0; //Estado inicial.   
+    public String getToken(){    
+     int estado = 0; //Estado inicial.  
      token = null;
      while ((codigoF.hasFinished())&&(estado != F)){ 
         char c = codigoF.getChar();
         int simbolo = codigoF.getCol(c);
         AccSemantica as = matrizAS[estado][simbolo];
-        if(as.ejecutar(c,this)== 0){// si devuelve 0 significa que consumio el caracter
-            codigoF.siguiente();
-            simbolo = codigoF.getCol(c);
-        }
-        if(!termino){
-            estado = matrizTE[estado][simbolo];
-            if(estado == F){// Devuelve el identificador del token
+        if(as.ejecutar(c,this)== 0){
+            if(termino){
                 return token.getId();
             }
-        else{//resetea el token vuelve el estado a 0(LLEGO ACA POR UN ERROR)
-            estado = 0;
-            buffer= "";
-            termino = false;
+            else{
+            codigoF.siguiente();
+            estado = matrizTE[estado][simbolo];
             }
         }
-     
-    
-         
-     }   
+        else{//llego aca porque dio error (la acc semantica no devolvio 0
+             estado = 0;
+            buffer= "";
+            termino = false;
+        }
+     }
+     if(estado == F){
+         char ch = codigoF.getChar();
+         int simbolo2 = codigoF.getCol(ch);
+         AccSemantica as1 = matrizAS[estado][simbolo2];
+         as1.ejecutar(ch, this);
+         return token.getId();
+        
+     }       
         
      return 0;   
         
