@@ -11,14 +11,20 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
-//CONCATENO Y CHEQUEO SI VINO = O OTRO
+//SI EL CARACTER QUE LLEGO ES EL 0 LO CONCATENO Y TERMINO Y DEVUELVO EL TOKEN, SINO LO MISMO SIN CONCATENAR
 
 public class AS7 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        ac.token().SetCaracter(c);
-        if()
+        if(c == '='){
+         ac.setBuffer(ac.getBuffer()+c); 
+        }
+        ac.creaToken(ac.getBuffer());
+        ac.termino();
+        
+        
+        return 0;
     }
     
 }
