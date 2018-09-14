@@ -12,15 +12,17 @@ import AnalizadorLexico.ArchController;
  * @author nicol
  */
 
-//CONCATENA CARACTER = Y DEVULEVE TOKEN
+//COMO LLEGA UN CARACTER VALIDO ( EL = )CONCATENA Y DEVUELVE TOKEN 
 
 public class AS6 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-       ac.token().SetCaracter(c);
-       //TENEMOS QUE HACER EL CHEQUEO QUE NO EXISTA EN LA TABLA DE IDENTIFICADORES Y DEVOLVER EL VALOR.
-       return 0;
+         ac.setBuffer(ac.getBuffer()+c);
+         ac.creaToken(ac.getBuffer());
+         ac.termino();
+         return 0;   
+        
     }
     
 }
