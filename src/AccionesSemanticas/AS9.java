@@ -15,9 +15,8 @@ public class AS9 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-         int n = 0;
          return 0;
-        //holaasd
+        
         
     }
     

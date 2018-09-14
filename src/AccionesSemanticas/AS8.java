@@ -12,7 +12,7 @@ import AnalizadorLexico.ArchController;
  * @author nicol
  */
 /*
-CONCATENA EN EL BUFFER Y TERMINA
+CONCATENA EN EL BUFFER Y TERMINA ESTA ES PARA LOS COMENTARIOS ENTRE ' ' (HAY QUE CREAR TOKEN?)
 */
 public class AS8 extends AccSemantica{
 
