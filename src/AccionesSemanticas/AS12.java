@@ -11,6 +11,8 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
+
+//CHEQUEA VALIDES DEL LONG INT
 public class AS12 extends AccSemantica{
 
     @Override

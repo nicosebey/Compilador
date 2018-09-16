@@ -11,7 +11,7 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
-//SI EL CARACTER QUE LLEGO ES EL 0 LO CONCATENO Y TERMINO Y DEVUELVO EL TOKEN, SINO LO MISMO SIN CONCATENAR
+//SI EL CARACTER QUE LLEGO ES EL = LO CONCATENO Y TERMINO Y DEVUELVO EL TOKEN, SINO LO MISMO SIN CONCATENAR
 
 public class AS7 extends AccSemantica{
 
@@ -20,7 +20,11 @@ public class AS7 extends AccSemantica{
         if(c == '='){
          ac.setBuffer(ac.getBuffer()+c); 
         }
+        else{
+             ac.setConcateno(false);
+        }
         ac.creaToken(ac.getBuffer());
+       
         ac.termino();
         
         

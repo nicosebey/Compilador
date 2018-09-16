@@ -11,11 +11,21 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
+//CHEQUEA QUE LA LONGITUD DEL TOKEN NO SEA MAYOR A 25
 public class AS10 extends AccSemantica {
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ac.setConcateno(false);
+        
+        if(ac.getBuffer().length() >25 ){
+            System.out.println("la longitud del identificador sobrepasa el maximo");
+            return 1;
+        }else{
+            ac.creaToken(ac.getBuffer());
+            ac.termino();
+        }
+            return 0;
     }
     
 }

@@ -11,6 +11,7 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
+//CHEQUEA  VALIDEZ DEL DOUBLE
 public class AS11 extends AccSemantica{
 
     @Override

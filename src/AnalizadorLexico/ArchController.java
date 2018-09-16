@@ -116,7 +116,7 @@ public class ArchController {
     private String buffer = new String();
     private TablaSimbolos tablaS = new TablaSimbolos();
     private ArrayList<Token> ltokens;
-    
+    private boolean concateno = true;
     
     
     
@@ -145,6 +145,7 @@ public class ArchController {
     public String getToken(){    
      int estado = 0; //Estado inicial.  
      token = null;
+     concateno = true;
      while ((codigoF.hasFinished())&&(estado != F)){ 
         char c = codigoF.getChar();
         int simbolo = codigoF.getCol(c);
@@ -154,7 +155,9 @@ public class ArchController {
                 return token.getId();
             }
             else{
-            codigoF.siguiente();
+                if(concateno){
+                    codigoF.siguiente();
+                }
             estado = matrizTE[estado][simbolo];
             }
         }
@@ -175,6 +178,9 @@ public class ArchController {
         
      return 0;   
         
+    }
+    public void setConcateno(boolean concateno){
+        this.concateno = concateno;
     }
     
     
