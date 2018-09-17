@@ -23,7 +23,7 @@ public class AS10 extends AccSemantica {
             return 1;
         }else{
             ac.creaToken(ac.getBuffer());
-            ac.añadirTokenTS(ac.getToken());
+            ac.añadirTokenTS(ac.getBuffer());
             ac.termino();
         }
             return 0;

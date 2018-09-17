@@ -25,7 +25,7 @@ public class AS7 extends AccSemantica{
              ac.setConcateno(false);
              ac.token().setLexemaSingular(ac.getBuffer().charAt(0));
             }
-        ac.añadirTokenTS(ac.getToken());
+        ac.añadirTokenTS(ac.getBuffer());
         ac.termino();
         return 0;
     }
