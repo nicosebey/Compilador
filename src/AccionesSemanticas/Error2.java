@@ -15,7 +15,8 @@ public class Error2 extends AccSemantica{//esperaba un digito
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        ac.termino();
+        ac.agregarError("caracter invalido: se esperaba un digito y llego un "+c);
+        return 1;
     }
     
 }

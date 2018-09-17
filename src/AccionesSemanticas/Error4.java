@@ -11,11 +11,16 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
-public class Error4 extends AccSemantica{//esperaba u y no llego o una l
+//esperaba u y no llego o una l
+public class Error4 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-       ac.termino();
+        if(ac.getBuffer().charAt(ac.getBuffer().length())== 'u')
+            ac.agregarError("se esperaba un l y llego un "+c);
+        else
+            ac.agregarError("se esperaba un u y llego un "+c);
+        return 1;
     }
     
 }

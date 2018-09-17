@@ -11,11 +11,15 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
-public class Error3 extends AccSemantica {//esperaba - o .
+//esperaba - o .
+public class Error3 extends AccSemantica {
+
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        ac.termino();
+       ac.agregarError("se esperaba un '-' o un '.' y llego un  "+c);
+        
+        return 1;
     }
     
 }

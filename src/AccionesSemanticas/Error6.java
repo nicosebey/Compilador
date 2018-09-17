@@ -15,7 +15,8 @@ public class Error6 extends AccSemantica{// un comentario no puede terminar lueg
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        ac.termino();
+        ac.agregarError("la ultima linea de una cadena de caracteres no lleva -");
+        return 1;
     }
     
 }

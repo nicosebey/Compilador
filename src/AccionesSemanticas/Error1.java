@@ -11,11 +11,13 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol prueba
  */
-public class Error1 extends AccSemantica{// esperaba un =
+public class Error1 extends AccSemantica{
+// esperaba un =
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-      ac.termino();
+     ac.agregarError("caracter invalido: se esperaba un =  y llego un "+c);  
+     return 1;  
     }
     
 }

@@ -65,7 +65,7 @@ public class ArchController {
         //private int pos;
     
     int [][] matrizTE ={
-        //d  _  l  +  *  /  -  =  :  (  )  {  }  ;   ,  !  <  > .  u  l  ´  /n D
+        //d  _  l  +  *  /  -  =  :  (  )  {  }  ;   ,  !  <  > .  u  l  '  /n D
         //0  1  2  3  4  5  6  7  8  9 10  11 12 13 14 15 16 17 18 19 20 21 22 23
         { 3, 1, 2, F, F, F, F, F, 4, F, F, F, F, F, F, 6, 7, 8, 9, 1, 1,10, 0, 2},//0
         {11,12,11, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F},//1
@@ -77,7 +77,7 @@ public class ArchController {
         { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F},//7
         { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F},//8
         { 9, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,13},//9
-        {10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10, F,10,10},//10
+        {10,10,10,10,10,10,15,10,10,10,10,10,10,10,10,10,10,10,10,10,10, F,10,10},//10
         {11, F,11, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,11},//11
         {12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12, F,12},//12
         {14,-1,-1,16,-1,-1,17,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},//13
@@ -117,6 +117,7 @@ public class ArchController {
     private TablaSimbolos tablaS = new TablaSimbolos();
     private ArrayList<Token> ltokens;
     private boolean concateno = true;
+    private ArrayList <String> errores;
     
     
     
@@ -137,6 +138,7 @@ public class ArchController {
        // line = 1;
        
        ltokens = new ArrayList<Token>();
+       errores = new ArrayList<>();
        
        
         
@@ -222,6 +224,9 @@ public class ArchController {
         termino = true;
     }
 
+    public void agregarError(String error){
+        errores.add(error);
+    }
 }
     
 

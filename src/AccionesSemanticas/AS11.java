@@ -6,6 +6,8 @@
 package AccionesSemanticas;
 
 import AnalizadorLexico.ArchController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,10 +15,39 @@ import AnalizadorLexico.ArchController;
  */
 //CHEQUEA  VALIDEZ DEL DOUBLE
 public class AS11 extends AccSemantica{
-
+    private static final double limite_inf = 2.2250738585072014E-308; 
+    private static final double limite_sup = 1.7976931348623157E308;
+    private static final double cero = 0.0;
     @Override
     public int ejecutar(char c, ArchController ac) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    ac.setConcateno(false);
+    boolean error = false;
+		try {
+			String constante = ac.getBuffer();
+			if (constante.startsWith(".")) constante = "0" + constante;
+			
+			double doble = Double.parseDouble(constante);
+			if (((doble>limite_inf) && (doble < limite_sup))|| doble==cero) {
+				 ac.creaToken(ac.getBuffer());
+                                 ac.añadirTokenTS(ac.getBuffer());
+                                 ac.termino();
+                                 return 0;
+			}
+			else
+				error = true;
+		}
+		catch (Exception ex) {
+			error = true;
+                        Logger.getLogger(ArchController.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		if (error){
+                        
+			//ac.addError("Linea: " + a.getCode().getLine() + ": Constante double fuera de rango.");
+                        return 1;
+                }
+                
+	return 0;	
+	}
+    
     
 }
