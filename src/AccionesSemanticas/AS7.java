@@ -11,7 +11,7 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
-//SI EL CARACTER QUE LLEGO ES EL = LO CONCATENO Y TERMINO Y DEVUELVO EL TOKEN, SINO LO MISMO SIN CONCATENAR
+//SI EL CARACTER QUE LLEGO ES EL = LO CONCATENO Y TERMINO Y DEVUELVO EL TOKEN, SINO LO MISMO SIN CONCATENAR ( el token seria singular (un <)) 
 
 public class AS7 extends AccSemantica{
 
@@ -19,15 +19,14 @@ public class AS7 extends AccSemantica{
     public int ejecutar(char c, ArchController ac) {
         if(c == '='){
          ac.setBuffer(ac.getBuffer()+c); 
+         ac.creaToken(ac.getBuffer());
         }
         else{
              ac.setConcateno(false);
-        }
-        ac.creaToken(ac.getBuffer());
-       
+             ac.token().setLexemaSingular(ac.getBuffer().charAt(0));
+            }
+        ac.añadirTokenTS(ac.getToken());
         ac.termino();
-        
-        
         return 0;
     }
     

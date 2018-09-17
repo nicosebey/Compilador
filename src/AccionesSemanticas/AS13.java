@@ -17,6 +17,11 @@ public class AS13 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
+       if(c != '-')
+           if(c != '-')
+             ac.setBuffer(ac.getBuffer()+c);
+             else
+                System.out.println("ERROR LA ULTIMA LINEA NO LLEVA GUION");
        return 0;
     }
     

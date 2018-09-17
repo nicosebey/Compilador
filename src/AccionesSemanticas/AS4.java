@@ -14,7 +14,11 @@ import AnalizadorLexico.ArchController;
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-       ac.token().setLexema(ac.getBuffer());
+       
+       ac.creaToken(ac.getBuffer());
+       ac.añadirTokenTS(ac.getToken());
+       ac.setConcateno(false);
+       ac.termino();
        return 0;
     }
  }

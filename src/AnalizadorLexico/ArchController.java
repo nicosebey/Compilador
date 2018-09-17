@@ -145,8 +145,9 @@ public class ArchController {
     public String getToken(){    
      int estado = 0; //Estado inicial.  
      token = null;
-     concateno = true;
+     
      while ((codigoF.hasFinished())&&(estado != F)){ 
+        concateno = true;
         char c = codigoF.getChar();
         int simbolo = codigoF.getCol(c);
         AccSemantica as = matrizAS[estado][simbolo];
@@ -176,7 +177,7 @@ public class ArchController {
         
      }       
         
-     return 0;   
+     return a;   
         
     }
     public void setConcateno(boolean concateno){
@@ -208,9 +209,8 @@ public class ArchController {
     }
 
     public void creaToken(String lexema){
-        Token nuevo = new Token();
-        nuevo.setLexema(lexema);
-        ltokens.add(nuevo);
+        token.setLexema(lexema);
+        ltokens.add(token);
     }
 
     public void añadirTokenTS(String buffer) {

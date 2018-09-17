@@ -12,7 +12,7 @@ import AnalizadorLexico.ArchController;
  * @author nicol
  */
 
-//Inicializa el buffer
+//Inicializa el buffer concatena el caracter
 public class AS1 extends AccSemantica{
 
     @Override

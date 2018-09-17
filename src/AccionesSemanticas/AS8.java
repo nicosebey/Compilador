@@ -18,8 +18,8 @@ public class AS8 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        ac.token().SetCaracter(c
-        //FALTA HACER EL CHEQUEO SI EXISTE YA EL IDENTIFICADOR
+       ac.setBuffer(ac.getBuffer()+c);
+       
         return 0;
     }
     

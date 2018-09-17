@@ -20,6 +20,7 @@ public class AS6 extends AccSemantica{
     public int ejecutar(char c, ArchController ac) {
          ac.setBuffer(ac.getBuffer()+c);
          ac.creaToken(ac.getBuffer());
+         ac.añadirTokenTS(ac.getToken());
          ac.termino();
          return 0;   
         

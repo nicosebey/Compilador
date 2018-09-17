@@ -11,13 +11,15 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
+//CONCATENAR LOS CARACTERES EN EL BUFFER(PODRIA HABER SIDO EL 3 PERO PRIMERO ENTENDIMOS MAL)
 public class AS9 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-         return 0;
-        
-        
+       if(c != '\n')
+          if(c != '-')
+             ac.setBuffer(ac.getBuffer()+c);   
+    return 0;   
     }
     
 }

@@ -11,6 +11,7 @@ import AnalizadorLexico.ArchController;
  *
  * @author nicol
  */
+//INICIALIZA BUFFER Y COMO SON TOKENS DIRECTOS ( + / * ( ) , ETC) LOS DEVUELVE
 public class AS2 extends AccSemantica{
 
     @Override
@@ -18,6 +19,7 @@ public class AS2 extends AccSemantica{
         ac.inicBuffer(c);
         ac.token().setLexemaSingular(c);
         ac.añadirTokenTS(ac.getBuffer());
+        ac.termino();
         return 0;    
     }
     
