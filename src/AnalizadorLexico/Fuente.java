@@ -10,7 +10,41 @@ package AnalizadorLexico;
  * @author nicol
  */
 public class Fuente {
+    static final char saltoLinea =    '\n';
+    static final char finArch = '$';
+    private int linea;
+    private char actual;
 
+    
+    
+    //POSICION EN EL ARCHIVO
+    private int pos;
+    
+    
+    
+    
+    //ARCHIVO
+    
+    private StringBuilder archivo;
+
+    public Fuente(StringBuilder archivo) {
+        this.archivo = archivo;
+        pos = 0;
+        actual = archivo.charAt(pos);
+        linea = 1; 
+    }
+    
+    
+    public int getLinea (){
+        return linea;
+    }
+    
+    
+    
+    
+    
+   
+    
     public int getCol(char c) {//DEVUELVE EL NUMERO DE COLUMNA DEPENDIENDO EL CHAR QUE LE LLEGA
        // CHAR QUE LE LLEGA
         if (c == 'D')
@@ -86,16 +120,22 @@ public class Fuente {
         return -1;
     }
 
-    boolean hasFinished() {//TERMINO DE LEER EL CODIGO FUENTE
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean hasFinished() {//TERMINO DE LEER EL CODIGO FUENTE
+        return actual == finArch;
     }
 
-    char getChar() {//devuelve el caracter a leer
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public char getChar() {//devuelve el caracter a leer
+        return actual;
     }
 
-    void siguiente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void siguiente() {
+        if (actual == saltoLinea)
+            linea++;
+        if (pos<archivo.length()){
+            pos++;
+            actual=archivo.charAt(pos);
+        }
     }
+    
     
 }

@@ -32,9 +32,7 @@ import java.util.ArrayList;
  * @author nicol
  */
 public class ArchController {
-    static final char saltoLinea =    '\n';
-    static final char finArch = '$';
-    //codigo fuente
+    
     private Fuente codigoF;
     private boolean termino=false;
     public static int F = 2000;// VAMOS A USAR ESTA F COMO ESTADO FINAL

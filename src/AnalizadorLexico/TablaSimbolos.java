@@ -12,14 +12,14 @@ import java.util.Hashtable;
  * @author nicol
  */
 public class TablaSimbolos {
- private static Hashtable<String,Puntero> tSimbol = new Hashtable<String,RecordTS>();    
+ private static Hashtable<String,String> tSimbol = new Hashtable<String,String>();    
 
 
 public void agregar(String lexema){
     if (tSimbol.containsKey(lexema))
         System.out.println("el identificador ya existe");
         else
-            tSimbol.put(lexema,/*algo*/);
+            tSimbol.put(lexema,"tipo");
     }
 
 
