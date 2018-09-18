@@ -157,15 +157,11 @@ public class ArchController {
         listaPalReservadas.add("void");
         listaPalReservadas.add("fun");
         listaPalReservadas.add("return");
-       // pos = 0;
-       
-       // line = 1;
-       
-       ltokens = new ArrayList<Token>();
-       errores = new ArrayList<>();
-       
        
         
+       ltokens = new ArrayList<Token>();
+       errores = new ArrayList<>();
+       tablaS = new TablaSimbolos();
     }
     
     public String getToken(){    
@@ -203,7 +199,7 @@ public class ArchController {
         
      }       
         
-     return "as";   
+     return null;   
         
     }
     public void setConcateno(boolean concateno){
