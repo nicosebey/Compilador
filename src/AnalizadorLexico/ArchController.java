@@ -108,6 +108,32 @@ public class ArchController {
         { as3,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2,err2},//17
         {err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,as12,err4,err4,err4} //18
          };
+    
+     //CONSTANTES  IDENTIFICADORES
+  
+    public static final int S_MAYOR_IGUAL = 257;
+    public static final int S_MENOR_IGUAL = 258;
+    public static final int S_DISTINTO = 259;
+    public static final int S_SE_VUELVE = 260;
+    public static final int ID = 261;
+    public static final int CADENA = 262;
+    public static final int CTE = 263;
+    
+        
+    //PALABRAS RESERVADAS
+    public static final int IF = 264;
+    public static final int ELSE =265;
+    public static final int END_IF = 266;
+    public static final int PRINT = 267;
+    public static final int USLINTEGER = 268;
+    public static final int DOUBLE = 269;
+    public static final int CASE = 270;
+    public static final int DO = 271;
+    public static final int VOID = 272;
+    public static final int FUN = 273;
+    public static final int RETURN = 274;
+    
+    
    
     private ArrayList <String> listaPalReservadas;  //PALABRAS RESERVADAS
     private Token token;
