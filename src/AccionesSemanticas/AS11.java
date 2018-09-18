@@ -31,6 +31,9 @@ public class AS11 extends AccSemantica{
 				 ac.creaToken(ac.getBuffer());
                                  ac.añadirTokenTS(ac.getBuffer());
                                  ac.termino();
+                                 //---------------PRUEBA--------------------//
+                                         System.out.println(ac.getBuffer());
+                                 //----------------------------------------//
                                  return 0;
 			}
 			else
@@ -43,6 +46,10 @@ public class AS11 extends AccSemantica{
 		if (error){
                         
 			//ac.addError("Linea: " + a.getCode().getLine() + ": Constante double fuera de rango.");
+                        //---------------PRUEBA--------------------//
+                                         System.out.println(ac.getBuffer());
+                                 //----------------------------------------//
+                                 
                         return 1;
                 }
                 

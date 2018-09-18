@@ -19,6 +19,9 @@ public class AS2 extends AccSemantica{
         ac.inicBuffer(c);
         ac.token().setLexemaSingular(c);
         ac.añadirTokenTS(ac.getBuffer());
+        //---------------PRUEBA--------------------//
+                                         System.out.println(ac.getBuffer());
+         //----------------------------------------//
         ac.termino();
         return 0;    
     }

@@ -21,9 +21,15 @@ public class AS5 extends AccSemantica {
         if(ac.esReservada(ac.getBuffer())){//si es reservada agrego token sino no
             ac.creaToken(ac.getBuffer());
             ac.termino();
+            //---------------PRUEBA--------------------//
+                                         System.out.println(ac.getBuffer());
+                                 //----------------------------------------//
             return 0;
     }
             else  
+            //---------------PRUEBA--------------------//
+                                         System.out.println(ac.getBuffer());
+                                 //----------------------------------------//
         return 1;
         
     }

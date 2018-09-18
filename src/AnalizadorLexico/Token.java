@@ -16,7 +16,12 @@ public class Token {
    
    
    
-   
+   public Token(String id){
+       this.id = id ;
+   }
+   public Token (){
+       this.id= null;
+   }
    
    public String getId(){
        return id;

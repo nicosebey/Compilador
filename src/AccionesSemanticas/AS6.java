@@ -22,6 +22,9 @@ public class AS6 extends AccSemantica{
          ac.creaToken(ac.getBuffer());
          ac.añadirTokenTS(ac.getBuffer());
          ac.termino();
+         //---------------PRUEBA--------------------//
+                                         System.out.println(ac.getBuffer());
+                                 //----------------------------------------//
          return 0;   
         
     }

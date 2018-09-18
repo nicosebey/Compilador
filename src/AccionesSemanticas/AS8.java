@@ -21,6 +21,10 @@ public class AS8 extends AccSemantica{
        ac.setBuffer(ac.getBuffer()+c);
        ac.creaToken(ac.getBuffer());
        ac.añadirTokenTS(ac.getBuffer());
+       ac.termino();
+       //---------------PRUEBA--------------------//
+                                         System.out.println(ac.getBuffer());
+                                 //----------------------------------------//
         return 0;
     }
     
