@@ -176,6 +176,7 @@ public class ArchController {
         concateno = true;
         char c = codigoF.getChar();
         int simbolo = codigoF.getCol(c);
+        // System.out.println(simbolo);
         AccSemantica as = matrizAS[estado][simbolo];
          /*/-----------------PRUEBA----------------
         System.out.println("prueba"+prueba);

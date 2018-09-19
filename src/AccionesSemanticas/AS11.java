@@ -24,16 +24,18 @@ public class AS11 extends AccSemantica{
     boolean error = false;
 		try {
 			String constante = ac.getBuffer();
-			if (constante.startsWith(".")) constante = "0" + constante;
+                        String constanteR=constante.replace("D","E");
+                        //System.out.println(constanteR+"aaaaaaaaaaaa");
+			if (constante.startsWith(".")) constanteR = "0" + constanteR;
 			
-			double doble = Double.parseDouble(constante);
+			Float doble = Float.parseFloat(constanteR);
 			if (((doble>limite_inf) && (doble < limite_sup))|| doble==cero) {
-				 ac.creaToken(ac.getBuffer());
+				 ac.creaToken(ac.getBuffer());  //ACA EL TOKEN SIGUE TENIENDO LA D en vez de la E DEL EXPONENTE QUE ESTA BIEN?
                                  ac.añadirTokenTS(ac.getBuffer());
                                  ac.termino();
-                                 //---------------PRUEBA--------------------//
+                                 /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
-                                 //----------------------------------------//
+                                 //----------------------------------------/*/
                                  return 0;
 			}
 			else
@@ -46,9 +48,9 @@ public class AS11 extends AccSemantica{
 		if (error){
                         
 			//ac.addError("Linea: " + a.getCode().getLine() + ": Constante double fuera de rango.");
-                        //---------------PRUEBA--------------------//
+                        /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
-                                 //----------------------------------------//
+                                 //----------------------------------------/*/
                                  
                         return 1;
                 }
