@@ -23,18 +23,22 @@ public class AS12 extends AccSemantica{
     @Override
     public int ejecutar(char c, ArchController ac) {
        
-	ac.setConcateno(false);
+	
          boolean error = false;
 		try {	
 			String constante = ac.getBuffer();
 			long largo = Long.parseLong(constante.substring(0, constante.length()-2));
+                        System.out.println(largo);
 			if (((largo>limite_inf) && (largo < limite_sup))) {
-				 ac.creaToken(ac.getBuffer());
+				 ac.creaToken(String.valueOf(largo)  );
+                                 ac.setBuffer(ac.getBuffer()+c);
                                  ac.añadirTokenTS(ac.getBuffer());
                                  ac.termino();
-                                 //---------------PRUEBA--------------------//
+                                 ac.getCodFuente().siguiente();
+                                 
+                                 /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
-                                 //----------------------------------------//
+                                 //----------------------------------------/*/
                                  return 0;
 			}
 			else
@@ -47,9 +51,9 @@ public class AS12 extends AccSemantica{
 		if (error){
                         
 			//ac.addError("Linea: " + a.getCode().getLine() + ": Constante double fuera de rango.");
-                        //---------------PRUEBA--------------------//
+                        /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
-                                 //----------------------------------------//
+                                 //----------------------------------------//*/
                         return 1;
                 }
                 

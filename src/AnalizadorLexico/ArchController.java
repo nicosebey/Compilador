@@ -69,8 +69,8 @@ public class ArchController {
     int [][] matrizTE ={
         //d  _  l  +  *  /  -  =  :  (  )  {  }  ;   ,  !  <  > .  u  l  '  /n D  ´ ´ 
         //0  1  2  3  4  5  6  7  8  9 10  11 12 13 14 15 16 17 18 19 20 21 22 23 24
-        { 3, 1, 2, F, F, F, F, F, 4, F, F, F, F, F, F, 6, 7, 8, 9, 1, 1,10, 0, 2,0 },//0
-        {11,12,11, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,-1},//1
+        { 3, 1, 2, F, F, F, F, F, 4, F, F, F, F, F, F, 6, 7, 8, 9, 2, 2,10, 0, 2,0 },//0
+        {11,12,11, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,11,11, F, F,11,-1},//1
         { F, F, 2, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, 2, 2, F, F, 2,F },//2
         { 3, 5,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, F,-1, 9,-1,-1,-1,-1,-1,-1},//3
         {-1,-1,-1,-1,-1,-1,-1, F,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},//4
@@ -93,7 +93,7 @@ public class ArchController {
          //d    _    l    +    *    /    -    =    :    (    )    {    }    ;    ,   !    <    >    .     u    l   ´    /n   D    ' '
          //0    1    2    3    4    5    6    7    8    9   10    11  12   13   14   15   16   17   18    19  20   21   22  23    24
         { as1, as1, as1, as2, as2, as2, as2, as2, as1, as2, as2, as2, as2, as2, as2, as1, as1, as1, as1, as2, as2, as1,as13, as1,blak},//0    ES VALIDO ESE NULL?
-        { as3, as3, as3, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4,err7},//1
+        { as3, as3, as3, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as3, as3, as4, as4, as3,err7},//1
         { as5, as5, as3, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as3, as3, as5, as5, as3, as5},//2
         { as3, as3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3, as3,err3,err3,err3,err3,err3,err3},//3
         {err1,err1,err1,err1,err1,err1,err1, as6,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1},//4
@@ -176,8 +176,10 @@ public class ArchController {
         concateno = true;
         char c = codigoF.getChar();
         int simbolo = codigoF.getCol(c);
-        // System.out.println(simbolo);
+        System.out.println(simbolo);
+         System.out.println(estado);
         AccSemantica as = matrizAS[estado][simbolo];
+         System.out.println("matriz["+estado+"]"+"["+simbolo+"]");
          /*/-----------------PRUEBA----------------
         System.out.println("prueba"+prueba);
          System.out.println(estado);
@@ -208,13 +210,18 @@ public class ArchController {
          int simbolo2 = codigoF.getCol(ch);
          AccSemantica as1 = matrizAS[estado][simbolo2];
          as1.ejecutar(ch, this);
-         
+         codigoF.siguiente();
          return token.getId();
         
-     }       
+     }     
         
      return null;   
         
+    }
+    
+    
+    public Fuente getCodFuente(){
+        return codigoF;
     }
     
     
