@@ -27,9 +27,9 @@ public class AS7 extends AccSemantica{
             }
         ac.añadirTokenTS(ac.getBuffer());
         ac.termino();
-        //---------------PRUEBA--------------------//
+        /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
-                                 //----------------------------------------//
+                                 //----------------------------------------/*/
         return 0;
     }
     

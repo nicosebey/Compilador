@@ -21,10 +21,11 @@ public class AS6 extends AccSemantica{
          ac.setBuffer(ac.getBuffer()+c);
          ac.creaToken(ac.getBuffer());
          ac.añadirTokenTS(ac.getBuffer());
+         //ac.añadirTokenLista(ac.token());
          ac.termino();
-         //---------------PRUEBA--------------------//
+         /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
-                                 //----------------------------------------//
+                                 //----------------------------------------/*/
          return 0;   
         
     }

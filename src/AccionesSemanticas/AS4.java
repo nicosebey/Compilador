@@ -19,9 +19,9 @@ import AnalizadorLexico.ArchController;
        ac.añadirTokenTS(ac.getBuffer());
        ac.setConcateno(false);
        ac.termino();
-       //---------------PRUEBA--------------------//
+       /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
-        //----------------------------------------//
+        //----------------------------------------/*/
        return 0;
     }
  }

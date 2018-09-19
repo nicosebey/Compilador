@@ -54,9 +54,9 @@ public class Fuente {
         if (c == 'l')
             return 20;
         if (Character.isDigit(c))
-            return 2;
-        if (Character.isLetter(c))
             return 0;
+        if (Character.isLetter(c))
+            return 2;
         switch (c) {
             case '_': {
                 return 1;
@@ -123,7 +123,12 @@ public class Fuente {
     }
 
     public boolean hasFinished() {//TERMINO DE LEER EL CODIGO FUENTE
-        return actual == finArch;
+        
+        if( actual == finArch){
+            System.out.println("termino de leer el archivo");
+            return true;
+        }
+        else return false;
         
     }
 

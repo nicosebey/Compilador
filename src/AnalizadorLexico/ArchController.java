@@ -95,7 +95,7 @@ public class ArchController {
         { as1, as1, as1, as2, as2, as2, as2, as2, as1, as2, as2, as2, as2, as2, as2, as1, as1, as1, as1, as2, as2, as1,as13, as1,blak},//0    ES VALIDO ESE NULL?
         { as3, as3, as3, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4,err7},//1
         { as5, as5, as3, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as3, as3, as5, as5, as3, as5},//2
-        { as3, as3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3},//3
+        { as3, as3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3, as3,err3,err3,err3,err3,err3,err3},//3
         {err1,err1,err1,err1,err1,err1,err1, as6,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1},//4
         {err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4,err4, as3,err4,err4,err4,err4,err4},//5
         {err1,err1,err1,err1,err1,err1,err1, as6,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1,err1},//6
@@ -161,7 +161,7 @@ public class ArchController {
         listaPalReservadas.add("void");
         listaPalReservadas.add("fun");
         listaPalReservadas.add("return");
-       
+        listaPalReservadas.add("if");
         
        
        
@@ -171,15 +171,21 @@ public class ArchController {
     public String getToken(){    
      int estado = 0; //Estado inicial.  
      token = new Token();
-     
+     int prueba = 0;
      while ((codigoF.hasFinished()==false)&&(estado != F)){ 
         concateno = true;
         char c = codigoF.getChar();
         int simbolo = codigoF.getCol(c);
         AccSemantica as = matrizAS[estado][simbolo];
-         System.out.println(estado+simbolo);
+         /*/-----------------PRUEBA----------------
+        System.out.println("prueba"+prueba);
+         System.out.println(estado);
+         System.out.println(simbolo);
+         prueba++;
+        //-------------------------------------------*/
         if(as.ejecutar(c,this)== 0){
             if(termino){
+                //System.out.println(token.getId()+"IDDDDD");
                 return token.getId();
             }
             else{
@@ -201,6 +207,7 @@ public class ArchController {
          int simbolo2 = codigoF.getCol(ch);
          AccSemantica as1 = matrizAS[estado][simbolo2];
          as1.ejecutar(ch, this);
+         
          return token.getId();
         
      }       
@@ -212,8 +219,10 @@ public class ArchController {
     
     public void recorrerCodFuente(){
         while(!codigoF.hasFinished()){
-            System.out.println("token n1: "+getToken());
+           // System.out.println("token n1: "+getToken());
+           getToken();
         }
+        
     }
     public void setConcateno(boolean concateno){
         this.concateno = concateno;
@@ -252,6 +261,9 @@ public class ArchController {
         tablaS.agregar(buffer);
         
     }
+    public void añadirTokenLista(Token token){
+        ltokens.add(token);
+    }
 
     public void termino() {
         termino = true;
@@ -259,6 +271,17 @@ public class ArchController {
 
     public void agregarError(String error){
         errores.add(error);
+    }
+    public void mostrarErrores(){
+       System.out.println(errores.size()+"ERRORES ENCONTRADOS");
+        for (String s :errores) 
+            System.out.println(s);
+    }
+    public void mostrarTokens(){
+        System.out.println(ltokens.size()+"TOKENS ENCONTRADOS");
+        for (Token t :ltokens) {
+            System.out.println(t.getId());
+            }
     }
 }
     

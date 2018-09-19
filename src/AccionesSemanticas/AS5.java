@@ -17,20 +17,23 @@ public class AS5 extends AccSemantica {
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        
+        //System.out.println(ac.getBuffer());
         if(ac.esReservada(ac.getBuffer())){//si es reservada agrego token sino no
             ac.creaToken(ac.getBuffer());
             ac.termino();
-            //---------------PRUEBA--------------------//
+            ac.setConcateno(false);
+            ac.añadirTokenTS(ac.getBuffer());
+            //ac.añadirTokenLista(ac.token());
+            /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
-                                 //----------------------------------------//
+                                 //----------------------------------------/*/
             return 0;
     }
             else  
-            //---------------PRUEBA--------------------//
+            /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
-                                 //----------------------------------------//
-        return 1;
+                                 //----------------------------------------/*/
+            return 1;
         
     }
     

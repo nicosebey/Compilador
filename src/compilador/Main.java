@@ -71,7 +71,8 @@ public class Main {
         
         
         controlador.recorrerCodFuente();
-        
+        controlador.mostrarErrores();
+        controlador.mostrarTokens();
         }
 
 }
