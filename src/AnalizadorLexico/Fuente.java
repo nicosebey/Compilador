@@ -115,13 +115,16 @@ public class Fuente {
             case '\n': {
                 return 22;
             }
-
+            case ' ':{
+                return 24;
+            }
         }
         return -1;
     }
 
     public boolean hasFinished() {//TERMINO DE LEER EL CODIGO FUENTE
         return actual == finArch;
+        
     }
 
     public char getChar() {//devuelve el caracter a leer

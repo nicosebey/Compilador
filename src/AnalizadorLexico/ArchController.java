@@ -19,6 +19,7 @@ import AccionesSemanticas.AS6;
 import AccionesSemanticas.AS7;
 import AccionesSemanticas.AS8;
 import AccionesSemanticas.AS9;
+import AccionesSemanticas.AcBlanco;
 import AccionesSemanticas.AccSemantica;
 import AccionesSemanticas.Error2;
 import AccionesSemanticas.Error3;
@@ -57,6 +58,7 @@ public class ArchController {
     private AccSemantica err5 = new Error5();
     private AccSemantica err6 = new Error6();
     private AccSemantica err7 = new Error7();
+    private AccSemantica blak = new AcBlanco();
 //numero de linea actual
          // private int line;
         //private char actual;
@@ -78,7 +80,7 @@ public class ArchController {
         { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,F },//8
         { 9, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,13,F },//9
         {10,10,10,10,10,10,15,10,10,10,10,10,10,10,10,10,10,10,10,10,10, F,10,10,10},//10
-        {11, F,11, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,11,F },//11
+        {11, F,11, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,11,11, F, F,11,F },//11
         {12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12, F,12,12},//12 CHEQUEAR SI LA F VA AHI O EN '
         {14,-1,-1,16,-1,-1,17,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1},//13
         {14, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,F },//14
@@ -90,7 +92,7 @@ public class ArchController {
     private AccSemantica [][] matrizAS = {
          //d    _    l    +    *    /    -    =    :    (    )    {    }    ;    ,   !    <    >    .     u    l   ´    /n   D    ' '
          //0    1    2    3    4    5    6    7    8    9   10    11  12   13   14   15   16   17   18    19  20   21   22  23    24
-        { as1, as1, as1, as2, as2, as2, as2, as2, as1, as2, as2, as2, as2, as2, as2, as1, as1, as1, as1, as2, as2, as1,as13, as1,null},//0    ES VALIDO ESE NULL?
+        { as1, as1, as1, as2, as2, as2, as2, as2, as1, as2, as2, as2, as2, as2, as2, as1, as1, as1, as1, as2, as2, as1,as13, as1,blak},//0    ES VALIDO ESE NULL?
         { as3, as3, as3, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4,err7},//1
         { as5, as5, as3, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as3, as3, as5, as5, as3, as5},//2
         { as3, as3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3},//3
@@ -101,7 +103,7 @@ public class ArchController {
         { as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7,as7 },//8
         { as3,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11, as3,as11},//9
         { as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as8, as9, as9,as9 },//10
-        { as3,as10, as3,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10, as3,as10},//11
+        { as3,as10, as3,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10, as9, as9,as10,as10, as3,as10},//11
         { as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as8, as9, as9,as9 },//12
         { as3,err5,err5, as3,err5,err5, as3,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5},//13
         { as3,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11},//14
@@ -137,13 +139,13 @@ public class ArchController {
     
     
    
-    private ArrayList <String> listaPalReservadas;  //PALABRAS RESERVADAS
-    private Token token;
+    private ArrayList<String> listaPalReservadas=new ArrayList<String>();  //PALABRAS RESERVADAS
+    private Token token = new Token();
     private String buffer = new String();
     private TablaSimbolos tablaS = new TablaSimbolos();
-    private ArrayList<Token> ltokens;
+    private ArrayList<Token> ltokens=new ArrayList<Token>();;
     private boolean concateno = true;
-    private ArrayList <String> errores;
+    private ArrayList <String> errores=new ArrayList<String>();
     
     
     
@@ -161,20 +163,21 @@ public class ArchController {
         listaPalReservadas.add("return");
        
         
-       ltokens = new ArrayList<Token>();
-       errores = new ArrayList<>();
-       tablaS = new TablaSimbolos();
+       
+       
+       
     }
     
     public String getToken(){    
      int estado = 0; //Estado inicial.  
-     token = null;
+     token = new Token();
      
-     while ((codigoF.hasFinished())&&(estado != F)){ 
+     while ((codigoF.hasFinished()==false)&&(estado != F)){ 
         concateno = true;
         char c = codigoF.getChar();
         int simbolo = codigoF.getCol(c);
         AccSemantica as = matrizAS[estado][simbolo];
+         System.out.println(estado+simbolo);
         if(as.ejecutar(c,this)== 0){
             if(termino){
                 return token.getId();
@@ -190,6 +193,7 @@ public class ArchController {
              estado = 0;
             buffer= "";
             termino = false;
+            codigoF.siguiente();
         }
      }
      if(estado == F){
@@ -208,7 +212,7 @@ public class ArchController {
     
     public void recorrerCodFuente(){
         while(!codigoF.hasFinished()){
-            System.out.println(getToken());
+            System.out.println("token n1: "+getToken());
         }
     }
     public void setConcateno(boolean concateno){

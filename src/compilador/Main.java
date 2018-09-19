@@ -47,11 +47,11 @@ public class Main {
        
          //-------------------------------carga del codigo fuente en un StringBuilder ------------------------------------------------// 
           
-          String direccion = new String("C: ACA VA LA RUTA DEL ARCH");
+          String direccion = new String("C:\\Users\\nicol\\Desktop\\aa.txt");
         //String direccion = new String("C:\\Users\\Facu\\IdeaProjects\\prueba\\src\\codigo.txt");
 
         InputStream is = new ByteArrayInputStream(direccion.getBytes());
-        System.out.println("COMPILADORG7\n");
+        
 
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         
@@ -61,13 +61,16 @@ public class Main {
       //-----------------------------------------------------------------------------------------------------------------------------//
         
         
+         // System.out.println(codigo);
         
-        
-        
+       
         Fuente archivo = new Fuente(codigo);
         ArchController controlador = new ArchController(archivo);
         //AHORA TENDRIA QUE PEDIR LOS TOKENS Y LOS ERRRORES
         
+        
+        
+        controlador.recorrerCodFuente();
         
         }
 
