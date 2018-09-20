@@ -162,7 +162,7 @@ public class ArchController {
         listaPalReservadas.add("fun");
         listaPalReservadas.add("return");
         listaPalReservadas.add("if");
-        
+        listaPalReservadas.add("uslinteger");
        
        
        
@@ -176,10 +176,10 @@ public class ArchController {
         concateno = true;
         char c = codigoF.getChar();
         int simbolo = codigoF.getCol(c);
-        System.out.println(simbolo);
-         System.out.println(estado);
+        //System.out.println(simbolo);
+         //System.out.println(estado);
         AccSemantica as = matrizAS[estado][simbolo];
-         System.out.println("matriz["+estado+"]"+"["+simbolo+"]");
+         //System.out.println("matriz["+estado+"]"+"["+simbolo+"]");
          /*/-----------------PRUEBA----------------
         System.out.println("prueba"+prueba);
          System.out.println(estado);

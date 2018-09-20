@@ -17,7 +17,7 @@ public class TablaSimbolos {
 
 public void agregar(String lexema){
     if (tSimbol.containsKey(lexema))
-        System.out.println("el identificador ya existe");
+        System.out.println("el identificador "+lexema+" ya existe");
         else
             tSimbol.put(lexema,"tipo");
     }
