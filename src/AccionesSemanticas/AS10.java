@@ -22,15 +22,20 @@ public class AS10 extends AccSemantica {
             System.out.println("la longitud del identificador sobrepasa el maximo");
             return 1;
         }else{
-            ac.creaToken(ac.getBuffer());
-            ac.añadirTokenTS(ac.getBuffer());
-            ac.termino();
-            
-                            //---------------PRUEBA--------------------//
+            if(!ac.getTS().existeL(ac.getBuffer())){
+               ac.creaToken(ac.getBuffer());
+               ac.añadirTokenTS(ac.getBuffer());
+               ac.termino();
+               return 0;}
+            else
+                System.out.println("el TOKEN YA EXISTE");
+                            /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
-                                 //----------------------------------------//       
+                                 //----------------------------------------/*/
+                            
+        
+            return 1;
         }
-            return 0;
     }
     
 }

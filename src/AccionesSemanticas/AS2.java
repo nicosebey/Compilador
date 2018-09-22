@@ -17,7 +17,9 @@ public class AS2 extends AccSemantica{
     @Override
     public int ejecutar(char c, ArchController ac) {
         ac.inicBuffer(c);
-        ac.token().setLexemaSingular(c);
+        
+        ac.creaTokenSingular(c);
+
         ac.añadirTokenTS(ac.getBuffer());
         /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());

@@ -38,6 +38,9 @@ public class ArchController {
     private Fuente codigoF;
     private boolean termino=false;
     public static int F = 2000;// VAMOS A USAR ESTA F COMO ESTADO FINAL
+    
+    
+    
     private AccSemantica as1 = new AS1();
     private AccSemantica as2 = new AS2();
     private AccSemantica as3 = new AS3();
@@ -136,6 +139,9 @@ public class ArchController {
     public static final int VOID = 272;
     public static final int FUN = 273;
     public static final int RETURN = 274;
+    public static final int THEN = 275;
+    
+    
     
     
    
@@ -166,12 +172,13 @@ public class ArchController {
         listaPalReservadas.add("uslinteger");
         listaPalReservadas.add("end_if");
         listaPalReservadas.add("print");
+        listaPalReservadas.add("id");
        
        
        
     }
     
-    public String getToken(){    
+    public int getToken(){    
      int estado = 0; //Estado inicial.  
      token = new Token();
      int prueba = 0;
@@ -192,7 +199,9 @@ public class ArchController {
         if(as.ejecutar(c,this)== 0){
             if(termino){
                 //System.out.println(token.getId()+"IDDDDD");
-                return token.getId();
+                System.out.println(getIdentificador(buffer)+"id");
+                codigoF.siguiente();
+                return getIdentificador(buffer);
             }
             else{
                 if(concateno){
@@ -214,13 +223,61 @@ public class ArchController {
          AccSemantica as1 = matrizAS[estado][simbolo2];
          as1.ejecutar(ch, this);
          codigoF.siguiente();
-         return token.getId();
+         System.out.println(getIdentificador(buffer)+"id");
+         return getIdentificador(buffer);
         
-     }     
+     }  
         
-     return null;   
+     return -1;   
         
     }
+    
+    public int getIdentificador(String lexema){
+ 
+         if (esReservada(lexema)){
+            switch (lexema){
+                case "if": return IF;
+                case "then": return THEN;
+                case "else": return ELSE;
+                case "end_if": return END_IF;
+                case "case": return CASE;
+                case "do": return DO;
+                case "void": return VOID;
+                case "fun": return FUN;
+                case "return": return RETURN;
+                case "print": return PRINT;
+               
+                default: return ID;
+            }
+        }
+
+         else 
+             if(lexema.length()>1){
+                 //System.out.println(lexema);
+                
+                if(lexema.equals("!="))
+                    return S_DISTINTO;
+                else
+                if(lexema.equals(">="))
+                    return S_MAYOR_IGUAL;
+                else
+                if(lexema.equals("<="))
+                    return S_MENOR_IGUAL;
+                
+                else/*
+                if(lexema.charAt(0)==''' && valor.charAt(valor.length()-1)=='\'')*/
+                    return CADENA;
+            }
+         //System.out.println("aaaaa");
+         return (int) lexema.charAt(0);//ESTE ES EL CASO DE LOS TOKEN SIMPLES ( { ) } ; ETC
+        }
+        
+        
+        
+        
+        
+        
+    
     
     
     public Fuente getCodFuente(){
@@ -267,6 +324,10 @@ public class ArchController {
         token.setLexema(lexema);
         ltokens.add(token);
     }
+    public void creaTokenSingular(char c){
+        token.setLexemaSingular(c);
+        ltokens.add(token);
+    }
 
     public void añadirTokenTS(String buffer) {
         tablaS.agregar(buffer);
@@ -274,6 +335,10 @@ public class ArchController {
     }
     public void añadirTokenLista(Token token){
         ltokens.add(token);
+    }
+    
+    public TablaSimbolos getTS(){
+        return tablaS;
     }
 
     public void termino() {
