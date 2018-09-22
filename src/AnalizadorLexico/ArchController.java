@@ -162,7 +162,10 @@ public class ArchController {
         listaPalReservadas.add("fun");
         listaPalReservadas.add("return");
         listaPalReservadas.add("if");
+        listaPalReservadas.add("else");
         listaPalReservadas.add("uslinteger");
+        listaPalReservadas.add("end_if");
+        listaPalReservadas.add("print");
        
        
        

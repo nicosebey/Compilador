@@ -11,6 +11,7 @@ package AnalizadorLexico;
  */
 public class Token {
    private String id;
+   private int identificador;
    
    
    
