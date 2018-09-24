@@ -1,3 +1,5 @@
+package ParserP;
+
 
 import AnalizadorLexico.ArchController;
 import AnalizadorLexico.Token;
@@ -716,12 +718,16 @@ public Parser(boolean debugMe)
 
 public int yylex(){
     Token token = this.lexico.getToken();
+    
     int val =token.getTipo();
     yyval = new ParserVal(token);
     return val;
 }
-//###############################################################
 
+public void yyerror(String s){
+    System.out.println("Parser: " + s);
+}
+//###############################################################
 
 
 }

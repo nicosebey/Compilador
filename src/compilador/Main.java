@@ -14,7 +14,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
+import ParserP.Parser;
 /**
  *
  * @author nicol
@@ -67,16 +67,17 @@ public class Main {
         Fuente archivo = new Fuente(codigo);
         ArchController controlador = new ArchController(archivo);
         
-        //Parser parser = new Parser(controlador);
+        Parser parser = new Parser(controlador);
+        parser.run();
         
         
         //AHORA TENDRIA QUE PEDIR LOS TOKENS Y LOS ERRRORES
         
-        
+        /*
         
         controlador.recorrerCodFuente();
         controlador.mostrarErrores();
-        controlador.mostrarTokens();
+        controlador.mostrarTokens();*/
         }
 
 }

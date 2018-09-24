@@ -17,7 +17,7 @@ public class AS10 extends AccSemantica {
     @Override
     public int ejecutar(char c, ArchController ac) {
         ac.setConcateno(false);
-        
+        ac.setEsComentario(false);
         if(ac.getBuffer().length() >25 ){
             System.out.println("la longitud del identificador sobrepasa el maximo");
             return 1;
@@ -26,6 +26,7 @@ public class AS10 extends AccSemantica {
                 ac.setEstadofinal();
                 //System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa  "+ac.getBuffer());
                ac.creaToken(ac.getBuffer());
+                //System.out.println(ac.getListaTokens().get(0).getId()+"iddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
                ac.añadirTokenTS(ac.getBuffer(),"identificador");
                ac.termino();
                ac.setBuffer("");

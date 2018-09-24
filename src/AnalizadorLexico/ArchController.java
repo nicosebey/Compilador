@@ -196,13 +196,16 @@ public class ArchController {
     
     public Token getToken(){    
      estado = 0; //Estado inicial.  
-     token = new Token();
+     //token = new Token();
      buffer = "";
      int prueba = 0;
+        
      while ((codigoF.hasFinished()==false)&&(estado != F)){ 
+         System.out.println("entre");
         concateno = true;
         termino = false;
         char c = codigoF.getChar();
+         System.out.println(c);
         int simbolo = codigoF.getCol(c);
         AccSemantica as = matrizAS[estado][simbolo];
          //System.out.println("matriz["+estado+"]"+"["+simbolo+"]");
@@ -214,10 +217,10 @@ public class ArchController {
         //-------------------------------------------*/
         if(as.ejecutar(c,this)== 0){
             if(termino){
-                //System.out.println(token.getId()+"IDDDDD");
-                //System.out.println(buffer);
-                //System.out.println(getIdentificador(buffer)+"id");
+                //System.out.println(ltokens.get(0).getId()+"IDDDDD");
+                
                 codigoF.siguiente();
+                System.out.println(getComentario());
                 if(!getComentario())
                     return  ltokens.get(ltokens.size()-1);
                // else return null;//getIdentificador(buffer);
@@ -316,7 +319,9 @@ public class ArchController {
         return codigoF;
     }
     
-    
+    public ArrayList<Token> getListaTokens(){
+        return ltokens;
+    }
     public void recorrerCodFuente(){
         
         while(!codigoF.hasFinished()){
@@ -357,10 +362,10 @@ public class ArchController {
     }
 
     public void creaToken(String lexema){
-        
         Token token = new Token(lexema);
         token.setLexema(lexema);
         ltokens.add(token);
+       
     }
     public void creaTokenSingular(char c){
         Token token2 = new Token();

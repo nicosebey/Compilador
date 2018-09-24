@@ -34,6 +34,7 @@ public class AS12 extends AccSemantica{
 			if (((largo>limite_inf) && (largo < limite_sup))) {
 				 ac.creaToken(String.valueOf(largo)  );
                                  ac.setBuffer(ac.getBuffer()+c);
+                                 ac.token().setTipo(ac.getIdentificador(ac.getBuffer()));
                                  ac.añadirTokenTS(String.valueOf(largo),"USLong");
                                  
                                  ac.termino();
