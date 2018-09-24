@@ -22,7 +22,7 @@ public class AS5 extends AccSemantica {
             ac.creaToken(ac.getBuffer());
             ac.termino();
             ac.setConcateno(false);
-            ac.añadirTokenTS(ac.getBuffer());
+            ac.añadirTokenTS(ac.getBuffer(),"palReserv");
             //ac.añadirTokenLista(ac.token());
             /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());

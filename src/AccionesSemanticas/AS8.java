@@ -20,7 +20,7 @@ public class AS8 extends AccSemantica{
     public int ejecutar(char c, ArchController ac) {
        ac.setBuffer(ac.getBuffer()+c);
        ac.creaToken(ac.getBuffer());
-       ac.añadirTokenTS(ac.getBuffer());
+       ac.añadirTokenTS(ac.getBuffer(),"cadena");
        ac.termino();
        /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());

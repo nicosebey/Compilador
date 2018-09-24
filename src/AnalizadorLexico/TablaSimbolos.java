@@ -15,11 +15,11 @@ public class TablaSimbolos {
  private static Hashtable<String,String> tSimbol = new Hashtable<String,String>();    
 
 
-public void agregar(String lexema){
+public void agregar(String lexema,String tipo){
     if (tSimbol.containsKey(lexema))
         System.out.println("el identificador "+lexema+" ya existe");
         else
-            tSimbol.put(lexema,"tipo");
+            tSimbol.put(lexema,tipo);
     }
 
 

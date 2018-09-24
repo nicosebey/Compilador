@@ -184,6 +184,7 @@ public class ArchController {
      int prueba = 0;
      while ((codigoF.hasFinished()==false)&&(estado != F)){ 
         concateno = true;
+        termino = false;
         char c = codigoF.getChar();
         int simbolo = codigoF.getCol(c);
         //System.out.println(simbolo);
@@ -329,8 +330,9 @@ public class ArchController {
         ltokens.add(token);
     }
 
-    public void añadirTokenTS(String buffer) {
-        tablaS.agregar(buffer);
+    public void añadirTokenTS(String buffer,String tipo) {
+        tablaS.agregar(buffer,tipo);
+        
         
     }
     public void añadirTokenLista(Token token){

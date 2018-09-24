@@ -27,17 +27,19 @@ public class AS12 extends AccSemantica{
          boolean error = false;
 		try {	
 			String constante = ac.getBuffer();
+                        //System.out.println(ac.getBuffer()+"kjhkjhkjhkjhkjhkjh");
+
 			long largo = Long.parseLong(constante.substring(0, constante.length()-2));
                         System.out.println(largo);
 			if (((largo>limite_inf) && (largo < limite_sup))) {
 				 ac.creaToken(String.valueOf(largo)  );
                                  ac.setBuffer(ac.getBuffer()+c);
-                                 ac.añadirTokenTS(ac.getBuffer());
+                                 ac.añadirTokenTS(ac.getBuffer(),"USLong");
                                  ac.termino();
                                  ac.getCodFuente().siguiente();
                                  
                                  /*/---------------PRUEBA--------------------//
-                                         System.out.println(ac.getBuffer());
+                                         System.out.println(ac.getBuffer()+"kjhkjhkjhkjhkjhkjh");
                                  //----------------------------------------/*/
                                  return 0;
 			}

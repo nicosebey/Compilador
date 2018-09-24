@@ -11,7 +11,7 @@ package AnalizadorLexico;
  */
 public class Token {
    private String id;
-   private int identificador;
+   private int tipo;
    
    
    
@@ -34,7 +34,9 @@ public class Token {
     public void setLexemaSingular(char c){
         id = String.valueOf(c);
     }
-            
+    public void setTipo(int tipo ){
+        this.tipo = tipo;
+    }
    
     
    

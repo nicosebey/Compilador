@@ -10,18 +10,24 @@ import AnalizadorLexico.ArchController;
 /**
  *
  * @author nicol
+ * 
+ * 
+ * 
+ * //DA ERROR YA QUE "_ " Y CUALQUIER COSA QUE VENGA DESPUES QUE CAIGA EN ESTA ACC SEMANTICA NO ES  VALIDO
  */public class AS4 extends AccSemantica {
 
     @Override
     public int ejecutar(char c, ArchController ac) {
        
-       ac.creaToken(ac.getBuffer());
+      /* ac.creaToken(ac.getBuffer());
        ac.añadirTokenTS(ac.getBuffer());
        ac.setConcateno(false);
-       ac.termino();
+       ac.termino();*/
        /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
         //----------------------------------------/*/
-       return 0;
+       
+        ac.agregarError("caracter invalido:"+c+" NO ES VALIDO");  
+       return 1;
     }
  }
