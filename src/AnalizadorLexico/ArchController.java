@@ -185,7 +185,6 @@ public class ArchController {
         listaPalReservadas.add("id");
         listaPalReservadas.add("then");
         listaPalReservadas.add("double");
-        listaPalReservadas.add("uslinteger");
      
     
     
@@ -269,7 +268,9 @@ public class ArchController {
                 case "fun": return FUN;
                 case "return": return RETURN;
                 case "print": return PRINT;
-               
+                case "double": return DOUBLE;
+                case "uslinteger": return USLINTEGER;
+
                 default: return ID;
             }
         }
@@ -277,7 +278,12 @@ public class ArchController {
          else 
              if(lexema.length()>1){
                  //System.out.println(lexema);
-                
+                if (lexema.contains("_ul"))
+                    return CTE_USLINTEGER;
+                if (lexema.contains("."))
+                    return CTE_D;
+                if (lexema.equals(":="))
+                    return ASIGNACION;
                 if(lexema.equals("!="))
                     return S_DISTINTO;
                 else
@@ -291,6 +297,7 @@ public class ArchController {
                 if(lexema.charAt(0)==''' && valor.charAt(valor.length()-1)=='\'')*/
                     return CADENA;
             }
+        
          //System.out.println("aaaaa");
          return (int) lexema.charAt(0);//ESTE ES EL CASO DE LOS TOKEN SIMPLES ( { ) } ; ETC
         }
