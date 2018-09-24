@@ -13,7 +13,7 @@ import AnalizadorLexico.ArchController;
  */
 //CHEQUEA QUE LA LONGITUD DEL TOKEN NO SEA MAYOR A 25
 public class AS10 extends AccSemantica {
-
+    
     @Override
     public int ejecutar(char c, ArchController ac) {
         ac.setConcateno(false);
@@ -23,9 +23,12 @@ public class AS10 extends AccSemantica {
             return 1;
         }else{
             if(!ac.getTS().existeL(ac.getBuffer())){
+                ac.setEstadofinal();
+                //System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa  "+ac.getBuffer());
                ac.creaToken(ac.getBuffer());
                ac.añadirTokenTS(ac.getBuffer(),"identificador");
                ac.termino();
+               ac.setBuffer("");
                return 0;}
             else
                 System.out.println("el TOKEN YA EXISTE");

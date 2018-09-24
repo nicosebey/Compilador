@@ -37,6 +37,9 @@ public class Token {
     public void setTipo(int tipo ){
         this.tipo = tipo;
     }
+    public int getTipo(){
+        return this.tipo;
+    }
    
     
    

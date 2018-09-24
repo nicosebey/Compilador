@@ -118,28 +118,35 @@ public class ArchController {
     
      //CONSTANTES  IDENTIFICADORES
   
-    public static final int S_MAYOR_IGUAL = 257;
-    public static final int S_MENOR_IGUAL = 258;
-    public static final int S_DISTINTO = 259;
-    public static final int S_SE_VUELVE = 260;
-    public static final int ID = 261;
-    public static final int CADENA = 262;
-    public static final int CTE = 263;
+    public final static short S_MAYOR_IGUAL=257;
+public final static short S_MENOR_IGUAL=258;
+public final static short S_DISTINTO=259;
+public final static short COMENTARIO=262;
+public final static short CADENA=263;
+public final static short CTE_D=260;
+public final static short CTE_USLINTEGER=261;
+public final static short ID=264;
+public final static short ASIGNACION=275;
+
     
         
     //PALABRAS RESERVADAS
-    public static final int IF = 264;
-    public static final int ELSE =265;
-    public static final int END_IF = 266;
-    public static final int PRINT = 267;
-    public static final int USLINTEGER = 268;
-    public static final int DOUBLE = 269;
-    public static final int CASE = 270;
-    public static final int DO = 271;
-    public static final int VOID = 272;
-    public static final int FUN = 273;
-    public static final int RETURN = 274;
-    public static final int THEN = 275;
+    public static final int IF = 265;
+    public static final int THEN = 266;
+    public static final int ELSE =267;
+    public static final int END_IF = 268;
+    public static final int DO = 269;
+    public static final int FUN = 270;
+    public static final int DOUBLE = 271;
+    public static final int USLINTEGER = 272;
+    public static final int RETURN = 273;
+    public static final int PRINT = 274;
+    public static final int CASE = 276;
+  
+  
+
+   
+    
     
     
     
@@ -152,6 +159,8 @@ public class ArchController {
     private ArrayList<Token> ltokens=new ArrayList<Token>();;
     private boolean concateno = true;
     private ArrayList <String> errores=new ArrayList<String>();
+    private boolean esComentario = false;
+    private int estado;
     
     
     
@@ -173,22 +182,23 @@ public class ArchController {
         listaPalReservadas.add("end_if");
         listaPalReservadas.add("print");
         listaPalReservadas.add("id");
+        
+        estado = 0;
        
        
        
     }
     
-    public int getToken(){    
-     int estado = 0; //Estado inicial.  
+    public Token getToken(){    
+     estado = 0; //Estado inicial.  
      token = new Token();
+     buffer = "";
      int prueba = 0;
      while ((codigoF.hasFinished()==false)&&(estado != F)){ 
         concateno = true;
         termino = false;
         char c = codigoF.getChar();
         int simbolo = codigoF.getCol(c);
-        //System.out.println(simbolo);
-         //System.out.println(estado);
         AccSemantica as = matrizAS[estado][simbolo];
          //System.out.println("matriz["+estado+"]"+"["+simbolo+"]");
          /*/-----------------PRUEBA----------------
@@ -200,9 +210,12 @@ public class ArchController {
         if(as.ejecutar(c,this)== 0){
             if(termino){
                 //System.out.println(token.getId()+"IDDDDD");
-                System.out.println(getIdentificador(buffer)+"id");
+                //System.out.println(buffer);
+                //System.out.println(getIdentificador(buffer)+"id");
                 codigoF.siguiente();
-                return getIdentificador(buffer);
+                if(!getComentario())
+                    return  ltokens.get(ltokens.size()-1);
+               // else return null;//getIdentificador(buffer);
             }
             else{
                 if(concateno){
@@ -217,19 +230,22 @@ public class ArchController {
             termino = false;
             codigoF.siguiente();
         }
-     }
+     }/*
      if(estado == F){
          char ch = codigoF.getChar();
          int simbolo2 = codigoF.getCol(ch);
          AccSemantica as1 = matrizAS[estado][simbolo2];
          as1.ejecutar(ch, this);
          codigoF.siguiente();
-         System.out.println(getIdentificador(buffer)+"id");
-         return getIdentificador(buffer);
+         //System.out.println(buffer);
+         //System.out.println(getIdentificador(buffer)+"id");
+         if(!getComentario())
+              return  ltokens.get(ltokens.size()-1);
+           // else return null;
         
-     }  
+     } */
         
-     return -1;   
+     return null;   
         
     }
     
@@ -279,7 +295,9 @@ public class ArchController {
         
         
     
-    
+    public boolean getComentario(){
+        return esComentario;
+    }
     
     public Fuente getCodFuente(){
         return codigoF;
@@ -287,9 +305,13 @@ public class ArchController {
     
     
     public void recorrerCodFuente(){
+        
         while(!codigoF.hasFinished()){
            // System.out.println("token n1: "+getToken());
-           getToken();
+           token = getToken();
+         
+            
+           
         }
         
     }
@@ -322,12 +344,15 @@ public class ArchController {
     }
 
     public void creaToken(String lexema){
+        
+        Token token = new Token(lexema);
         token.setLexema(lexema);
         ltokens.add(token);
     }
     public void creaTokenSingular(char c){
-        token.setLexemaSingular(c);
-        ltokens.add(token);
+        Token token2 = new Token();
+        token2.setLexemaSingular(c);
+        ltokens.add(token2);
     }
 
     public void añadirTokenTS(String buffer,String tipo) {
@@ -359,7 +384,17 @@ public class ArchController {
         System.out.println(ltokens.size()+"TOKENS ENCONTRADOS");
         for (Token t :ltokens) {
             System.out.println(t.getId());
+            System.out.println(tablaS.getL(t.getId()));
+            
             }
+    }
+
+    public void setEsComentario(boolean comentario) {
+       esComentario = comentario;
+    }
+
+    public void setEstadofinal() {
+        estado = F; //To change body of generated methods, choose Tools | Templates.
     }
 }
     

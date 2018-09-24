@@ -19,12 +19,13 @@ public class AS2 extends AccSemantica{
         ac.inicBuffer(c);
         
         ac.creaTokenSingular(c);
-
+        
         ac.añadirTokenTS(ac.getBuffer(),"unarios");
         /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
          //----------------------------------------/*/
         ac.termino();
+        ac.setEstadofinal();
         return 0;    
     }
     

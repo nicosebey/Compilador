@@ -17,7 +17,8 @@ public class AcBlanco extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        return 1;
+        ac.setBuffer("");
+        return 0;
     }
     
 }

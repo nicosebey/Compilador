@@ -22,6 +22,7 @@ package Parser;
 //#line 24 "Parser.java"
 
 import AnalizadorLexico.ArchController;
+import AnalizadorLexico.Token;
 
 
 
@@ -712,7 +713,10 @@ public Parser (ArchController lexico){
 }
 
 public int yylex(){
-    return lexico.getToken();
+   Token token = lexico.getToken();
+   int val = token.getTipo();
+   yyval = new ParserVal(token);
+   return val;
 }
 
 }

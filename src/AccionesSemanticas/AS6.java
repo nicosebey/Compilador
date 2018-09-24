@@ -26,6 +26,7 @@ public class AS6 extends AccSemantica{
          /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
                                  //----------------------------------------/*/
+         ac.setEstadofinal();
          return 0;   
         
     }

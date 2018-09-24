@@ -25,7 +25,7 @@ public void agregar(String lexema,String tipo){
 
 public String getL(String s){
     if (tSimbol.containsKey(s))
-        return s;
+        return tSimbol.get(s);
     else
         return null;
 }

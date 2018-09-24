@@ -45,8 +45,10 @@ lista_de_variables : lista_de_variables ';' ID {}
 		  
 		    | ID {} ;
 
-clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN ;
+clousure : tipofuncion ID '(' ')' '{' bloque_sentencias '}' RETURN ;
 
+tipofuncion : FUN {}
+            | VOID {} ;
 
 
 tipo :  USLINTEGER{}

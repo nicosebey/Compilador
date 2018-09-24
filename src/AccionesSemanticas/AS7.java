@@ -30,6 +30,7 @@ public class AS7 extends AccSemantica{
         /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
                                  //----------------------------------------/*/
+        ac.setEstadofinal();
         return 0;
     }
     

@@ -22,10 +22,12 @@ public class AS8 extends AccSemantica{
        ac.creaToken(ac.getBuffer());
        ac.añadirTokenTS(ac.getBuffer(),"cadena");
        ac.termino();
+       ac.setBuffer("");
        /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
                                  //----------------------------------------/*/
-        return 0;
+       ac.setEstadofinal(); 
+       return 0;
     }
     
 }

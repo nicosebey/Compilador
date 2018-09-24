@@ -23,16 +23,19 @@ public class AS5 extends AccSemantica {
             ac.termino();
             ac.setConcateno(false);
             ac.añadirTokenTS(ac.getBuffer(),"palReserv");
+            ac.setBuffer("");
             //ac.añadirTokenLista(ac.token());
             /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
                                  //----------------------------------------/*/
+            ac.setEstadofinal();
             return 0;
     }
             else  
             /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
                                  //----------------------------------------/*/
+            System.out.println(ac.getBuffer());
             System.out.println(ac.getBuffer()+" no es una palabra reservada o esta mal escrita");
             return 1;
         
