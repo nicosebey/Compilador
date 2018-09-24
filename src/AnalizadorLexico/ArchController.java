@@ -119,15 +119,15 @@ public class ArchController {
      //CONSTANTES  IDENTIFICADORES
   
     public final static short S_MAYOR_IGUAL=257;
-public final static short S_MENOR_IGUAL=258;
-public final static short S_DISTINTO=259;
-public final static short COMENTARIO=262;
-public final static short CADENA=263;
-public final static short CTE_D=260;
-public final static short CTE_USLINTEGER=261;
-public final static short ID=264;
-public final static short ASIGNACION=275;
-public final static short VOID=277;
+    public final static short S_MENOR_IGUAL=258;
+    public final static short S_DISTINTO=259;
+    public final static short COMENTARIO=262;
+    public final static short CADENA=263;
+    public final static short CTE_D=260;
+    public final static short CTE_USLINTEGER=261;
+    public final static short ID=264;
+    public final static short ASIGNACION=275;
+
 
     
         
@@ -143,7 +143,7 @@ public final static short VOID=277;
     public static final int RETURN = 273;
     public static final int PRINT = 274;
     public static final int CASE = 276;
-  
+    public final static short VOID=277;
   
 
    
@@ -183,7 +183,12 @@ public final static short VOID=277;
         listaPalReservadas.add("end_if");
         listaPalReservadas.add("print");
         listaPalReservadas.add("id");
-        
+        listaPalReservadas.add("then");
+        listaPalReservadas.add("double");
+        listaPalReservadas.add("uslinteger");
+     
+    
+    
         estado = 0;
        
        
