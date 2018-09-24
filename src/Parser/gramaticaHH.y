@@ -18,6 +18,7 @@
 %token PRINT
 %token ASIGNACION
 %token CASE
+%token VOID
 %%
 
 

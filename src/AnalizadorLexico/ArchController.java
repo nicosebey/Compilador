@@ -127,6 +127,7 @@ public final static short CTE_D=260;
 public final static short CTE_USLINTEGER=261;
 public final static short ID=264;
 public final static short ASIGNACION=275;
+public final static short VOID=277;
 
     
         
