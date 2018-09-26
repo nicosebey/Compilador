@@ -162,7 +162,9 @@ public class ArchController {
     private ArrayList <String> errores=new ArrayList<String>();
     private boolean esComentario = false;
     private int estado;
-    
+   
+    private ArrayList<String> estructuras = new ArrayList<String>();// CARGO LAS ESTRUCTURAS QUE FUNCIONAN BIEN
+     
     
     
     
@@ -201,11 +203,11 @@ public class ArchController {
      int prueba = 0;
         
      while ((codigoF.hasFinished()==false)&&(estado != F)){ 
-         System.out.println("entre");
+         //System.out.println("entre");
         concateno = true;
         termino = false;
         char c = codigoF.getChar();
-         System.out.println(c);
+        // System.out.println(c);
         int simbolo = codigoF.getCol(c);
         AccSemantica as = matrizAS[estado][simbolo];
          //System.out.println("matriz["+estado+"]"+"["+simbolo+"]");
@@ -220,7 +222,7 @@ public class ArchController {
                 //System.out.println(ltokens.get(0).getId()+"IDDDDD");
                 
                 codigoF.siguiente();
-                System.out.println(getComentario());
+                //System.out.println(getComentario());
                 if(!getComentario())
                     return  ltokens.get(ltokens.size()-1);
                // else return null;//getIdentificador(buffer);
@@ -363,12 +365,14 @@ public class ArchController {
 
     public void creaToken(String lexema){
         Token token = new Token(lexema);
+        token.setTipo(getIdentificador(lexema));
         token.setLexema(lexema);
         ltokens.add(token);
        
     }
     public void creaTokenSingular(char c){
         Token token2 = new Token();
+         token.setTipo(getIdentificador(String.valueOf(c)));
         token2.setLexemaSingular(c);
         ltokens.add(token2);
     }
@@ -393,6 +397,14 @@ public class ArchController {
     public void agregarError(String error){
         errores.add(error);
     }
+    public void agregarEstructura(String error){
+            estructuras.add(error);
+    }
+    
+    
+    
+    
+    
     public void mostrarErrores(){
        System.out.println(errores.size()+"ERRORES ENCONTRADOS");
         for (String s :errores) 
@@ -413,6 +425,11 @@ public class ArchController {
 
     public void setEstadofinal() {
         estado = F; //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    public ArchController getLexico(){
+        return this;
     }
 }
     
