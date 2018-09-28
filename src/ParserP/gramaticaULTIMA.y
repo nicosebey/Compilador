@@ -150,57 +150,57 @@ error_accion : cte error DO bloque {lexico.getLexico().agregarError("en la linea
 
 
 
-cte : CTE_D
-      | CTE_USLINTEGER
+cte : CTE_D {System.out.println("leida DOUBLE");}
+      | CTE_USLINTEGER{System.out.println("Leida CTE");}
 	;
 
 
-seleccion : IF '(' condicion ')' bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una seleccion");}
-	  | error_seleccion
+seleccion : IF {System.out.println("cargue un if");}'(' condicion ')'{System.out.println("cargue una condicion");} bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una seleccion");}
+	{/*  | error_seleccion
 	   ;
 
 
-error_seleccion : IF error condicion ')' bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el '(' de la condicion ");}
+error_seleccion : IF  condicion ')' bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el '(' de la condicion ");}
 		| IF '(' condicion   bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ')' de la condicion ");}
 		| IF  condicion  bloque_sentencias ELSE bloque_sentencias END_IF    {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"faltan los parentesis de la condicion");}
                 ;
-
-asignacion : ID ':=' expresion {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una asignacion");}
+*/;};
+asignacion : ID {System.out.println("lei id");} ASIGNACION {System.out.println("lei asig");} expresion{System.out.println("lei exp");} {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una asignacion");System.out.println("realice una asignacion");}
            | error_asignacion
            ;
 
 
-error_asignacion : ID  {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el := de la asignacion ");}
+error_asignacion : ID expresion { System.out.println("Error"); lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el := de la asignacion ");}
+                 | ASIGNACION expresion { System.out.println("Error"); lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ID de la asignacion ");}
                  ;
 
 
 
 
-expresion : expresion '+' termino {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una suma");} 
+expresion : expresion '+' termino {System.out.println("se hizo una suma ");}{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una suma");} 
 	  | expresion '-' termino {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una resta");}
-	  | termino 
-          
-                ;
+	  | termino {System.out.println("TERMINO a EXPR");}
+          ;
 
 termino : termino '*' factor {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una multiplicacion");} 
 	| termino '/' factor {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una division");}
-	| factor 
-       
-              ;
+	| factor { System.out.println("FACTOR a TERMINO"); }
+        ;
 
-factor : cte
+factor : cte { System.out.println("CTE a FACTOR"); }
 	| factor_negado
-	| ID 
+	| ID {System.out.println("cargue un identificador");}
+        {/*| error { System.out.println("Error"); lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el token ");}*/}
 	;
 
 factor_negado : '-' CTE_D
               ;
 
 
-condicion :  expresion comparador expresion 
+condicion :  {System.out.println("llegue aca pero no lee exp");}expresion {System.out.println("encontre un puta expresion");}comparador expresion 
            ;
 
-comparador : '<'
+comparador : '<'{System.out.println("cargue un menor");}
 	   |  '>'
 	   |   '=' 
            |  S_MAYOR_IGUAL
@@ -222,10 +222,12 @@ public Parser(ArchController lexico)
 
 public int yylex(){
     Token token = this.lexico.getToken();
-    
+   if(token != null ){ 
     int val =token.getTipo();
     yyval = new ParserVal(token);
     return val;
+}
+   else return 0;
 }
 
 public void yyerror(String s){

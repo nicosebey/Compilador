@@ -22,23 +22,24 @@ public class AS12 extends AccSemantica{
     private static final long limite_sup = (long) (2E32)-1;
     @Override
     public int ejecutar(char c, ArchController ac) {
-       
-	
+        //ac.setConcateno(false);
+        //System.out.println(c);
          boolean error = false;
 		try {	
 			String constante = ac.getBuffer();
                         //System.out.println(ac.getBuffer()+"kjhkjhkjhkjhkjhkjh");
 
 			long largo = Long.parseLong(constante.substring(0, constante.length()-2));
-                        System.out.println(largo);
+                        //System.out.println(largo);
 			if (((largo>limite_inf) && (largo < limite_sup))) {
-				 ac.creaToken(String.valueOf(largo)  );
-                                 ac.setBuffer(ac.getBuffer()+c);
+				 ac.creaToken(String.valueOf(largo)+"_ul"  );
+                                 ac.setBuffer(ac.getBuffer());
                                  ac.token().setTipo(ac.getIdentificador(ac.getBuffer()));
+                                 
                                  ac.añadirTokenTS(String.valueOf(largo),"USLong");
                                  
                                  ac.termino();
-                                 ac.getCodFuente().siguiente();
+                                //ac.getCodFuente().siguiente();
                                  
                                  /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer()+"kjhkjhkjhkjhkjhkjh");

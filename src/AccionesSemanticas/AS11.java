@@ -31,6 +31,7 @@ public class AS11 extends AccSemantica{
 			Float doble = Float.parseFloat(constanteR);
 			if (((doble>limite_inf) && (doble < limite_sup))|| doble==cero) {
 				 ac.creaToken(String.valueOf(doble));  //ACA EL TOKEN SIGUE TENIENDO LA D en vez de la E DEL EXPONENTE QUE ESTA BIEN?
+                                 ac.token().setTipo(ac.getIdentificador(constanteR));
                                  ac.añadirTokenTS(String.valueOf(doble),"double");
                                  ac.termino();
                                  /*/---------------PRUEBA--------------------//

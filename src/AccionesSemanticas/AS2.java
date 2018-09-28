@@ -19,7 +19,7 @@ public class AS2 extends AccSemantica{
         ac.inicBuffer(c);
         
         ac.creaTokenSingular(c);
-        
+        ac.token().setTipo(c);
         ac.añadirTokenTS(ac.getBuffer(),"unarios");
         /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());

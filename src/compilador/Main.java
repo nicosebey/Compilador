@@ -21,9 +21,10 @@ import ParserP.*;
  */
 public class Main {
     private static BufferedReader codigo;
+    
+    private static String direccion;
 
     private static StringBuilder getCodigo(BufferedReader ubicacion){
-
         StringBuilder buffer = new StringBuilder();
         try{
             codigo = new BufferedReader( new FileReader( ubicacion.readLine() ) );
@@ -42,14 +43,13 @@ public class Main {
         }
         return buffer;
     }
+
     
       public static void main (String [] args) {
        
          //-------------------------------carga del codigo fuente en un StringBuilder ------------------------------------------------// 
           
-          String direccion = new String("C:\\Users\\nicol\\Desktop\\aa.txt");
-       
-
+        String direccion = new String("C:\\Users\\nicol\\Desktop\\aa.txt");
         InputStream is = new ByteArrayInputStream(direccion.getBytes());
         
 
@@ -58,7 +58,7 @@ public class Main {
         StringBuilder codigo = null;
         codigo = new StringBuilder( getCodigo( br ) );
         
-      //-----------------------------------------------------------------------------------------------------------------------------//
+      //-----------------------------------------------------------------------------------------------------------------------------
         
         
          // System.out.println(codigo);
@@ -69,15 +69,20 @@ public class Main {
         
         Parser parser = new Parser(controlador);
         parser.run();
-        
-        
+       
+          
+        controlador.getEstructuras();
+        controlador.mostrarErrores();
+        controlador.mostrarTokens();
         //AHORA TENDRIA QUE PEDIR LOS TOKENS Y LOS ERRRORES
         
-        /*
         
-        controlador.recorrerCodFuente();
-        controlador.mostrarErrores();
-        controlador.mostrarTokens();*/
+        
+       /* controlador.recorrerCodFuente();
+        controlador.mostrarErrores();*/
+        
         }
-
+      public void setDireccion (String direccion){
+          this.direccion = direccion;
+      }
 }

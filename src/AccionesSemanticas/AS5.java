@@ -35,7 +35,7 @@ public class AS5 extends AccSemantica {
             /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
                                  //----------------------------------------/*/
-            System.out.println(ac.getBuffer());
+            //System.out.println(ac.getBuffer());
             System.out.println(ac.getBuffer()+" no es una palabra reservada o esta mal escrita");
             return 1;
         

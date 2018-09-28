@@ -57,6 +57,8 @@ public class Fuente {
             return 0;
         if (Character.isLetter(c))
             return 2;
+        if(Character.isWhitespace(c))
+                return 24;
         switch (c) {
             case '_': {
                 return 1;
@@ -115,9 +117,7 @@ public class Fuente {
             case '\n': {
                 return 22;
             }
-            case ' ':{
-                return 24;
-            }
+            
         }
         return -1;
     }

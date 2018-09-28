@@ -26,6 +26,7 @@ public class AS7 extends AccSemantica{
              ac.token().setLexemaSingular(ac.getBuffer().charAt(0));
             }
         ac.añadirTokenTS(ac.getBuffer(),"comparador");
+        ac.token().setTipo(ac.getIdentificador(ac.getBuffer()));
         ac.termino();
         /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
