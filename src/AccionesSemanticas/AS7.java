@@ -23,7 +23,8 @@ public class AS7 extends AccSemantica{
         }
         else{
              ac.setConcateno(false);
-             ac.token().setLexemaSingular(ac.getBuffer().charAt(0));
+             ac.creaTokenSingular(ac.getBuffer().charAt(0));
+             //ac.token().setLexemaSingular(ac.getBuffer().charAt(0));
             }
         ac.añadirTokenTS(ac.getBuffer(),"comparador");
         ac.token().setTipo(ac.getIdentificador(ac.getBuffer()));

@@ -31,14 +31,19 @@ public class AS10 extends AccSemantica {
                ac.termino();
                ac.setBuffer("");
                return 0;}
-            else
+            else{
                 System.out.println("el TOKEN YA EXISTE");
+                ac.setEstadofinal();
+                ac.termino();
+                ac.setRepetido(ac.getBuffer());
+                ac.setBuffer("");
+                return 0;}
                             /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
                                  //----------------------------------------/*/
                             
         
-            return 1;
+            
         }
     }
     

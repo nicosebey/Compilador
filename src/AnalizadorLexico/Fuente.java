@@ -29,7 +29,7 @@ public class Fuente {
 
     public Fuente(StringBuilder archivo) {
         this.archivo = archivo;
-        pos = 1;
+        pos = 0;
         actual = archivo.charAt(pos);
         linea = 1; 
     }

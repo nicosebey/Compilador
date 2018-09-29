@@ -38,7 +38,7 @@ public class ArchController {
     private Fuente codigoF;
     private boolean termino=false;
     public static int F = 2000;// VAMOS A USAR ESTA F COMO ESTADO FINAL
-    
+    public String repetido = null;
     
     
     private AccSemantica as1 = new AS1();
@@ -95,7 +95,7 @@ public class ArchController {
     private AccSemantica [][] matrizAS = {
          //d    _    l    +    *    /    -    =    :    (    )    {    }    ;    ,   !    <    >    .     u    l   ´    /n   D    ' '
          //0    1    2    3    4    5    6    7    8    9   10    11  12   13   14   15   16   17   18    19  20   21   22  23    24
-        { as1, as1, as1, as2, as2, as2, as2, as2, as1, as2, as2, as2, as2, as2, as2, as1, as1, as1, as1, as2, as2, as1,as13, as1,blak},//0    ES VALIDO ESE NULL?
+        { as1, as1, as1, as2, as2, as2, as2, as2, as1, as2, as2, as2, as2, as2, as2, as1, as1, as1, as1, as1, as1, as1,as13, as1,blak},//0    ES VALIDO ESE NULL?
         { as3, as3, as3, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as4, as3, as3, as4, as4, as3,err7},//1
         { as5, as3, as3, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as5, as3, as3, as5, as5, as3, as5},//2
         { as3, as3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3,err3, as3,err3,err3,err3,err3,err3,err3},//3
@@ -198,13 +198,13 @@ public class ArchController {
     
     public Token getToken(){    
      estado = 0; //Estado inicial.  
-     //token = new Token();
+     repetido = null;
      buffer = "";
      int prueba = 0;
         
      while ((codigoF.hasFinished()==false)/*&&(estado != F))*/){ 
         
-         
+        
         concateno = true;
         termino = false;
         char c = codigoF.getChar();
@@ -229,7 +229,10 @@ public class ArchController {
                 if(!getComentario()){
                    /* System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");*/
                     //System.out.println(ltokens.size()+"tamaño listat");
-                    return  ltokens.get(ltokens.size()-1);
+                    if(repetido == null)
+                        return  ltokens.get(ltokens.size()-1);
+                    else
+                        ltokens.
                // else return null;//getIdentificador(buffer);
                 }
             }
@@ -454,6 +457,10 @@ public class ArchController {
 
     public ArrayList<String> getListaEstructuras() {
         return estructuras;
+    }
+
+    public void setRepetido(String buffer) {
+        repetido = buffer; //To change body of generated methods, choose Tools | Templates.
     }
 }
     
