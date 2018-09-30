@@ -46,16 +46,16 @@ bloque_sentencias  :   sentencia
 
 
 error_bloque : error bloque_sentencias '}' {lexico.getLexico().agregarError("en la linea "+" (aca va el numero de la linea)"+" Error sintactico: falta '{' ");}
-	     | error bloque_sentencias error  {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+" Error sintactico: falta '{'y '}' ");}
+	    {/*  | error bloque_sentencias error  {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+" Error sintactico: falta '{'y '}' ");}*/}
 	     | '{' bloque_sentencias error {lexico.getLexico().agregarError( "en la linea "+"(aca va el numero de la linea)"+" Error sintactico: falta '}' ");}
              
  ;
 
 
-sentencia   : declaracion ',' {System.out.println("se cargo una declaracion");}
+sentencia   : declaracion ','{System.out.println("se cargo una declaracion");}
             | ejecucion   ',' {}
            
-	    | error_sentencia_d 
+          {/*  | error_sentencia_d 
             ;
 
 
@@ -63,7 +63,7 @@ sentencia   : declaracion ',' {System.out.println("se cargo una declaracion");}
 
 error_sentencia_d : declaracion error { lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"Error sintactico: falta la coma");}
 		   | ejecucion error {	lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"Error sintactico: falta la coma");}
-                    
+                */}    
               	;
 
 
@@ -141,7 +141,7 @@ error_print : PRINT CADENA ')' {lexico.getLexico().agregarError( "(aca va el num
 	     ;
 
 
-control : CASE '(' ID ')' '{' lista_acciones '}' 
+control : CASE '(' ID ')' '{' lista_acciones '}' {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se creo un case");}
 	| error_control
 	 ;
 
@@ -176,18 +176,18 @@ cte : CTE_D {System.out.println("leida DOUBLE");}
 	;
 
 
-seleccion : IF {System.out.println("cargue un if");}'(' condicion ')'{System.out.println("cargue una condicion");} bloque {System.out.println("cargue un BLOQUE1");}ELSE bloque {System.out.println("cargue un BLOQUE ELSE");}END_IF {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una seleccion");}
-	  {/*| error_seleccion
+seleccion : IF {System.out.println("cargue un if");}'(' condicion ')'{System.out.println("cargue una condicion");} bloque {System.out.println("cargue un BLOQUE1");}ELSE bloque {System.out.println("cargue un BLOQUE ELSE");}END_IF {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una condicion IF");}
+{/*	  | error_seleccion
 	   ;
 
-
+{/*
 error_seleccion : 
                  IF '('condicion')' {System.out.println("LOGRE ENTRAR ACA PERO PUTO");} error_bloque ELSE bloque END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el BLOQUE de la condicion ");}
                  
                 IF  condicion ')' bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el '(' de la condicion ");}
 		| IF '(' condicion   bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ')' de la condicion ");}
 		| IF  condicion  bloque_sentencias ELSE bloque_sentencias END_IF    {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"faltan los parentesis de la condicion");}
-               */} ;
+             */;}   ;
 
 asignacion : ID {System.out.println("lei id");} ASIGNACION {System.out.println("lei asig");} expresion{System.out.println("lei exp");} {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una asignacion");System.out.println("realice una asignacion");}
            | error_asignacion

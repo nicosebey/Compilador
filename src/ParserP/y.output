@@ -9,145 +9,145 @@
    5  bloque_sentencias : sentencia
    6                    | bloque_sentencias sentencia
 
-   7  error_bloque : error bloque_sentencias '}'
-   8               | error bloque_sentencias error
+   7  $$1 :
+
+   8  error_bloque : error bloque_sentencias '}' $$1
    9               | '{' bloque_sentencias error
 
   10  sentencia : declaracion ','
-  11            | ejecucion ','
-  12            | error_sentencia_d
 
-  13  error_sentencia_d : declaracion error
-  14                    | ejecucion error
+  11  $$2 :
 
-  15  declaracion : tipo lista_de_variables
-  16              | clousure
+  12  sentencia : ejecucion ',' $$2
 
-  17  lista_de_variables : lista_de_variables ';' ID
-  18                     | ID
-  19                     | error_lista_de_variables
+  13  declaracion : tipo lista_de_variables
+  14              | clousure
 
-  20  error_lista_de_variables : lista_de_variables ID
+  15  lista_de_variables : lista_de_variables ';' ID
+  16                     | ID
+  17                     | error_lista_de_variables
 
-  21  clousure : VOID ID '(' ')' '{' bloque_sentencias '}' RETURN
-  22           | FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')'
-  23           | FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ID ')'
-  24           | error_clousure
+  18  error_lista_de_variables : lista_de_variables ID
 
-  25  error_clousure : VOID ID ')' '{' bloque_sentencias '}' RETURN
-  26                 | VOID ID '(' '{' bloque_sentencias '}' RETURN
-  27                 | VOID ID '(' ')' bloque_sentencias '}' RETURN
-  28                 | VOID ID '(' ')' '{' bloque_sentencias RETURN
-  29                 | VOID ID '(' ')' bloque_sentencias RETURN
-  30                 | VOID ID '{' bloque_sentencias '}' RETURN
-  31                 | VOID ID '(' ')' '{' bloque_sentencias '}'
-  32                 | VOID '(' ')' '{' bloque_sentencias '}' RETURN
-  33                 | ID '(' ')' '{' bloque_sentencias '}' RETURN
-  34                 | FUN ID ')' '{' bloque_sentencias '}' RETURN
-  35                 | FUN ID '(' '{' bloque_sentencias '}' RETURN
-  36                 | FUN ID '(' ')' bloque_sentencias '}' RETURN
-  37                 | FUN ID '(' ')' '{' bloque_sentencias RETURN
-  38                 | FUN ID '(' ')' bloque_sentencias RETURN
-  39                 | FUN ID '{' bloque_sentencias '}' RETURN
-  40                 | FUN ID '(' ')' '{' bloque_sentencias '}'
-  41                 | FUN '(' ')' '{' bloque_sentencias '}' RETURN
+  19  clousure : VOID ID '(' ')' '{' bloque_sentencias '}' RETURN
+  20           | FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')'
+  21           | FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ID ')'
+  22           | error_clousure
 
-  42  $$1 :
+  23  error_clousure : VOID ID ')' '{' bloque_sentencias '}' RETURN
+  24                 | VOID ID '(' '{' bloque_sentencias '}' RETURN
+  25                 | VOID ID '(' ')' bloque_sentencias '}' RETURN
+  26                 | VOID ID '(' ')' '{' bloque_sentencias RETURN
+  27                 | VOID ID '(' ')' bloque_sentencias RETURN
+  28                 | VOID ID '{' bloque_sentencias '}' RETURN
+  29                 | VOID ID '(' ')' '{' bloque_sentencias '}'
+  30                 | VOID '(' ')' '{' bloque_sentencias '}' RETURN
+  31                 | ID '(' ')' '{' bloque_sentencias '}' RETURN
+  32                 | FUN ID ')' '{' bloque_sentencias '}' RETURN
+  33                 | FUN ID '(' '{' bloque_sentencias '}' RETURN
+  34                 | FUN ID '(' ')' bloque_sentencias '}' RETURN
+  35                 | FUN ID '(' ')' '{' bloque_sentencias RETURN
+  36                 | FUN ID '(' ')' bloque_sentencias RETURN
+  37                 | FUN ID '{' bloque_sentencias '}' RETURN
+  38                 | FUN ID '(' ')' '{' bloque_sentencias '}'
+  39                 | FUN '(' ')' '{' bloque_sentencias '}' RETURN
 
-  43  error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ')' $$1
+  40  $$3 :
 
-  44  tipo : USLINTEGER
-  45       | DOUBLE
+  41  error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ')' $$3
 
-  46  ejecucion : control
-  47            | seleccion
-  48            | print
-  49            | asignacion
+  42  tipo : USLINTEGER
+  43       | DOUBLE
 
-  50  print : PRINT '(' CADENA ')'
-  51        | error_print
+  44  ejecucion : control
+  45            | seleccion
+  46            | print
+  47            | asignacion
 
-  52  error_print : PRINT CADENA ')'
-  53              | PRINT '(' CADENA
-  54              | PRINT CADENA
+  48  print : PRINT '(' CADENA ')'
+  49        | error_print
 
-  55  control : CASE '(' ID ')' '{' lista_acciones '}'
-  56          | error_control
+  50  error_print : PRINT CADENA ')'
+  51              | PRINT '(' CADENA
+  52              | PRINT CADENA
 
-  57  error_control : CASE ID ')' '{' lista_acciones '}'
-  58                | CASE '(' ID '{' lista_acciones '}'
-  59                | CASE '(' ID ')' lista_acciones '}'
-  60                | CASE '(' ID ')' '{' lista_acciones
-  61                | CASE ID '{' lista_acciones '}'
-  62                | CASE ID lista_acciones
-  63                | CASE '(' ID ')' lista_acciones
+  53  control : CASE '(' ID ')' '{' lista_acciones '}'
+  54          | error_control
 
-  64  lista_acciones : lista_acciones accion
-  65                 | accion
+  55  error_control : CASE ID ')' '{' lista_acciones '}'
+  56                | CASE '(' ID '{' lista_acciones '}'
+  57                | CASE '(' ID ')' lista_acciones '}'
+  58                | CASE '(' ID ')' '{' lista_acciones
+  59                | CASE ID '{' lista_acciones '}'
+  60                | CASE ID lista_acciones
+  61                | CASE '(' ID ')' lista_acciones
 
-  66  accion : cte ':' DO bloque
-  67         | error_accion
+  62  lista_acciones : lista_acciones accion
+  63                 | accion
 
-  68  error_accion : cte error DO bloque
+  64  accion : cte ':' DO bloque
+  65         | error_accion
 
-  69  cte : CTE_D
-  70      | CTE_USLINTEGER
+  66  error_accion : cte error DO bloque
 
-  71  $$2 :
+  67  cte : CTE_D
+  68      | CTE_USLINTEGER
 
-  72  $$3 :
+  69  $$4 :
 
-  73  $$4 :
+  70  $$5 :
 
-  74  $$5 :
+  71  $$6 :
 
-  75  $$6 :
+  72  $$7 :
 
-  76  seleccion : IF $$2 '(' condicion ')' $$3 bloque $$4 ELSE bloque $$5 END_IF $$6
+  73  $$8 :
 
-  77  $$7 :
+  74  seleccion : IF $$4 '(' condicion ')' $$5 bloque $$6 ELSE bloque $$7 END_IF $$8
 
-  78  $$8 :
+  75  $$9 :
 
-  79  $$9 :
+  76  $$10 :
 
-  80  asignacion : ID $$7 ASIGNACION $$8 expresion $$9
-  81             | error_asignacion
+  77  $$11 :
 
-  82  error_asignacion : ID expresion
-  83                   | ASIGNACION expresion
+  78  asignacion : ID $$9 ASIGNACION $$10 expresion $$11
+  79             | error_asignacion
 
-  84  $$10 :
+  80  error_asignacion : ID expresion
+  81                   | ASIGNACION expresion
 
-  85  expresion : expresion '+' termino $$10
-  86            | expresion '-' termino
-  87            | termino
+  82  $$12 :
 
-  88  termino : termino '*' factor
-  89          | termino '/' factor
-  90          | factor
+  83  expresion : expresion '+' termino $$12
+  84            | expresion '-' termino
+  85            | termino
 
-  91  factor : cte
-  92         | factor_negado
+  86  termino : termino '*' factor
+  87          | termino '/' factor
+  88          | factor
 
-  93  $$11 :
+  89  factor : cte
+  90         | factor_negado
 
-  94  factor : ID $$11
+  91  $$13 :
 
-  95  factor_negado : '-' CTE_D
+  92  factor : ID $$13
 
-  96  $$12 :
+  93  factor_negado : '-' CTE_D
 
-  97  $$13 :
+  94  $$14 :
 
-  98  condicion : $$12 expresion $$13 comparador expresion
+  95  $$15 :
 
-  99  comparador : '<'
- 100             | '>'
- 101             | '='
- 102             | S_MAYOR_IGUAL
- 103             | S_MENOR_IGUAL
- 104             | S_DISTINTO
+  96  condicion : $$14 expresion $$15 comparador expresion
+
+  97  comparador : '<'
+  98             | '>'
+  99             | '='
+ 100             | S_MAYOR_IGUAL
+ 101             | S_MENOR_IGUAL
+ 102             | S_DISTINTO
 
 state 0
 	$accept : . programa $end  (0)
@@ -171,22 +171,20 @@ state 0
 	error_bloque  goto 15
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 1
-	error_bloque : error . bloque_sentencias '}'  (7)
-	error_bloque : error . bloque_sentencias error  (8)
+	error_bloque : error . bloque_sentencias '}' $$1  (8)
 
 	ID  shift 2
 	IF  shift 3
@@ -199,138 +197,137 @@ state 1
 	VOID  shift 10
 	.  error
 
-	sentencia  goto 29
-	bloque_sentencias  goto 30
+	sentencia  goto 28
+	bloque_sentencias  goto 29
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 2
-	error_clousure : ID . '(' ')' '{' bloque_sentencias '}' RETURN  (33)
-	asignacion : ID . $$7 ASIGNACION $$8 expresion $$9  (80)
-	error_asignacion : ID . expresion  (82)
-	$$7 : .  (77)
+	error_clousure : ID . '(' ')' '{' bloque_sentencias '}' RETURN  (31)
+	asignacion : ID . $$9 ASIGNACION $$10 expresion $$11  (78)
+	error_asignacion : ID . expresion  (80)
+	$$9 : .  (75)
 
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	ID  shift 33
-	'('  shift 34
-	'-'  shift 35
-	ASIGNACION  reduce 77
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	ID  shift 32
+	'('  shift 33
+	'-'  shift 34
+	ASIGNACION  reduce 75
 
-	cte  goto 36
-	$$7  goto 37
-	expresion  goto 38
-	termino  goto 39
-	factor  goto 40
-	factor_negado  goto 41
+	cte  goto 35
+	$$9  goto 36
+	expresion  goto 37
+	termino  goto 38
+	factor  goto 39
+	factor_negado  goto 40
 
 
 state 3
-	seleccion : IF . $$2 '(' condicion ')' $$3 bloque $$4 ELSE bloque $$5 END_IF $$6  (76)
-	$$2 : .  (71)
+	seleccion : IF . $$4 '(' condicion ')' $$5 bloque $$6 ELSE bloque $$7 END_IF $$8  (74)
+	$$4 : .  (69)
 
-	.  reduce 71
+	.  reduce 69
 
-	$$2  goto 42
+	$$4  goto 41
 
 
 state 4
-	clousure : FUN . ID '(' ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')'  (22)
-	clousure : FUN . ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ID ')'  (23)
-	error_clousure : FUN . ID ')' '{' bloque_sentencias '}' RETURN  (34)
-	error_clousure : FUN . ID '(' '{' bloque_sentencias '}' RETURN  (35)
-	error_clousure : FUN . ID '(' ')' bloque_sentencias '}' RETURN  (36)
-	error_clousure : FUN . ID '(' ')' '{' bloque_sentencias RETURN  (37)
-	error_clousure : FUN . ID '(' ')' bloque_sentencias RETURN  (38)
-	error_clousure : FUN . ID '{' bloque_sentencias '}' RETURN  (39)
-	error_clousure : FUN . ID '(' ')' '{' bloque_sentencias '}'  (40)
-	error_clousure : FUN . '(' ')' '{' bloque_sentencias '}' RETURN  (41)
-	error_clousure : FUN . ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ')' $$1  (43)
+	clousure : FUN . ID '(' ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')'  (20)
+	clousure : FUN . ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ID ')'  (21)
+	error_clousure : FUN . ID ')' '{' bloque_sentencias '}' RETURN  (32)
+	error_clousure : FUN . ID '(' '{' bloque_sentencias '}' RETURN  (33)
+	error_clousure : FUN . ID '(' ')' bloque_sentencias '}' RETURN  (34)
+	error_clousure : FUN . ID '(' ')' '{' bloque_sentencias RETURN  (35)
+	error_clousure : FUN . ID '(' ')' bloque_sentencias RETURN  (36)
+	error_clousure : FUN . ID '{' bloque_sentencias '}' RETURN  (37)
+	error_clousure : FUN . ID '(' ')' '{' bloque_sentencias '}'  (38)
+	error_clousure : FUN . '(' ')' '{' bloque_sentencias '}' RETURN  (39)
+	error_clousure : FUN . ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ')' $$3  (41)
 
-	ID  shift 43
-	'('  shift 44
+	ID  shift 42
+	'('  shift 43
 	.  error
 
 
 state 5
-	tipo : DOUBLE .  (45)
+	tipo : DOUBLE .  (43)
 
-	.  reduce 45
+	.  reduce 43
 
 
 state 6
-	tipo : USLINTEGER .  (44)
+	tipo : USLINTEGER .  (42)
 
-	.  reduce 44
+	.  reduce 42
 
 
 state 7
-	print : PRINT . '(' CADENA ')'  (50)
-	error_print : PRINT . CADENA ')'  (52)
-	error_print : PRINT . '(' CADENA  (53)
-	error_print : PRINT . CADENA  (54)
+	print : PRINT . '(' CADENA ')'  (48)
+	error_print : PRINT . CADENA ')'  (50)
+	error_print : PRINT . '(' CADENA  (51)
+	error_print : PRINT . CADENA  (52)
 
-	CADENA  shift 45
-	'('  shift 46
+	CADENA  shift 44
+	'('  shift 45
 	.  error
 
 
 state 8
-	error_asignacion : ASIGNACION . expresion  (83)
+	error_asignacion : ASIGNACION . expresion  (81)
 
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	ID  shift 33
-	'-'  shift 35
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	ID  shift 32
+	'-'  shift 34
 	.  error
 
-	cte  goto 36
-	expresion  goto 47
-	termino  goto 39
-	factor  goto 40
-	factor_negado  goto 41
+	cte  goto 35
+	expresion  goto 46
+	termino  goto 38
+	factor  goto 39
+	factor_negado  goto 40
 
 
 state 9
-	control : CASE . '(' ID ')' '{' lista_acciones '}'  (55)
-	error_control : CASE . ID ')' '{' lista_acciones '}'  (57)
-	error_control : CASE . '(' ID '{' lista_acciones '}'  (58)
-	error_control : CASE . '(' ID ')' lista_acciones '}'  (59)
-	error_control : CASE . '(' ID ')' '{' lista_acciones  (60)
-	error_control : CASE . ID '{' lista_acciones '}'  (61)
-	error_control : CASE . ID lista_acciones  (62)
-	error_control : CASE . '(' ID ')' lista_acciones  (63)
+	control : CASE . '(' ID ')' '{' lista_acciones '}'  (53)
+	error_control : CASE . ID ')' '{' lista_acciones '}'  (55)
+	error_control : CASE . '(' ID '{' lista_acciones '}'  (56)
+	error_control : CASE . '(' ID ')' lista_acciones '}'  (57)
+	error_control : CASE . '(' ID ')' '{' lista_acciones  (58)
+	error_control : CASE . ID '{' lista_acciones '}'  (59)
+	error_control : CASE . ID lista_acciones  (60)
+	error_control : CASE . '(' ID ')' lista_acciones  (61)
 
-	ID  shift 48
-	'('  shift 49
+	ID  shift 47
+	'('  shift 48
 	.  error
 
 
 state 10
-	clousure : VOID . ID '(' ')' '{' bloque_sentencias '}' RETURN  (21)
-	error_clousure : VOID . ID ')' '{' bloque_sentencias '}' RETURN  (25)
-	error_clousure : VOID . ID '(' '{' bloque_sentencias '}' RETURN  (26)
-	error_clousure : VOID . ID '(' ')' bloque_sentencias '}' RETURN  (27)
-	error_clousure : VOID . ID '(' ')' '{' bloque_sentencias RETURN  (28)
-	error_clousure : VOID . ID '(' ')' bloque_sentencias RETURN  (29)
-	error_clousure : VOID . ID '{' bloque_sentencias '}' RETURN  (30)
-	error_clousure : VOID . ID '(' ')' '{' bloque_sentencias '}'  (31)
-	error_clousure : VOID . '(' ')' '{' bloque_sentencias '}' RETURN  (32)
+	clousure : VOID . ID '(' ')' '{' bloque_sentencias '}' RETURN  (19)
+	error_clousure : VOID . ID ')' '{' bloque_sentencias '}' RETURN  (23)
+	error_clousure : VOID . ID '(' '{' bloque_sentencias '}' RETURN  (24)
+	error_clousure : VOID . ID '(' ')' bloque_sentencias '}' RETURN  (25)
+	error_clousure : VOID . ID '(' ')' '{' bloque_sentencias RETURN  (26)
+	error_clousure : VOID . ID '(' ')' bloque_sentencias RETURN  (27)
+	error_clousure : VOID . ID '{' bloque_sentencias '}' RETURN  (28)
+	error_clousure : VOID . ID '(' ')' '{' bloque_sentencias '}'  (29)
+	error_clousure : VOID . '(' ')' '{' bloque_sentencias '}' RETURN  (30)
 
-	ID  shift 50
-	'('  shift 51
+	ID  shift 49
+	'('  shift 50
 	.  error
 
 
@@ -349,21 +346,20 @@ state 11
 	VOID  shift 10
 	.  error
 
-	sentencia  goto 29
-	bloque_sentencias  goto 52
+	sentencia  goto 28
+	bloque_sentencias  goto 51
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 12
@@ -392,104 +388,92 @@ state 15
 
 state 16
 	sentencia : declaracion . ','  (10)
-	error_sentencia_d : declaracion . error  (13)
 
-	error  shift 53
-	','  shift 54
+	','  shift 52
 	.  error
 
 
 state 17
-	sentencia : ejecucion . ','  (11)
-	error_sentencia_d : ejecucion . error  (14)
+	sentencia : ejecucion . ',' $$2  (12)
 
-	error  shift 55
-	','  shift 56
+	','  shift 53
 	.  error
 
 
 state 18
-	sentencia : error_sentencia_d .  (12)
+	declaracion : tipo . lista_de_variables  (13)
 
-	.  reduce 12
+	ID  shift 54
+	.  error
+
+	lista_de_variables  goto 55
+	error_lista_de_variables  goto 56
 
 
 state 19
-	declaracion : tipo . lista_de_variables  (15)
+	declaracion : clousure .  (14)
 
-	ID  shift 57
-	.  error
-
-	lista_de_variables  goto 58
-	error_lista_de_variables  goto 59
+	.  reduce 14
 
 
 state 20
-	declaracion : clousure .  (16)
+	clousure : error_clousure .  (22)
 
-	.  reduce 16
+	.  reduce 22
 
 
 state 21
-	clousure : error_clousure .  (24)
+	ejecucion : control .  (44)
 
-	.  reduce 24
+	.  reduce 44
 
 
 state 22
-	ejecucion : control .  (46)
+	ejecucion : seleccion .  (45)
+
+	.  reduce 45
+
+
+state 23
+	ejecucion : print .  (46)
 
 	.  reduce 46
 
 
-state 23
-	ejecucion : seleccion .  (47)
+state 24
+	ejecucion : asignacion .  (47)
 
 	.  reduce 47
 
 
-state 24
-	ejecucion : print .  (48)
-
-	.  reduce 48
-
-
 state 25
-	ejecucion : asignacion .  (49)
+	print : error_print .  (49)
 
 	.  reduce 49
 
 
 state 26
-	print : error_print .  (51)
+	control : error_control .  (54)
 
-	.  reduce 51
+	.  reduce 54
 
 
 state 27
-	control : error_control .  (56)
+	asignacion : error_asignacion .  (79)
 
-	.  reduce 56
+	.  reduce 79
 
 
 state 28
-	asignacion : error_asignacion .  (81)
-
-	.  reduce 81
-
-
-state 29
 	bloque_sentencias : sentencia .  (5)
 
 	.  reduce 5
 
 
-state 30
+state 29
 	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	error_bloque : error bloque_sentencias . '}'  (7)
-	error_bloque : error bloque_sentencias . error  (8)
+	error_bloque : error bloque_sentencias . '}' $$1  (8)
 
-	error  shift 60
 	ID  shift 2
 	IF  shift 3
 	FUN  shift 4
@@ -499,233 +483,228 @@ state 30
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	'}'  shift 61
+	'}'  shift 57
 	.  error
 
-	sentencia  goto 62
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
+
+
+state 30
+	cte : CTE_D .  (67)
+
+	.  reduce 67
 
 
 state 31
-	cte : CTE_D .  (69)
+	cte : CTE_USLINTEGER .  (68)
 
-	.  reduce 69
+	.  reduce 68
 
 
 state 32
-	cte : CTE_USLINTEGER .  (70)
+	factor : ID . $$13  (92)
+	$$13 : .  (91)
 
-	.  reduce 70
+	.  reduce 91
+
+	$$13  goto 59
 
 
 state 33
-	factor : ID . $$11  (94)
-	$$11 : .  (93)
+	error_clousure : ID '(' . ')' '{' bloque_sentencias '}' RETURN  (31)
 
-	.  reduce 93
-
-	$$11  goto 63
+	')'  shift 60
+	.  error
 
 
 state 34
-	error_clousure : ID '(' . ')' '{' bloque_sentencias '}' RETURN  (33)
+	factor_negado : '-' . CTE_D  (93)
 
-	')'  shift 64
+	CTE_D  shift 61
 	.  error
 
 
 state 35
-	factor_negado : '-' . CTE_D  (95)
+	factor : cte .  (89)
 
-	CTE_D  shift 65
-	.  error
+	.  reduce 89
 
 
 state 36
-	factor : cte .  (91)
+	asignacion : ID $$9 . ASIGNACION $$10 expresion $$11  (78)
 
-	.  reduce 91
-
-
-state 37
-	asignacion : ID $$7 . ASIGNACION $$8 expresion $$9  (80)
-
-	ASIGNACION  shift 66
+	ASIGNACION  shift 62
 	.  error
 
 
-state 38
-	error_asignacion : ID expresion .  (82)
-	expresion : expresion . '+' termino $$10  (85)
-	expresion : expresion . '-' termino  (86)
+state 37
+	error_asignacion : ID expresion .  (80)
+	expresion : expresion . '+' termino $$12  (83)
+	expresion : expresion . '-' termino  (84)
 
-	'+'  shift 67
-	'-'  shift 68
-	error  reduce 82
-	','  reduce 82
+	'+'  shift 63
+	'-'  shift 64
+	','  reduce 80
+
+
+state 38
+	expresion : termino .  (85)
+	termino : termino . '*' factor  (86)
+	termino : termino . '/' factor  (87)
+
+	'*'  shift 65
+	'/'  shift 66
+	S_MAYOR_IGUAL  reduce 85
+	S_MENOR_IGUAL  reduce 85
+	S_DISTINTO  reduce 85
+	','  reduce 85
+	')'  reduce 85
+	'+'  reduce 85
+	'-'  reduce 85
+	'<'  reduce 85
+	'>'  reduce 85
+	'='  reduce 85
 
 
 state 39
-	expresion : termino .  (87)
-	termino : termino . '*' factor  (88)
-	termino : termino . '/' factor  (89)
+	termino : factor .  (88)
 
-	'*'  shift 69
-	'/'  shift 70
-	error  reduce 87
-	S_MAYOR_IGUAL  reduce 87
-	S_MENOR_IGUAL  reduce 87
-	S_DISTINTO  reduce 87
-	','  reduce 87
-	')'  reduce 87
-	'+'  reduce 87
-	'-'  reduce 87
-	'<'  reduce 87
-	'>'  reduce 87
-	'='  reduce 87
+	.  reduce 88
 
 
 state 40
-	termino : factor .  (90)
+	factor : factor_negado .  (90)
 
 	.  reduce 90
 
 
 state 41
-	factor : factor_negado .  (92)
+	seleccion : IF $$4 . '(' condicion ')' $$5 bloque $$6 ELSE bloque $$7 END_IF $$8  (74)
 
-	.  reduce 92
+	'('  shift 67
+	.  error
 
 
 state 42
-	seleccion : IF $$2 . '(' condicion ')' $$3 bloque $$4 ELSE bloque $$5 END_IF $$6  (76)
+	clousure : FUN ID . '(' ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')'  (20)
+	clousure : FUN ID . '(' ')' '{' bloque_sentencias '}' RETURN '(' ID ')'  (21)
+	error_clousure : FUN ID . ')' '{' bloque_sentencias '}' RETURN  (32)
+	error_clousure : FUN ID . '(' '{' bloque_sentencias '}' RETURN  (33)
+	error_clousure : FUN ID . '(' ')' bloque_sentencias '}' RETURN  (34)
+	error_clousure : FUN ID . '(' ')' '{' bloque_sentencias RETURN  (35)
+	error_clousure : FUN ID . '(' ')' bloque_sentencias RETURN  (36)
+	error_clousure : FUN ID . '{' bloque_sentencias '}' RETURN  (37)
+	error_clousure : FUN ID . '(' ')' '{' bloque_sentencias '}'  (38)
+	error_clousure : FUN ID . '(' ')' '{' bloque_sentencias '}' RETURN '(' ')' $$3  (41)
 
-	'('  shift 71
+	'{'  shift 68
+	'('  shift 69
+	')'  shift 70
 	.  error
 
 
 state 43
-	clousure : FUN ID . '(' ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')'  (22)
-	clousure : FUN ID . '(' ')' '{' bloque_sentencias '}' RETURN '(' ID ')'  (23)
-	error_clousure : FUN ID . ')' '{' bloque_sentencias '}' RETURN  (34)
-	error_clousure : FUN ID . '(' '{' bloque_sentencias '}' RETURN  (35)
-	error_clousure : FUN ID . '(' ')' bloque_sentencias '}' RETURN  (36)
-	error_clousure : FUN ID . '(' ')' '{' bloque_sentencias RETURN  (37)
-	error_clousure : FUN ID . '(' ')' bloque_sentencias RETURN  (38)
-	error_clousure : FUN ID . '{' bloque_sentencias '}' RETURN  (39)
-	error_clousure : FUN ID . '(' ')' '{' bloque_sentencias '}'  (40)
-	error_clousure : FUN ID . '(' ')' '{' bloque_sentencias '}' RETURN '(' ')' $$1  (43)
+	error_clousure : FUN '(' . ')' '{' bloque_sentencias '}' RETURN  (39)
 
-	'{'  shift 72
-	'('  shift 73
-	')'  shift 74
+	')'  shift 71
 	.  error
 
 
 state 44
-	error_clousure : FUN '(' . ')' '{' bloque_sentencias '}' RETURN  (41)
+	error_print : PRINT CADENA . ')'  (50)
+	error_print : PRINT CADENA .  (52)
 
-	')'  shift 75
-	.  error
+	')'  shift 72
+	','  reduce 52
 
 
 state 45
-	error_print : PRINT CADENA . ')'  (52)
-	error_print : PRINT CADENA .  (54)
+	print : PRINT '(' . CADENA ')'  (48)
+	error_print : PRINT '(' . CADENA  (51)
 
-	')'  shift 76
-	error  reduce 54
-	','  reduce 54
+	CADENA  shift 73
+	.  error
 
 
 state 46
-	print : PRINT '(' . CADENA ')'  (50)
-	error_print : PRINT '(' . CADENA  (53)
+	error_asignacion : ASIGNACION expresion .  (81)
+	expresion : expresion . '+' termino $$12  (83)
+	expresion : expresion . '-' termino  (84)
 
-	CADENA  shift 77
-	.  error
+	'+'  shift 63
+	'-'  shift 64
+	','  reduce 81
 
 
 state 47
-	error_asignacion : ASIGNACION expresion .  (83)
-	expresion : expresion . '+' termino $$10  (85)
-	expresion : expresion . '-' termino  (86)
+	error_control : CASE ID . ')' '{' lista_acciones '}'  (55)
+	error_control : CASE ID . '{' lista_acciones '}'  (59)
+	error_control : CASE ID . lista_acciones  (60)
 
-	'+'  shift 67
-	'-'  shift 68
-	error  reduce 83
-	','  reduce 83
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	'{'  shift 74
+	')'  shift 75
+	.  error
+
+	lista_acciones  goto 76
+	accion  goto 77
+	cte  goto 78
+	error_accion  goto 79
 
 
 state 48
-	error_control : CASE ID . ')' '{' lista_acciones '}'  (57)
-	error_control : CASE ID . '{' lista_acciones '}'  (61)
-	error_control : CASE ID . lista_acciones  (62)
+	control : CASE '(' . ID ')' '{' lista_acciones '}'  (53)
+	error_control : CASE '(' . ID '{' lista_acciones '}'  (56)
+	error_control : CASE '(' . ID ')' lista_acciones '}'  (57)
+	error_control : CASE '(' . ID ')' '{' lista_acciones  (58)
+	error_control : CASE '(' . ID ')' lista_acciones  (61)
 
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	'{'  shift 78
-	')'  shift 79
+	ID  shift 80
 	.  error
-
-	lista_acciones  goto 80
-	accion  goto 81
-	cte  goto 82
-	error_accion  goto 83
 
 
 state 49
-	control : CASE '(' . ID ')' '{' lista_acciones '}'  (55)
-	error_control : CASE '(' . ID '{' lista_acciones '}'  (58)
-	error_control : CASE '(' . ID ')' lista_acciones '}'  (59)
-	error_control : CASE '(' . ID ')' '{' lista_acciones  (60)
-	error_control : CASE '(' . ID ')' lista_acciones  (63)
+	clousure : VOID ID . '(' ')' '{' bloque_sentencias '}' RETURN  (19)
+	error_clousure : VOID ID . ')' '{' bloque_sentencias '}' RETURN  (23)
+	error_clousure : VOID ID . '(' '{' bloque_sentencias '}' RETURN  (24)
+	error_clousure : VOID ID . '(' ')' bloque_sentencias '}' RETURN  (25)
+	error_clousure : VOID ID . '(' ')' '{' bloque_sentencias RETURN  (26)
+	error_clousure : VOID ID . '(' ')' bloque_sentencias RETURN  (27)
+	error_clousure : VOID ID . '{' bloque_sentencias '}' RETURN  (28)
+	error_clousure : VOID ID . '(' ')' '{' bloque_sentencias '}'  (29)
 
-	ID  shift 84
+	'{'  shift 81
+	'('  shift 82
+	')'  shift 83
 	.  error
 
 
 state 50
-	clousure : VOID ID . '(' ')' '{' bloque_sentencias '}' RETURN  (21)
-	error_clousure : VOID ID . ')' '{' bloque_sentencias '}' RETURN  (25)
-	error_clousure : VOID ID . '(' '{' bloque_sentencias '}' RETURN  (26)
-	error_clousure : VOID ID . '(' ')' bloque_sentencias '}' RETURN  (27)
-	error_clousure : VOID ID . '(' ')' '{' bloque_sentencias RETURN  (28)
-	error_clousure : VOID ID . '(' ')' bloque_sentencias RETURN  (29)
-	error_clousure : VOID ID . '{' bloque_sentencias '}' RETURN  (30)
-	error_clousure : VOID ID . '(' ')' '{' bloque_sentencias '}'  (31)
+	error_clousure : VOID '(' . ')' '{' bloque_sentencias '}' RETURN  (30)
 
-	'{'  shift 85
-	'('  shift 86
-	')'  shift 87
+	')'  shift 84
 	.  error
 
 
 state 51
-	error_clousure : VOID '(' . ')' '{' bloque_sentencias '}' RETURN  (32)
-
-	')'  shift 88
-	.  error
-
-
-state 52
 	bloque : '{' bloque_sentencias . '}'  (3)
 	bloque_sentencias : bloque_sentencias . sentencia  (6)
 	error_bloque : '{' bloque_sentencias . error  (9)
 
-	error  shift 89
+	error  shift 85
 	ID  shift 2
 	IF  shift 3
 	FUN  shift 4
@@ -735,188 +714,174 @@ state 52
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	'}'  shift 90
+	'}'  shift 86
 	.  error
 
-	sentencia  goto 62
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
-state 53
-	error_sentencia_d : declaracion error .  (13)
-
-	.  reduce 13
-
-
-state 54
+state 52
 	sentencia : declaracion ',' .  (10)
 
 	.  reduce 10
 
 
-state 55
-	error_sentencia_d : ejecucion error .  (14)
-
-	.  reduce 14
-
-
-state 56
-	sentencia : ejecucion ',' .  (11)
+state 53
+	sentencia : ejecucion ',' . $$2  (12)
+	$$2 : .  (11)
 
 	.  reduce 11
 
+	$$2  goto 87
+
+
+state 54
+	lista_de_variables : ID .  (16)
+
+	.  reduce 16
+
+
+state 55
+	declaracion : tipo lista_de_variables .  (13)
+	lista_de_variables : lista_de_variables . ';' ID  (15)
+	error_lista_de_variables : lista_de_variables . ID  (18)
+
+	ID  shift 88
+	';'  shift 89
+	','  reduce 13
+
+
+state 56
+	lista_de_variables : error_lista_de_variables .  (17)
+
+	.  reduce 17
+
 
 state 57
-	lista_de_variables : ID .  (18)
-
-	.  reduce 18
-
-
-state 58
-	declaracion : tipo lista_de_variables .  (15)
-	lista_de_variables : lista_de_variables . ';' ID  (17)
-	error_lista_de_variables : lista_de_variables . ID  (20)
-
-	ID  shift 91
-	';'  shift 92
-	error  reduce 15
-	','  reduce 15
-
-
-state 59
-	lista_de_variables : error_lista_de_variables .  (19)
-
-	.  reduce 19
-
-
-state 60
-	error_bloque : error bloque_sentencias error .  (8)
-
-	.  reduce 8
-
-
-state 61
-	error_bloque : error bloque_sentencias '}' .  (7)
+	error_bloque : error bloque_sentencias '}' . $$1  (8)
+	$$1 : .  (7)
 
 	.  reduce 7
 
+	$$1  goto 90
 
-state 62
+
+state 58
 	bloque_sentencias : bloque_sentencias sentencia .  (6)
 
 	.  reduce 6
 
 
-state 63
-	factor : ID $$11 .  (94)
+state 59
+	factor : ID $$13 .  (92)
 
-	.  reduce 94
+	.  reduce 92
+
+
+state 60
+	error_clousure : ID '(' ')' . '{' bloque_sentencias '}' RETURN  (31)
+
+	'{'  shift 91
+	.  error
+
+
+state 61
+	factor_negado : '-' CTE_D .  (93)
+
+	.  reduce 93
+
+
+state 62
+	asignacion : ID $$9 ASIGNACION . $$10 expresion $$11  (78)
+	$$10 : .  (76)
+
+	.  reduce 76
+
+	$$10  goto 92
+
+
+state 63
+	expresion : expresion '+' . termino $$12  (83)
+
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	ID  shift 32
+	'-'  shift 34
+	.  error
+
+	cte  goto 35
+	termino  goto 93
+	factor  goto 39
+	factor_negado  goto 40
 
 
 state 64
-	error_clousure : ID '(' ')' . '{' bloque_sentencias '}' RETURN  (33)
+	expresion : expresion '-' . termino  (84)
 
-	'{'  shift 93
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	ID  shift 32
+	'-'  shift 34
 	.  error
+
+	cte  goto 35
+	termino  goto 94
+	factor  goto 39
+	factor_negado  goto 40
 
 
 state 65
-	factor_negado : '-' CTE_D .  (95)
+	termino : termino '*' . factor  (86)
 
-	.  reduce 95
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	ID  shift 32
+	'-'  shift 34
+	.  error
+
+	cte  goto 35
+	factor  goto 95
+	factor_negado  goto 40
 
 
 state 66
-	asignacion : ID $$7 ASIGNACION . $$8 expresion $$9  (80)
-	$$8 : .  (78)
+	termino : termino '/' . factor  (87)
 
-	.  reduce 78
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	ID  shift 32
+	'-'  shift 34
+	.  error
 
-	$$8  goto 94
+	cte  goto 35
+	factor  goto 96
+	factor_negado  goto 40
 
 
 state 67
-	expresion : expresion '+' . termino $$10  (85)
+	seleccion : IF $$4 '(' . condicion ')' $$5 bloque $$6 ELSE bloque $$7 END_IF $$8  (74)
+	$$14 : .  (94)
 
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	ID  shift 33
-	'-'  shift 35
-	.  error
+	.  reduce 94
 
-	cte  goto 36
-	termino  goto 95
-	factor  goto 40
-	factor_negado  goto 41
+	condicion  goto 97
+	$$14  goto 98
 
 
 state 68
-	expresion : expresion '-' . termino  (86)
-
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	ID  shift 33
-	'-'  shift 35
-	.  error
-
-	cte  goto 36
-	termino  goto 96
-	factor  goto 40
-	factor_negado  goto 41
-
-
-state 69
-	termino : termino '*' . factor  (88)
-
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	ID  shift 33
-	'-'  shift 35
-	.  error
-
-	cte  goto 36
-	factor  goto 97
-	factor_negado  goto 41
-
-
-state 70
-	termino : termino '/' . factor  (89)
-
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	ID  shift 33
-	'-'  shift 35
-	.  error
-
-	cte  goto 36
-	factor  goto 98
-	factor_negado  goto 41
-
-
-state 71
-	seleccion : IF $$2 '(' . condicion ')' $$3 bloque $$4 ELSE bloque $$5 END_IF $$6  (76)
-	$$12 : .  (96)
-
-	.  reduce 96
-
-	condicion  goto 99
-	$$12  goto 100
-
-
-state 72
-	error_clousure : FUN ID '{' . bloque_sentencias '}' RETURN  (39)
+	error_clousure : FUN ID '{' . bloque_sentencias '}' RETURN  (37)
 
 	ID  shift 2
 	IF  shift 3
@@ -929,136 +894,133 @@ state 72
 	VOID  shift 10
 	.  error
 
-	sentencia  goto 29
-	bloque_sentencias  goto 101
+	sentencia  goto 28
+	bloque_sentencias  goto 99
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
+
+
+state 69
+	clousure : FUN ID '(' . ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')'  (20)
+	clousure : FUN ID '(' . ')' '{' bloque_sentencias '}' RETURN '(' ID ')'  (21)
+	error_clousure : FUN ID '(' . '{' bloque_sentencias '}' RETURN  (33)
+	error_clousure : FUN ID '(' . ')' bloque_sentencias '}' RETURN  (34)
+	error_clousure : FUN ID '(' . ')' '{' bloque_sentencias RETURN  (35)
+	error_clousure : FUN ID '(' . ')' bloque_sentencias RETURN  (36)
+	error_clousure : FUN ID '(' . ')' '{' bloque_sentencias '}'  (38)
+	error_clousure : FUN ID '(' . ')' '{' bloque_sentencias '}' RETURN '(' ')' $$3  (41)
+
+	'{'  shift 100
+	')'  shift 101
+	.  error
+
+
+state 70
+	error_clousure : FUN ID ')' . '{' bloque_sentencias '}' RETURN  (32)
+
+	'{'  shift 102
+	.  error
+
+
+state 71
+	error_clousure : FUN '(' ')' . '{' bloque_sentencias '}' RETURN  (39)
+
+	'{'  shift 103
+	.  error
+
+
+state 72
+	error_print : PRINT CADENA ')' .  (50)
+
+	.  reduce 50
 
 
 state 73
-	clousure : FUN ID '(' . ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')'  (22)
-	clousure : FUN ID '(' . ')' '{' bloque_sentencias '}' RETURN '(' ID ')'  (23)
-	error_clousure : FUN ID '(' . '{' bloque_sentencias '}' RETURN  (35)
-	error_clousure : FUN ID '(' . ')' bloque_sentencias '}' RETURN  (36)
-	error_clousure : FUN ID '(' . ')' '{' bloque_sentencias RETURN  (37)
-	error_clousure : FUN ID '(' . ')' bloque_sentencias RETURN  (38)
-	error_clousure : FUN ID '(' . ')' '{' bloque_sentencias '}'  (40)
-	error_clousure : FUN ID '(' . ')' '{' bloque_sentencias '}' RETURN '(' ')' $$1  (43)
+	print : PRINT '(' CADENA . ')'  (48)
+	error_print : PRINT '(' CADENA .  (51)
 
-	'{'  shift 102
-	')'  shift 103
-	.  error
+	')'  shift 104
+	','  reduce 51
 
 
 state 74
-	error_clousure : FUN ID ')' . '{' bloque_sentencias '}' RETURN  (34)
+	error_control : CASE ID '{' . lista_acciones '}'  (59)
 
-	'{'  shift 104
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
 	.  error
+
+	lista_acciones  goto 105
+	accion  goto 77
+	cte  goto 78
+	error_accion  goto 79
 
 
 state 75
-	error_clousure : FUN '(' ')' . '{' bloque_sentencias '}' RETURN  (41)
+	error_control : CASE ID ')' . '{' lista_acciones '}'  (55)
 
-	'{'  shift 105
+	'{'  shift 106
 	.  error
 
 
 state 76
-	error_print : PRINT CADENA ')' .  (52)
+	error_control : CASE ID lista_acciones .  (60)
+	lista_acciones : lista_acciones . accion  (62)
 
-	.  reduce 52
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	','  reduce 60
+
+	accion  goto 107
+	cte  goto 78
+	error_accion  goto 79
 
 
 state 77
-	print : PRINT '(' CADENA . ')'  (50)
-	error_print : PRINT '(' CADENA .  (53)
+	lista_acciones : accion .  (63)
 
-	')'  shift 106
-	error  reduce 53
-	','  reduce 53
+	.  reduce 63
 
 
 state 78
-	error_control : CASE ID '{' . lista_acciones '}'  (61)
+	accion : cte . ':' DO bloque  (64)
+	error_accion : cte . error DO bloque  (66)
 
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
+	error  shift 108
+	':'  shift 109
 	.  error
-
-	lista_acciones  goto 107
-	accion  goto 81
-	cte  goto 82
-	error_accion  goto 83
 
 
 state 79
-	error_control : CASE ID ')' . '{' lista_acciones '}'  (57)
-
-	'{'  shift 108
-	.  error
-
-
-state 80
-	error_control : CASE ID lista_acciones .  (62)
-	lista_acciones : lista_acciones . accion  (64)
-
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	error  reduce 62
-	','  reduce 62
-
-	accion  goto 109
-	cte  goto 82
-	error_accion  goto 83
-
-
-state 81
-	lista_acciones : accion .  (65)
+	accion : error_accion .  (65)
 
 	.  reduce 65
 
 
-state 82
-	accion : cte . ':' DO bloque  (66)
-	error_accion : cte . error DO bloque  (68)
+state 80
+	control : CASE '(' ID . ')' '{' lista_acciones '}'  (53)
+	error_control : CASE '(' ID . '{' lista_acciones '}'  (56)
+	error_control : CASE '(' ID . ')' lista_acciones '}'  (57)
+	error_control : CASE '(' ID . ')' '{' lista_acciones  (58)
+	error_control : CASE '(' ID . ')' lista_acciones  (61)
 
-	error  shift 110
-	':'  shift 111
+	'{'  shift 110
+	')'  shift 111
 	.  error
 
 
-state 83
-	accion : error_accion .  (67)
-
-	.  reduce 67
-
-
-state 84
-	control : CASE '(' ID . ')' '{' lista_acciones '}'  (55)
-	error_control : CASE '(' ID . '{' lista_acciones '}'  (58)
-	error_control : CASE '(' ID . ')' lista_acciones '}'  (59)
-	error_control : CASE '(' ID . ')' '{' lista_acciones  (60)
-	error_control : CASE '(' ID . ')' lista_acciones  (63)
-
-	'{'  shift 112
-	')'  shift 113
-	.  error
-
-
-state 85
-	error_clousure : VOID ID '{' . bloque_sentencias '}' RETURN  (30)
+state 81
+	error_clousure : VOID ID '{' . bloque_sentencias '}' RETURN  (28)
 
 	ID  shift 2
 	IF  shift 3
@@ -1071,77 +1033,88 @@ state 85
 	VOID  shift 10
 	.  error
 
-	sentencia  goto 29
-	bloque_sentencias  goto 114
+	sentencia  goto 28
+	bloque_sentencias  goto 112
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
-state 86
-	clousure : VOID ID '(' . ')' '{' bloque_sentencias '}' RETURN  (21)
-	error_clousure : VOID ID '(' . '{' bloque_sentencias '}' RETURN  (26)
-	error_clousure : VOID ID '(' . ')' bloque_sentencias '}' RETURN  (27)
-	error_clousure : VOID ID '(' . ')' '{' bloque_sentencias RETURN  (28)
-	error_clousure : VOID ID '(' . ')' bloque_sentencias RETURN  (29)
-	error_clousure : VOID ID '(' . ')' '{' bloque_sentencias '}'  (31)
+state 82
+	clousure : VOID ID '(' . ')' '{' bloque_sentencias '}' RETURN  (19)
+	error_clousure : VOID ID '(' . '{' bloque_sentencias '}' RETURN  (24)
+	error_clousure : VOID ID '(' . ')' bloque_sentencias '}' RETURN  (25)
+	error_clousure : VOID ID '(' . ')' '{' bloque_sentencias RETURN  (26)
+	error_clousure : VOID ID '(' . ')' bloque_sentencias RETURN  (27)
+	error_clousure : VOID ID '(' . ')' '{' bloque_sentencias '}'  (29)
+
+	'{'  shift 113
+	')'  shift 114
+	.  error
+
+
+state 83
+	error_clousure : VOID ID ')' . '{' bloque_sentencias '}' RETURN  (23)
 
 	'{'  shift 115
-	')'  shift 116
 	.  error
 
 
-state 87
-	error_clousure : VOID ID ')' . '{' bloque_sentencias '}' RETURN  (25)
+state 84
+	error_clousure : VOID '(' ')' . '{' bloque_sentencias '}' RETURN  (30)
 
-	'{'  shift 117
+	'{'  shift 116
 	.  error
 
 
-state 88
-	error_clousure : VOID '(' ')' . '{' bloque_sentencias '}' RETURN  (32)
-
-	'{'  shift 118
-	.  error
-
-
-state 89
+state 85
 	error_bloque : '{' bloque_sentencias error .  (9)
 
 	.  reduce 9
 
 
-state 90
+state 86
 	bloque : '{' bloque_sentencias '}' .  (3)
 
 	.  reduce 3
 
 
-state 91
-	error_lista_de_variables : lista_de_variables ID .  (20)
+state 87
+	sentencia : ejecucion ',' $$2 .  (12)
 
-	.  reduce 20
+	.  reduce 12
 
 
-state 92
-	lista_de_variables : lista_de_variables ';' . ID  (17)
+state 88
+	error_lista_de_variables : lista_de_variables ID .  (18)
 
-	ID  shift 119
+	.  reduce 18
+
+
+state 89
+	lista_de_variables : lista_de_variables ';' . ID  (15)
+
+	ID  shift 117
 	.  error
 
 
-state 93
-	error_clousure : ID '(' ')' '{' . bloque_sentencias '}' RETURN  (33)
+state 90
+	error_bloque : error bloque_sentencias '}' $$1 .  (8)
+
+	.  reduce 8
+
+
+state 91
+	error_clousure : ID '(' ')' '{' . bloque_sentencias '}' RETURN  (31)
 
 	ID  shift 2
 	IF  shift 3
@@ -1154,48 +1127,67 @@ state 93
 	VOID  shift 10
 	.  error
 
-	sentencia  goto 29
-	bloque_sentencias  goto 120
+	sentencia  goto 28
+	bloque_sentencias  goto 118
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
+
+
+state 92
+	asignacion : ID $$9 ASIGNACION $$10 . expresion $$11  (78)
+
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	ID  shift 32
+	'-'  shift 34
+	.  error
+
+	cte  goto 35
+	expresion  goto 119
+	termino  goto 38
+	factor  goto 39
+	factor_negado  goto 40
+
+
+state 93
+	expresion : expresion '+' termino . $$12  (83)
+	termino : termino . '*' factor  (86)
+	termino : termino . '/' factor  (87)
+	$$12 : .  (82)
+
+	'*'  shift 65
+	'/'  shift 66
+	S_MAYOR_IGUAL  reduce 82
+	S_MENOR_IGUAL  reduce 82
+	S_DISTINTO  reduce 82
+	','  reduce 82
+	')'  reduce 82
+	'+'  reduce 82
+	'-'  reduce 82
+	'<'  reduce 82
+	'>'  reduce 82
+	'='  reduce 82
+
+	$$12  goto 120
 
 
 state 94
-	asignacion : ID $$7 ASIGNACION $$8 . expresion $$9  (80)
+	expresion : expresion '-' termino .  (84)
+	termino : termino . '*' factor  (86)
+	termino : termino . '/' factor  (87)
 
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	ID  shift 33
-	'-'  shift 35
-	.  error
-
-	cte  goto 36
-	expresion  goto 121
-	termino  goto 39
-	factor  goto 40
-	factor_negado  goto 41
-
-
-state 95
-	expresion : expresion '+' termino . $$10  (85)
-	termino : termino . '*' factor  (88)
-	termino : termino . '/' factor  (89)
-	$$10 : .  (84)
-
-	'*'  shift 69
-	'/'  shift 70
-	error  reduce 84
+	'*'  shift 65
+	'/'  shift 66
 	S_MAYOR_IGUAL  reduce 84
 	S_MENOR_IGUAL  reduce 84
 	S_DISTINTO  reduce 84
@@ -1207,67 +1199,111 @@ state 95
 	'>'  reduce 84
 	'='  reduce 84
 
-	$$10  goto 122
+
+state 95
+	termino : termino '*' factor .  (86)
+
+	.  reduce 86
 
 
 state 96
-	expresion : expresion '-' termino .  (86)
-	termino : termino . '*' factor  (88)
-	termino : termino . '/' factor  (89)
+	termino : termino '/' factor .  (87)
 
-	'*'  shift 69
-	'/'  shift 70
-	error  reduce 86
-	S_MAYOR_IGUAL  reduce 86
-	S_MENOR_IGUAL  reduce 86
-	S_DISTINTO  reduce 86
-	','  reduce 86
-	')'  reduce 86
-	'+'  reduce 86
-	'-'  reduce 86
-	'<'  reduce 86
-	'>'  reduce 86
-	'='  reduce 86
+	.  reduce 87
 
 
 state 97
-	termino : termino '*' factor .  (88)
+	seleccion : IF $$4 '(' condicion . ')' $$5 bloque $$6 ELSE bloque $$7 END_IF $$8  (74)
 
-	.  reduce 88
+	')'  shift 121
+	.  error
 
 
 state 98
-	termino : termino '/' factor .  (89)
+	condicion : $$14 . expresion $$15 comparador expresion  (96)
 
-	.  reduce 89
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	ID  shift 32
+	'-'  shift 34
+	.  error
+
+	cte  goto 35
+	expresion  goto 122
+	termino  goto 38
+	factor  goto 39
+	factor_negado  goto 40
 
 
 state 99
-	seleccion : IF $$2 '(' condicion . ')' $$3 bloque $$4 ELSE bloque $$5 END_IF $$6  (76)
+	bloque_sentencias : bloque_sentencias . sentencia  (6)
+	error_clousure : FUN ID '{' bloque_sentencias . '}' RETURN  (37)
 
-	')'  shift 123
+	ID  shift 2
+	IF  shift 3
+	FUN  shift 4
+	DOUBLE  shift 5
+	USLINTEGER  shift 6
+	PRINT  shift 7
+	ASIGNACION  shift 8
+	CASE  shift 9
+	VOID  shift 10
+	'}'  shift 123
 	.  error
+
+	sentencia  goto 58
+	declaracion  goto 16
+	ejecucion  goto 17
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 100
-	condicion : $$12 . expresion $$13 comparador expresion  (98)
+	error_clousure : FUN ID '(' '{' . bloque_sentencias '}' RETURN  (33)
 
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	ID  shift 33
-	'-'  shift 35
+	ID  shift 2
+	IF  shift 3
+	FUN  shift 4
+	DOUBLE  shift 5
+	USLINTEGER  shift 6
+	PRINT  shift 7
+	ASIGNACION  shift 8
+	CASE  shift 9
+	VOID  shift 10
 	.  error
 
-	cte  goto 36
-	expresion  goto 124
-	termino  goto 39
-	factor  goto 40
-	factor_negado  goto 41
+	sentencia  goto 28
+	bloque_sentencias  goto 124
+	declaracion  goto 16
+	ejecucion  goto 17
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 101
-	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	error_clousure : FUN ID '{' bloque_sentencias . '}' RETURN  (39)
+	clousure : FUN ID '(' ')' . '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')'  (20)
+	clousure : FUN ID '(' ')' . '{' bloque_sentencias '}' RETURN '(' ID ')'  (21)
+	error_clousure : FUN ID '(' ')' . bloque_sentencias '}' RETURN  (34)
+	error_clousure : FUN ID '(' ')' . '{' bloque_sentencias RETURN  (35)
+	error_clousure : FUN ID '(' ')' . bloque_sentencias RETURN  (36)
+	error_clousure : FUN ID '(' ')' . '{' bloque_sentencias '}'  (38)
+	error_clousure : FUN ID '(' ')' . '{' bloque_sentencias '}' RETURN '(' ')' $$3  (41)
 
 	ID  shift 2
 	IF  shift 3
@@ -1278,64 +1314,57 @@ state 101
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	'}'  shift 125
+	'{'  shift 125
 	.  error
 
-	sentencia  goto 62
-	declaracion  goto 16
-	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
-
-
-state 102
-	error_clousure : FUN ID '(' '{' . bloque_sentencias '}' RETURN  (35)
-
-	ID  shift 2
-	IF  shift 3
-	FUN  shift 4
-	DOUBLE  shift 5
-	USLINTEGER  shift 6
-	PRINT  shift 7
-	ASIGNACION  shift 8
-	CASE  shift 9
-	VOID  shift 10
-	.  error
-
-	sentencia  goto 29
+	sentencia  goto 28
 	bloque_sentencias  goto 126
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
+
+
+state 102
+	error_clousure : FUN ID ')' '{' . bloque_sentencias '}' RETURN  (32)
+
+	ID  shift 2
+	IF  shift 3
+	FUN  shift 4
+	DOUBLE  shift 5
+	USLINTEGER  shift 6
+	PRINT  shift 7
+	ASIGNACION  shift 8
+	CASE  shift 9
+	VOID  shift 10
+	.  error
+
+	sentencia  goto 28
+	bloque_sentencias  goto 127
+	declaracion  goto 16
+	ejecucion  goto 17
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 103
-	clousure : FUN ID '(' ')' . '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')'  (22)
-	clousure : FUN ID '(' ')' . '{' bloque_sentencias '}' RETURN '(' ID ')'  (23)
-	error_clousure : FUN ID '(' ')' . bloque_sentencias '}' RETURN  (36)
-	error_clousure : FUN ID '(' ')' . '{' bloque_sentencias RETURN  (37)
-	error_clousure : FUN ID '(' ')' . bloque_sentencias RETURN  (38)
-	error_clousure : FUN ID '(' ')' . '{' bloque_sentencias '}'  (40)
-	error_clousure : FUN ID '(' ')' . '{' bloque_sentencias '}' RETURN '(' ')' $$1  (43)
+	error_clousure : FUN '(' ')' '{' . bloque_sentencias '}' RETURN  (39)
 
 	ID  shift 2
 	IF  shift 3
@@ -1346,174 +1375,174 @@ state 103
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	'{'  shift 127
 	.  error
 
-	sentencia  goto 29
+	sentencia  goto 28
 	bloque_sentencias  goto 128
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 104
-	error_clousure : FUN ID ')' '{' . bloque_sentencias '}' RETURN  (34)
+	print : PRINT '(' CADENA ')' .  (48)
 
-	ID  shift 2
-	IF  shift 3
-	FUN  shift 4
-	DOUBLE  shift 5
-	USLINTEGER  shift 6
-	PRINT  shift 7
-	ASIGNACION  shift 8
-	CASE  shift 9
-	VOID  shift 10
-	.  error
-
-	sentencia  goto 29
-	bloque_sentencias  goto 129
-	declaracion  goto 16
-	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	.  reduce 48
 
 
 state 105
-	error_clousure : FUN '(' ')' '{' . bloque_sentencias '}' RETURN  (41)
+	error_control : CASE ID '{' lista_acciones . '}'  (59)
+	lista_acciones : lista_acciones . accion  (62)
 
-	ID  shift 2
-	IF  shift 3
-	FUN  shift 4
-	DOUBLE  shift 5
-	USLINTEGER  shift 6
-	PRINT  shift 7
-	ASIGNACION  shift 8
-	CASE  shift 9
-	VOID  shift 10
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	'}'  shift 129
 	.  error
 
-	sentencia  goto 29
-	bloque_sentencias  goto 130
-	declaracion  goto 16
-	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	accion  goto 107
+	cte  goto 78
+	error_accion  goto 79
 
 
 state 106
-	print : PRINT '(' CADENA ')' .  (50)
+	error_control : CASE ID ')' '{' . lista_acciones '}'  (55)
 
-	.  reduce 50
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	.  error
+
+	lista_acciones  goto 130
+	accion  goto 77
+	cte  goto 78
+	error_accion  goto 79
 
 
 state 107
-	error_control : CASE ID '{' lista_acciones . '}'  (61)
-	lista_acciones : lista_acciones . accion  (64)
+	lista_acciones : lista_acciones accion .  (62)
 
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	'}'  shift 131
-	.  error
-
-	accion  goto 109
-	cte  goto 82
-	error_accion  goto 83
+	.  reduce 62
 
 
 state 108
-	error_control : CASE ID ')' '{' . lista_acciones '}'  (57)
+	error_accion : cte error . DO bloque  (66)
 
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
+	DO  shift 131
 	.  error
-
-	lista_acciones  goto 132
-	accion  goto 81
-	cte  goto 82
-	error_accion  goto 83
 
 
 state 109
-	lista_acciones : lista_acciones accion .  (64)
+	accion : cte ':' . DO bloque  (64)
 
-	.  reduce 64
+	DO  shift 132
+	.  error
 
 
 state 110
-	error_accion : cte error . DO bloque  (68)
+	error_control : CASE '(' ID '{' . lista_acciones '}'  (56)
 
-	DO  shift 133
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
 	.  error
+
+	lista_acciones  goto 133
+	accion  goto 77
+	cte  goto 78
+	error_accion  goto 79
 
 
 state 111
-	accion : cte ':' . DO bloque  (66)
+	control : CASE '(' ID ')' . '{' lista_acciones '}'  (53)
+	error_control : CASE '(' ID ')' . lista_acciones '}'  (57)
+	error_control : CASE '(' ID ')' . '{' lista_acciones  (58)
+	error_control : CASE '(' ID ')' . lista_acciones  (61)
 
-	DO  shift 134
-	.  error
-
-
-state 112
-	error_control : CASE '(' ID '{' . lista_acciones '}'  (58)
-
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	'{'  shift 134
 	.  error
 
 	lista_acciones  goto 135
-	accion  goto 81
-	cte  goto 82
-	error_accion  goto 83
+	accion  goto 77
+	cte  goto 78
+	error_accion  goto 79
+
+
+state 112
+	bloque_sentencias : bloque_sentencias . sentencia  (6)
+	error_clousure : VOID ID '{' bloque_sentencias . '}' RETURN  (28)
+
+	ID  shift 2
+	IF  shift 3
+	FUN  shift 4
+	DOUBLE  shift 5
+	USLINTEGER  shift 6
+	PRINT  shift 7
+	ASIGNACION  shift 8
+	CASE  shift 9
+	VOID  shift 10
+	'}'  shift 136
+	.  error
+
+	sentencia  goto 58
+	declaracion  goto 16
+	ejecucion  goto 17
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 113
-	control : CASE '(' ID ')' . '{' lista_acciones '}'  (55)
-	error_control : CASE '(' ID ')' . lista_acciones '}'  (59)
-	error_control : CASE '(' ID ')' . '{' lista_acciones  (60)
-	error_control : CASE '(' ID ')' . lista_acciones  (63)
+	error_clousure : VOID ID '(' '{' . bloque_sentencias '}' RETURN  (24)
 
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	'{'  shift 136
+	ID  shift 2
+	IF  shift 3
+	FUN  shift 4
+	DOUBLE  shift 5
+	USLINTEGER  shift 6
+	PRINT  shift 7
+	ASIGNACION  shift 8
+	CASE  shift 9
+	VOID  shift 10
 	.  error
 
-	lista_acciones  goto 137
-	accion  goto 81
-	cte  goto 82
-	error_accion  goto 83
+	sentencia  goto 28
+	bloque_sentencias  goto 137
+	declaracion  goto 16
+	ejecucion  goto 17
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 114
-	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	error_clousure : VOID ID '{' bloque_sentencias . '}' RETURN  (30)
+	clousure : VOID ID '(' ')' . '{' bloque_sentencias '}' RETURN  (19)
+	error_clousure : VOID ID '(' ')' . bloque_sentencias '}' RETURN  (25)
+	error_clousure : VOID ID '(' ')' . '{' bloque_sentencias RETURN  (26)
+	error_clousure : VOID ID '(' ')' . bloque_sentencias RETURN  (27)
+	error_clousure : VOID ID '(' ')' . '{' bloque_sentencias '}'  (29)
 
 	ID  shift 2
 	IF  shift 3
@@ -1524,62 +1553,57 @@ state 114
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	'}'  shift 138
+	'{'  shift 138
 	.  error
 
-	sentencia  goto 62
-	declaracion  goto 16
-	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
-
-
-state 115
-	error_clousure : VOID ID '(' '{' . bloque_sentencias '}' RETURN  (26)
-
-	ID  shift 2
-	IF  shift 3
-	FUN  shift 4
-	DOUBLE  shift 5
-	USLINTEGER  shift 6
-	PRINT  shift 7
-	ASIGNACION  shift 8
-	CASE  shift 9
-	VOID  shift 10
-	.  error
-
-	sentencia  goto 29
+	sentencia  goto 28
 	bloque_sentencias  goto 139
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
+
+
+state 115
+	error_clousure : VOID ID ')' '{' . bloque_sentencias '}' RETURN  (23)
+
+	ID  shift 2
+	IF  shift 3
+	FUN  shift 4
+	DOUBLE  shift 5
+	USLINTEGER  shift 6
+	PRINT  shift 7
+	ASIGNACION  shift 8
+	CASE  shift 9
+	VOID  shift 10
+	.  error
+
+	sentencia  goto 28
+	bloque_sentencias  goto 140
+	declaracion  goto 16
+	ejecucion  goto 17
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 116
-	clousure : VOID ID '(' ')' . '{' bloque_sentencias '}' RETURN  (21)
-	error_clousure : VOID ID '(' ')' . bloque_sentencias '}' RETURN  (27)
-	error_clousure : VOID ID '(' ')' . '{' bloque_sentencias RETURN  (28)
-	error_clousure : VOID ID '(' ')' . bloque_sentencias RETURN  (29)
-	error_clousure : VOID ID '(' ')' . '{' bloque_sentencias '}'  (31)
+	error_clousure : VOID '(' ')' '{' . bloque_sentencias '}' RETURN  (30)
 
 	ID  shift 2
 	IF  shift 3
@@ -1590,59 +1614,33 @@ state 116
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	'{'  shift 140
 	.  error
 
-	sentencia  goto 29
+	sentencia  goto 28
 	bloque_sentencias  goto 141
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 117
-	error_clousure : VOID ID ')' '{' . bloque_sentencias '}' RETURN  (25)
+	lista_de_variables : lista_de_variables ';' ID .  (15)
 
-	ID  shift 2
-	IF  shift 3
-	FUN  shift 4
-	DOUBLE  shift 5
-	USLINTEGER  shift 6
-	PRINT  shift 7
-	ASIGNACION  shift 8
-	CASE  shift 9
-	VOID  shift 10
-	.  error
-
-	sentencia  goto 29
-	bloque_sentencias  goto 142
-	declaracion  goto 16
-	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	.  reduce 15
 
 
 state 118
-	error_clousure : VOID '(' ')' '{' . bloque_sentencias '}' RETURN  (32)
+	bloque_sentencias : bloque_sentencias . sentencia  (6)
+	error_clousure : ID '(' ')' '{' bloque_sentencias . '}' RETURN  (31)
 
 	ID  shift 2
 	IF  shift 3
@@ -1653,34 +1651,80 @@ state 118
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
+	'}'  shift 142
 	.  error
 
-	sentencia  goto 29
-	bloque_sentencias  goto 143
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 119
-	lista_de_variables : lista_de_variables ';' ID .  (17)
+	asignacion : ID $$9 ASIGNACION $$10 expresion . $$11  (78)
+	expresion : expresion . '+' termino $$12  (83)
+	expresion : expresion . '-' termino  (84)
+	$$11 : .  (77)
 
-	.  reduce 17
+	'+'  shift 63
+	'-'  shift 64
+	','  reduce 77
+
+	$$11  goto 143
 
 
 state 120
+	expresion : expresion '+' termino $$12 .  (83)
+
+	.  reduce 83
+
+
+state 121
+	seleccion : IF $$4 '(' condicion ')' . $$5 bloque $$6 ELSE bloque $$7 END_IF $$8  (74)
+	$$5 : .  (70)
+
+	.  reduce 70
+
+	$$5  goto 144
+
+
+state 122
+	expresion : expresion . '+' termino $$12  (83)
+	expresion : expresion . '-' termino  (84)
+	condicion : $$14 expresion . $$15 comparador expresion  (96)
+	$$15 : .  (95)
+
+	'+'  shift 63
+	'-'  shift 64
+	S_MAYOR_IGUAL  reduce 95
+	S_MENOR_IGUAL  reduce 95
+	S_DISTINTO  reduce 95
+	'<'  reduce 95
+	'>'  reduce 95
+	'='  reduce 95
+
+	$$15  goto 145
+
+
+state 123
+	error_clousure : FUN ID '{' bloque_sentencias '}' . RETURN  (37)
+
+	RETURN  shift 146
+	.  error
+
+
+state 124
 	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	error_clousure : ID '(' ')' '{' bloque_sentencias . '}' RETURN  (33)
+	error_clousure : FUN ID '(' '{' bloque_sentencias . '}' RETURN  (33)
 
 	ID  shift 2
 	IF  shift 3
@@ -1691,117 +1735,94 @@ state 120
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	'}'  shift 144
+	'}'  shift 147
 	.  error
 
-	sentencia  goto 62
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
-
-
-state 121
-	asignacion : ID $$7 ASIGNACION $$8 expresion . $$9  (80)
-	expresion : expresion . '+' termino $$10  (85)
-	expresion : expresion . '-' termino  (86)
-	$$9 : .  (79)
-
-	'+'  shift 67
-	'-'  shift 68
-	error  reduce 79
-	','  reduce 79
-
-	$$9  goto 145
-
-
-state 122
-	expresion : expresion '+' termino $$10 .  (85)
-
-	.  reduce 85
-
-
-state 123
-	seleccion : IF $$2 '(' condicion ')' . $$3 bloque $$4 ELSE bloque $$5 END_IF $$6  (76)
-	$$3 : .  (72)
-
-	.  reduce 72
-
-	$$3  goto 146
-
-
-state 124
-	expresion : expresion . '+' termino $$10  (85)
-	expresion : expresion . '-' termino  (86)
-	condicion : $$12 expresion . $$13 comparador expresion  (98)
-	$$13 : .  (97)
-
-	'+'  shift 67
-	'-'  shift 68
-	S_MAYOR_IGUAL  reduce 97
-	S_MENOR_IGUAL  reduce 97
-	S_DISTINTO  reduce 97
-	'<'  reduce 97
-	'>'  reduce 97
-	'='  reduce 97
-
-	$$13  goto 147
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 125
-	error_clousure : FUN ID '{' bloque_sentencias '}' . RETURN  (39)
+	clousure : FUN ID '(' ')' '{' . bloque_sentencias '}' RETURN '(' bloque_sentencias ')'  (20)
+	clousure : FUN ID '(' ')' '{' . bloque_sentencias '}' RETURN '(' ID ')'  (21)
+	error_clousure : FUN ID '(' ')' '{' . bloque_sentencias RETURN  (35)
+	error_clousure : FUN ID '(' ')' '{' . bloque_sentencias '}'  (38)
+	error_clousure : FUN ID '(' ')' '{' . bloque_sentencias '}' RETURN '(' ')' $$3  (41)
 
-	RETURN  shift 148
+	ID  shift 2
+	IF  shift 3
+	FUN  shift 4
+	DOUBLE  shift 5
+	USLINTEGER  shift 6
+	PRINT  shift 7
+	ASIGNACION  shift 8
+	CASE  shift 9
+	VOID  shift 10
 	.  error
+
+	sentencia  goto 28
+	bloque_sentencias  goto 148
+	declaracion  goto 16
+	ejecucion  goto 17
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 126
 	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	error_clousure : FUN ID '(' '{' bloque_sentencias . '}' RETURN  (35)
+	error_clousure : FUN ID '(' ')' bloque_sentencias . '}' RETURN  (34)
+	error_clousure : FUN ID '(' ')' bloque_sentencias . RETURN  (36)
 
 	ID  shift 2
 	IF  shift 3
 	FUN  shift 4
 	DOUBLE  shift 5
 	USLINTEGER  shift 6
+	RETURN  shift 149
 	PRINT  shift 7
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	'}'  shift 149
+	'}'  shift 150
 	.  error
 
-	sentencia  goto 62
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 127
-	clousure : FUN ID '(' ')' '{' . bloque_sentencias '}' RETURN '(' bloque_sentencias ')'  (22)
-	clousure : FUN ID '(' ')' '{' . bloque_sentencias '}' RETURN '(' ID ')'  (23)
-	error_clousure : FUN ID '(' ')' '{' . bloque_sentencias RETURN  (37)
-	error_clousure : FUN ID '(' ')' '{' . bloque_sentencias '}'  (40)
-	error_clousure : FUN ID '(' ')' '{' . bloque_sentencias '}' RETURN '(' ')' $$1  (43)
+	bloque_sentencias : bloque_sentencias . sentencia  (6)
+	error_clousure : FUN ID ')' '{' bloque_sentencias . '}' RETURN  (32)
 
 	ID  shift 2
 	IF  shift 3
@@ -1812,36 +1833,33 @@ state 127
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
+	'}'  shift 151
 	.  error
 
-	sentencia  goto 29
-	bloque_sentencias  goto 150
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 128
 	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	error_clousure : FUN ID '(' ')' bloque_sentencias . '}' RETURN  (36)
-	error_clousure : FUN ID '(' ')' bloque_sentencias . RETURN  (38)
+	error_clousure : FUN '(' ')' '{' bloque_sentencias . '}' RETURN  (39)
 
 	ID  shift 2
 	IF  shift 3
 	FUN  shift 4
 	DOUBLE  shift 5
 	USLINTEGER  shift 6
-	RETURN  shift 151
 	PRINT  shift 7
 	ASIGNACION  shift 8
 	CASE  shift 9
@@ -1849,144 +1867,161 @@ state 128
 	'}'  shift 152
 	.  error
 
-	sentencia  goto 62
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 129
-	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	error_clousure : FUN ID ')' '{' bloque_sentencias . '}' RETURN  (34)
+	error_control : CASE ID '{' lista_acciones '}' .  (59)
 
-	ID  shift 2
-	IF  shift 3
-	FUN  shift 4
-	DOUBLE  shift 5
-	USLINTEGER  shift 6
-	PRINT  shift 7
-	ASIGNACION  shift 8
-	CASE  shift 9
-	VOID  shift 10
-	'}'  shift 153
-	.  error
-
-	sentencia  goto 62
-	declaracion  goto 16
-	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	.  reduce 59
 
 
 state 130
-	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	error_clousure : FUN '(' ')' '{' bloque_sentencias . '}' RETURN  (41)
+	error_control : CASE ID ')' '{' lista_acciones . '}'  (55)
+	lista_acciones : lista_acciones . accion  (62)
 
-	ID  shift 2
-	IF  shift 3
-	FUN  shift 4
-	DOUBLE  shift 5
-	USLINTEGER  shift 6
-	PRINT  shift 7
-	ASIGNACION  shift 8
-	CASE  shift 9
-	VOID  shift 10
-	'}'  shift 154
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	'}'  shift 153
 	.  error
 
-	sentencia  goto 62
-	declaracion  goto 16
-	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	accion  goto 107
+	cte  goto 78
+	error_accion  goto 79
 
 
 state 131
-	error_control : CASE ID '{' lista_acciones '}' .  (61)
+	error_accion : cte error DO . bloque  (66)
 
-	.  reduce 61
+	error  shift 1
+	ID  shift 2
+	IF  shift 3
+	FUN  shift 4
+	DOUBLE  shift 5
+	USLINTEGER  shift 6
+	PRINT  shift 7
+	ASIGNACION  shift 8
+	CASE  shift 9
+	VOID  shift 10
+	'{'  shift 11
+	.  error
+
+	bloque  goto 154
+	sentencia  goto 14
+	error_bloque  goto 15
+	declaracion  goto 16
+	ejecucion  goto 17
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 132
-	error_control : CASE ID ')' '{' lista_acciones . '}'  (57)
-	lista_acciones : lista_acciones . accion  (64)
+	accion : cte ':' DO . bloque  (64)
 
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	'}'  shift 155
+	error  shift 1
+	ID  shift 2
+	IF  shift 3
+	FUN  shift 4
+	DOUBLE  shift 5
+	USLINTEGER  shift 6
+	PRINT  shift 7
+	ASIGNACION  shift 8
+	CASE  shift 9
+	VOID  shift 10
+	'{'  shift 11
 	.  error
 
-	accion  goto 109
-	cte  goto 82
-	error_accion  goto 83
+	bloque  goto 155
+	sentencia  goto 14
+	error_bloque  goto 15
+	declaracion  goto 16
+	ejecucion  goto 17
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 133
-	error_accion : cte error DO . bloque  (68)
+	error_control : CASE '(' ID '{' lista_acciones . '}'  (56)
+	lista_acciones : lista_acciones . accion  (62)
 
-	error  shift 1
-	ID  shift 2
-	IF  shift 3
-	FUN  shift 4
-	DOUBLE  shift 5
-	USLINTEGER  shift 6
-	PRINT  shift 7
-	ASIGNACION  shift 8
-	CASE  shift 9
-	VOID  shift 10
-	'{'  shift 11
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	'}'  shift 156
 	.  error
 
-	bloque  goto 156
-	sentencia  goto 14
-	error_bloque  goto 15
-	declaracion  goto 16
-	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	accion  goto 107
+	cte  goto 78
+	error_accion  goto 79
 
 
 state 134
-	accion : cte ':' DO . bloque  (66)
+	control : CASE '(' ID ')' '{' . lista_acciones '}'  (53)
+	error_control : CASE '(' ID ')' '{' . lista_acciones  (58)
 
-	error  shift 1
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	.  error
+
+	lista_acciones  goto 157
+	accion  goto 77
+	cte  goto 78
+	error_accion  goto 79
+
+
+state 135
+	error_control : CASE '(' ID ')' lista_acciones . '}'  (57)
+	error_control : CASE '(' ID ')' lista_acciones .  (61)
+	lista_acciones : lista_acciones . accion  (62)
+
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	'}'  shift 158
+	','  reduce 61
+
+	accion  goto 107
+	cte  goto 78
+	error_accion  goto 79
+
+
+state 136
+	error_clousure : VOID ID '{' bloque_sentencias '}' . RETURN  (28)
+
+	RETURN  shift 159
+	.  error
+
+
+state 137
+	bloque_sentencias : bloque_sentencias . sentencia  (6)
+	error_clousure : VOID ID '(' '{' bloque_sentencias . '}' RETURN  (24)
+
 	ID  shift 2
 	IF  shift 3
 	FUN  shift 4
@@ -1996,114 +2031,92 @@ state 134
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	'{'  shift 11
+	'}'  shift 160
 	.  error
 
-	bloque  goto 157
-	sentencia  goto 14
-	error_bloque  goto 15
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
-
-
-state 135
-	error_control : CASE '(' ID '{' lista_acciones . '}'  (58)
-	lista_acciones : lista_acciones . accion  (64)
-
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	'}'  shift 158
-	.  error
-
-	accion  goto 109
-	cte  goto 82
-	error_accion  goto 83
-
-
-state 136
-	control : CASE '(' ID ')' '{' . lista_acciones '}'  (55)
-	error_control : CASE '(' ID ')' '{' . lista_acciones  (60)
-
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	.  error
-
-	lista_acciones  goto 159
-	accion  goto 81
-	cte  goto 82
-	error_accion  goto 83
-
-
-state 137
-	error_control : CASE '(' ID ')' lista_acciones . '}'  (59)
-	error_control : CASE '(' ID ')' lista_acciones .  (63)
-	lista_acciones : lista_acciones . accion  (64)
-
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	'}'  shift 160
-	error  reduce 63
-	','  reduce 63
-
-	accion  goto 109
-	cte  goto 82
-	error_accion  goto 83
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 138
-	error_clousure : VOID ID '{' bloque_sentencias '}' . RETURN  (30)
+	clousure : VOID ID '(' ')' '{' . bloque_sentencias '}' RETURN  (19)
+	error_clousure : VOID ID '(' ')' '{' . bloque_sentencias RETURN  (26)
+	error_clousure : VOID ID '(' ')' '{' . bloque_sentencias '}'  (29)
 
-	RETURN  shift 161
+	ID  shift 2
+	IF  shift 3
+	FUN  shift 4
+	DOUBLE  shift 5
+	USLINTEGER  shift 6
+	PRINT  shift 7
+	ASIGNACION  shift 8
+	CASE  shift 9
+	VOID  shift 10
 	.  error
+
+	sentencia  goto 28
+	bloque_sentencias  goto 161
+	declaracion  goto 16
+	ejecucion  goto 17
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 139
 	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	error_clousure : VOID ID '(' '{' bloque_sentencias . '}' RETURN  (26)
+	error_clousure : VOID ID '(' ')' bloque_sentencias . '}' RETURN  (25)
+	error_clousure : VOID ID '(' ')' bloque_sentencias . RETURN  (27)
 
 	ID  shift 2
 	IF  shift 3
 	FUN  shift 4
 	DOUBLE  shift 5
 	USLINTEGER  shift 6
+	RETURN  shift 162
 	PRINT  shift 7
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	'}'  shift 162
+	'}'  shift 163
 	.  error
 
-	sentencia  goto 62
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 140
-	clousure : VOID ID '(' ')' '{' . bloque_sentencias '}' RETURN  (21)
-	error_clousure : VOID ID '(' ')' '{' . bloque_sentencias RETURN  (28)
-	error_clousure : VOID ID '(' ')' '{' . bloque_sentencias '}'  (31)
+	bloque_sentencias : bloque_sentencias . sentencia  (6)
+	error_clousure : VOID ID ')' '{' bloque_sentencias . '}' RETURN  (23)
 
 	ID  shift 2
 	IF  shift 3
@@ -2114,36 +2127,33 @@ state 140
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
+	'}'  shift 164
 	.  error
 
-	sentencia  goto 29
-	bloque_sentencias  goto 163
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 141
 	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	error_clousure : VOID ID '(' ')' bloque_sentencias . '}' RETURN  (27)
-	error_clousure : VOID ID '(' ')' bloque_sentencias . RETURN  (29)
+	error_clousure : VOID '(' ')' '{' bloque_sentencias . '}' RETURN  (30)
 
 	ID  shift 2
 	IF  shift 3
 	FUN  shift 4
 	DOUBLE  shift 5
 	USLINTEGER  shift 6
-	RETURN  shift 164
 	PRINT  shift 7
 	ASIGNACION  shift 8
 	CASE  shift 9
@@ -2151,101 +2161,36 @@ state 141
 	'}'  shift 165
 	.  error
 
-	sentencia  goto 62
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
 state 142
-	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	error_clousure : VOID ID ')' '{' bloque_sentencias . '}' RETURN  (25)
+	error_clousure : ID '(' ')' '{' bloque_sentencias '}' . RETURN  (31)
 
-	ID  shift 2
-	IF  shift 3
-	FUN  shift 4
-	DOUBLE  shift 5
-	USLINTEGER  shift 6
-	PRINT  shift 7
-	ASIGNACION  shift 8
-	CASE  shift 9
-	VOID  shift 10
-	'}'  shift 166
+	RETURN  shift 166
 	.  error
-
-	sentencia  goto 62
-	declaracion  goto 16
-	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
 
 
 state 143
-	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	error_clousure : VOID '(' ')' '{' bloque_sentencias . '}' RETURN  (32)
+	asignacion : ID $$9 ASIGNACION $$10 expresion $$11 .  (78)
 
-	ID  shift 2
-	IF  shift 3
-	FUN  shift 4
-	DOUBLE  shift 5
-	USLINTEGER  shift 6
-	PRINT  shift 7
-	ASIGNACION  shift 8
-	CASE  shift 9
-	VOID  shift 10
-	'}'  shift 167
-	.  error
-
-	sentencia  goto 62
-	declaracion  goto 16
-	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	.  reduce 78
 
 
 state 144
-	error_clousure : ID '(' ')' '{' bloque_sentencias '}' . RETURN  (33)
-
-	RETURN  shift 168
-	.  error
-
-
-state 145
-	asignacion : ID $$7 ASIGNACION $$8 expresion $$9 .  (80)
-
-	.  reduce 80
-
-
-state 146
-	seleccion : IF $$2 '(' condicion ')' $$3 . bloque $$4 ELSE bloque $$5 END_IF $$6  (76)
+	seleccion : IF $$4 '(' condicion ')' $$5 . bloque $$6 ELSE bloque $$7 END_IF $$8  (74)
 
 	error  shift 1
 	ID  shift 2
@@ -2260,423 +2205,417 @@ state 146
 	'{'  shift 11
 	.  error
 
-	bloque  goto 169
+	bloque  goto 167
 	sentencia  goto 14
 	error_bloque  goto 15
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
+
+
+state 145
+	condicion : $$14 expresion $$15 . comparador expresion  (96)
+
+	S_MAYOR_IGUAL  shift 168
+	S_MENOR_IGUAL  shift 169
+	S_DISTINTO  shift 170
+	'<'  shift 171
+	'>'  shift 172
+	'='  shift 173
+	.  error
+
+	comparador  goto 174
+
+
+state 146
+	error_clousure : FUN ID '{' bloque_sentencias '}' RETURN .  (37)
+
+	.  reduce 37
 
 
 state 147
-	condicion : $$12 expresion $$13 . comparador expresion  (98)
+	error_clousure : FUN ID '(' '{' bloque_sentencias '}' . RETURN  (33)
 
-	S_MAYOR_IGUAL  shift 170
-	S_MENOR_IGUAL  shift 171
-	S_DISTINTO  shift 172
-	'<'  shift 173
-	'>'  shift 174
-	'='  shift 175
+	RETURN  shift 175
 	.  error
-
-	comparador  goto 176
 
 
 state 148
-	error_clousure : FUN ID '{' bloque_sentencias '}' RETURN .  (39)
-
-	.  reduce 39
-
-
-state 149
-	error_clousure : FUN ID '(' '{' bloque_sentencias '}' . RETURN  (35)
-
-	RETURN  shift 177
-	.  error
-
-
-state 150
 	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	clousure : FUN ID '(' ')' '{' bloque_sentencias . '}' RETURN '(' bloque_sentencias ')'  (22)
-	clousure : FUN ID '(' ')' '{' bloque_sentencias . '}' RETURN '(' ID ')'  (23)
-	error_clousure : FUN ID '(' ')' '{' bloque_sentencias . RETURN  (37)
-	error_clousure : FUN ID '(' ')' '{' bloque_sentencias . '}'  (40)
-	error_clousure : FUN ID '(' ')' '{' bloque_sentencias . '}' RETURN '(' ')' $$1  (43)
+	clousure : FUN ID '(' ')' '{' bloque_sentencias . '}' RETURN '(' bloque_sentencias ')'  (20)
+	clousure : FUN ID '(' ')' '{' bloque_sentencias . '}' RETURN '(' ID ')'  (21)
+	error_clousure : FUN ID '(' ')' '{' bloque_sentencias . RETURN  (35)
+	error_clousure : FUN ID '(' ')' '{' bloque_sentencias . '}'  (38)
+	error_clousure : FUN ID '(' ')' '{' bloque_sentencias . '}' RETURN '(' ')' $$3  (41)
 
 	ID  shift 2
 	IF  shift 3
 	FUN  shift 4
 	DOUBLE  shift 5
 	USLINTEGER  shift 6
-	RETURN  shift 178
+	RETURN  shift 176
 	PRINT  shift 7
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	'}'  shift 179
+	'}'  shift 177
 	.  error
 
-	sentencia  goto 62
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
+
+
+state 149
+	error_clousure : FUN ID '(' ')' bloque_sentencias RETURN .  (36)
+
+	.  reduce 36
+
+
+state 150
+	error_clousure : FUN ID '(' ')' bloque_sentencias '}' . RETURN  (34)
+
+	RETURN  shift 178
+	.  error
 
 
 state 151
-	error_clousure : FUN ID '(' ')' bloque_sentencias RETURN .  (38)
+	error_clousure : FUN ID ')' '{' bloque_sentencias '}' . RETURN  (32)
 
-	.  reduce 38
+	RETURN  shift 179
+	.  error
 
 
 state 152
-	error_clousure : FUN ID '(' ')' bloque_sentencias '}' . RETURN  (36)
+	error_clousure : FUN '(' ')' '{' bloque_sentencias '}' . RETURN  (39)
 
 	RETURN  shift 180
 	.  error
 
 
 state 153
-	error_clousure : FUN ID ')' '{' bloque_sentencias '}' . RETURN  (34)
+	error_control : CASE ID ')' '{' lista_acciones '}' .  (55)
 
-	RETURN  shift 181
-	.  error
+	.  reduce 55
 
 
 state 154
-	error_clousure : FUN '(' ')' '{' bloque_sentencias '}' . RETURN  (41)
+	error_accion : cte error DO bloque .  (66)
+
+	.  reduce 66
+
+
+state 155
+	accion : cte ':' DO bloque .  (64)
+
+	.  reduce 64
+
+
+state 156
+	error_control : CASE '(' ID '{' lista_acciones '}' .  (56)
+
+	.  reduce 56
+
+
+state 157
+	control : CASE '(' ID ')' '{' lista_acciones . '}'  (53)
+	error_control : CASE '(' ID ')' '{' lista_acciones .  (58)
+	lista_acciones : lista_acciones . accion  (62)
+
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	'}'  shift 181
+	','  reduce 58
+
+	accion  goto 107
+	cte  goto 78
+	error_accion  goto 79
+
+
+state 158
+	error_control : CASE '(' ID ')' lista_acciones '}' .  (57)
+
+	.  reduce 57
+
+
+state 159
+	error_clousure : VOID ID '{' bloque_sentencias '}' RETURN .  (28)
+
+	.  reduce 28
+
+
+state 160
+	error_clousure : VOID ID '(' '{' bloque_sentencias '}' . RETURN  (24)
 
 	RETURN  shift 182
 	.  error
 
 
-state 155
-	error_control : CASE ID ')' '{' lista_acciones '}' .  (57)
-
-	.  reduce 57
-
-
-state 156
-	error_accion : cte error DO bloque .  (68)
-
-	.  reduce 68
-
-
-state 157
-	accion : cte ':' DO bloque .  (66)
-
-	.  reduce 66
-
-
-state 158
-	error_control : CASE '(' ID '{' lista_acciones '}' .  (58)
-
-	.  reduce 58
-
-
-state 159
-	control : CASE '(' ID ')' '{' lista_acciones . '}'  (55)
-	error_control : CASE '(' ID ')' '{' lista_acciones .  (60)
-	lista_acciones : lista_acciones . accion  (64)
-
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	'}'  shift 183
-	error  reduce 60
-	','  reduce 60
-
-	accion  goto 109
-	cte  goto 82
-	error_accion  goto 83
-
-
-state 160
-	error_control : CASE '(' ID ')' lista_acciones '}' .  (59)
-
-	.  reduce 59
-
-
 state 161
-	error_clousure : VOID ID '{' bloque_sentencias '}' RETURN .  (30)
-
-	.  reduce 30
-
-
-state 162
-	error_clousure : VOID ID '(' '{' bloque_sentencias '}' . RETURN  (26)
-
-	RETURN  shift 184
-	.  error
-
-
-state 163
 	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	clousure : VOID ID '(' ')' '{' bloque_sentencias . '}' RETURN  (21)
-	error_clousure : VOID ID '(' ')' '{' bloque_sentencias . RETURN  (28)
-	error_clousure : VOID ID '(' ')' '{' bloque_sentencias . '}'  (31)
+	clousure : VOID ID '(' ')' '{' bloque_sentencias . '}' RETURN  (19)
+	error_clousure : VOID ID '(' ')' '{' bloque_sentencias . RETURN  (26)
+	error_clousure : VOID ID '(' ')' '{' bloque_sentencias . '}'  (29)
 
 	ID  shift 2
 	IF  shift 3
 	FUN  shift 4
 	DOUBLE  shift 5
 	USLINTEGER  shift 6
-	RETURN  shift 185
+	RETURN  shift 183
 	PRINT  shift 7
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	'}'  shift 186
+	'}'  shift 184
 	.  error
 
-	sentencia  goto 62
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
+
+
+state 162
+	error_clousure : VOID ID '(' ')' bloque_sentencias RETURN .  (27)
+
+	.  reduce 27
+
+
+state 163
+	error_clousure : VOID ID '(' ')' bloque_sentencias '}' . RETURN  (25)
+
+	RETURN  shift 185
+	.  error
 
 
 state 164
-	error_clousure : VOID ID '(' ')' bloque_sentencias RETURN .  (29)
+	error_clousure : VOID ID ')' '{' bloque_sentencias '}' . RETURN  (23)
 
-	.  reduce 29
+	RETURN  shift 186
+	.  error
 
 
 state 165
-	error_clousure : VOID ID '(' ')' bloque_sentencias '}' . RETURN  (27)
+	error_clousure : VOID '(' ')' '{' bloque_sentencias '}' . RETURN  (30)
 
 	RETURN  shift 187
 	.  error
 
 
 state 166
-	error_clousure : VOID ID ')' '{' bloque_sentencias '}' . RETURN  (25)
+	error_clousure : ID '(' ')' '{' bloque_sentencias '}' RETURN .  (31)
 
-	RETURN  shift 188
-	.  error
+	.  reduce 31
 
 
 state 167
-	error_clousure : VOID '(' ')' '{' bloque_sentencias '}' . RETURN  (32)
+	seleccion : IF $$4 '(' condicion ')' $$5 bloque . $$6 ELSE bloque $$7 END_IF $$8  (74)
+	$$6 : .  (71)
 
-	RETURN  shift 189
-	.  error
+	.  reduce 71
+
+	$$6  goto 188
 
 
 state 168
-	error_clousure : ID '(' ')' '{' bloque_sentencias '}' RETURN .  (33)
+	comparador : S_MAYOR_IGUAL .  (100)
 
-	.  reduce 33
+	.  reduce 100
 
 
 state 169
-	seleccion : IF $$2 '(' condicion ')' $$3 bloque . $$4 ELSE bloque $$5 END_IF $$6  (76)
-	$$4 : .  (73)
+	comparador : S_MENOR_IGUAL .  (101)
 
-	.  reduce 73
-
-	$$4  goto 190
+	.  reduce 101
 
 
 state 170
-	comparador : S_MAYOR_IGUAL .  (102)
+	comparador : S_DISTINTO .  (102)
 
 	.  reduce 102
 
 
 state 171
-	comparador : S_MENOR_IGUAL .  (103)
+	comparador : '<' .  (97)
 
-	.  reduce 103
+	.  reduce 97
 
 
 state 172
-	comparador : S_DISTINTO .  (104)
+	comparador : '>' .  (98)
 
-	.  reduce 104
+	.  reduce 98
 
 
 state 173
-	comparador : '<' .  (99)
+	comparador : '=' .  (99)
 
 	.  reduce 99
 
 
 state 174
-	comparador : '>' .  (100)
+	condicion : $$14 expresion $$15 comparador . expresion  (96)
 
-	.  reduce 100
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	ID  shift 32
+	'-'  shift 34
+	.  error
+
+	cte  goto 35
+	expresion  goto 189
+	termino  goto 38
+	factor  goto 39
+	factor_negado  goto 40
 
 
 state 175
-	comparador : '=' .  (101)
+	error_clousure : FUN ID '(' '{' bloque_sentencias '}' RETURN .  (33)
 
-	.  reduce 101
+	.  reduce 33
 
 
 state 176
-	condicion : $$12 expresion $$13 comparador . expresion  (98)
-
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	ID  shift 33
-	'-'  shift 35
-	.  error
-
-	cte  goto 36
-	expresion  goto 191
-	termino  goto 39
-	factor  goto 40
-	factor_negado  goto 41
-
-
-state 177
-	error_clousure : FUN ID '(' '{' bloque_sentencias '}' RETURN .  (35)
+	error_clousure : FUN ID '(' ')' '{' bloque_sentencias RETURN .  (35)
 
 	.  reduce 35
 
 
+state 177
+	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' . RETURN '(' bloque_sentencias ')'  (20)
+	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' . RETURN '(' ID ')'  (21)
+	error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' .  (38)
+	error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' . RETURN '(' ')' $$3  (41)
+
+	RETURN  shift 190
+	','  reduce 38
+
+
 state 178
-	error_clousure : FUN ID '(' ')' '{' bloque_sentencias RETURN .  (37)
-
-	.  reduce 37
-
-
-state 179
-	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' . RETURN '(' bloque_sentencias ')'  (22)
-	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' . RETURN '(' ID ')'  (23)
-	error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' .  (40)
-	error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' . RETURN '(' ')' $$1  (43)
-
-	RETURN  shift 192
-	error  reduce 40
-	','  reduce 40
-
-
-state 180
-	error_clousure : FUN ID '(' ')' bloque_sentencias '}' RETURN .  (36)
-
-	.  reduce 36
-
-
-state 181
-	error_clousure : FUN ID ')' '{' bloque_sentencias '}' RETURN .  (34)
+	error_clousure : FUN ID '(' ')' bloque_sentencias '}' RETURN .  (34)
 
 	.  reduce 34
 
 
-state 182
-	error_clousure : FUN '(' ')' '{' bloque_sentencias '}' RETURN .  (41)
-
-	.  reduce 41
-
-
-state 183
-	control : CASE '(' ID ')' '{' lista_acciones '}' .  (55)
-
-	.  reduce 55
-
-
-state 184
-	error_clousure : VOID ID '(' '{' bloque_sentencias '}' RETURN .  (26)
-
-	.  reduce 26
-
-
-state 185
-	error_clousure : VOID ID '(' ')' '{' bloque_sentencias RETURN .  (28)
-
-	.  reduce 28
-
-
-state 186
-	clousure : VOID ID '(' ')' '{' bloque_sentencias '}' . RETURN  (21)
-	error_clousure : VOID ID '(' ')' '{' bloque_sentencias '}' .  (31)
-
-	RETURN  shift 193
-	error  reduce 31
-	','  reduce 31
-
-
-state 187
-	error_clousure : VOID ID '(' ')' bloque_sentencias '}' RETURN .  (27)
-
-	.  reduce 27
-
-
-state 188
-	error_clousure : VOID ID ')' '{' bloque_sentencias '}' RETURN .  (25)
-
-	.  reduce 25
-
-
-state 189
-	error_clousure : VOID '(' ')' '{' bloque_sentencias '}' RETURN .  (32)
+state 179
+	error_clousure : FUN ID ')' '{' bloque_sentencias '}' RETURN .  (32)
 
 	.  reduce 32
 
 
-state 190
-	seleccion : IF $$2 '(' condicion ')' $$3 bloque $$4 . ELSE bloque $$5 END_IF $$6  (76)
+state 180
+	error_clousure : FUN '(' ')' '{' bloque_sentencias '}' RETURN .  (39)
 
-	ELSE  shift 194
+	.  reduce 39
+
+
+state 181
+	control : CASE '(' ID ')' '{' lista_acciones '}' .  (53)
+
+	.  reduce 53
+
+
+state 182
+	error_clousure : VOID ID '(' '{' bloque_sentencias '}' RETURN .  (24)
+
+	.  reduce 24
+
+
+state 183
+	error_clousure : VOID ID '(' ')' '{' bloque_sentencias RETURN .  (26)
+
+	.  reduce 26
+
+
+state 184
+	clousure : VOID ID '(' ')' '{' bloque_sentencias '}' . RETURN  (19)
+	error_clousure : VOID ID '(' ')' '{' bloque_sentencias '}' .  (29)
+
+	RETURN  shift 191
+	','  reduce 29
+
+
+state 185
+	error_clousure : VOID ID '(' ')' bloque_sentencias '}' RETURN .  (25)
+
+	.  reduce 25
+
+
+state 186
+	error_clousure : VOID ID ')' '{' bloque_sentencias '}' RETURN .  (23)
+
+	.  reduce 23
+
+
+state 187
+	error_clousure : VOID '(' ')' '{' bloque_sentencias '}' RETURN .  (30)
+
+	.  reduce 30
+
+
+state 188
+	seleccion : IF $$4 '(' condicion ')' $$5 bloque $$6 . ELSE bloque $$7 END_IF $$8  (74)
+
+	ELSE  shift 192
+	.  error
+
+
+state 189
+	expresion : expresion . '+' termino $$12  (83)
+	expresion : expresion . '-' termino  (84)
+	condicion : $$14 expresion $$15 comparador expresion .  (96)
+
+	'+'  shift 63
+	'-'  shift 64
+	')'  reduce 96
+
+
+state 190
+	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN . '(' bloque_sentencias ')'  (20)
+	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN . '(' ID ')'  (21)
+	error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN . '(' ')' $$3  (41)
+
+	'('  shift 193
 	.  error
 
 
 state 191
-	expresion : expresion . '+' termino $$10  (85)
-	expresion : expresion . '-' termino  (86)
-	condicion : $$12 expresion $$13 comparador expresion .  (98)
+	clousure : VOID ID '(' ')' '{' bloque_sentencias '}' RETURN .  (19)
 
-	'+'  shift 67
-	'-'  shift 68
-	')'  reduce 98
+	.  reduce 19
 
 
 state 192
-	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN . '(' bloque_sentencias ')'  (22)
-	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN . '(' ID ')'  (23)
-	error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN . '(' ')' $$1  (43)
-
-	'('  shift 195
-	.  error
-
-
-state 193
-	clousure : VOID ID '(' ')' '{' bloque_sentencias '}' RETURN .  (21)
-
-	.  reduce 21
-
-
-state 194
-	seleccion : IF $$2 '(' condicion ')' $$3 bloque $$4 ELSE . bloque $$5 END_IF $$6  (76)
+	seleccion : IF $$4 '(' condicion ')' $$5 bloque $$6 ELSE . bloque $$7 END_IF $$8  (74)
 
 	error  shift 1
 	ID  shift 2
@@ -2691,30 +2630,29 @@ state 194
 	'{'  shift 11
 	.  error
 
-	bloque  goto 196
+	bloque  goto 194
 	sentencia  goto 14
 	error_bloque  goto 15
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
 
 
-state 195
-	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' . bloque_sentencias ')'  (22)
-	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' . ID ')'  (23)
-	error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' . ')' $$1  (43)
+state 193
+	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' . bloque_sentencias ')'  (20)
+	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' . ID ')'  (21)
+	error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' . ')' $$3  (41)
 
-	ID  shift 197
+	ID  shift 195
 	IF  shift 3
 	FUN  shift 4
 	DOUBLE  shift 5
@@ -2723,70 +2661,69 @@ state 195
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	')'  shift 198
+	')'  shift 196
 	.  error
 
-	sentencia  goto 29
-	bloque_sentencias  goto 199
+	sentencia  goto 28
+	bloque_sentencias  goto 197
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
+
+
+state 194
+	seleccion : IF $$4 '(' condicion ')' $$5 bloque $$6 ELSE bloque . $$7 END_IF $$8  (74)
+	$$7 : .  (72)
+
+	.  reduce 72
+
+	$$7  goto 198
+
+
+state 195
+	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ID . ')'  (21)
+	error_clousure : ID . '(' ')' '{' bloque_sentencias '}' RETURN  (31)
+	asignacion : ID . $$9 ASIGNACION $$10 expresion $$11  (78)
+	error_asignacion : ID . expresion  (80)
+	$$9 : .  (75)
+
+	CTE_D  shift 30
+	CTE_USLINTEGER  shift 31
+	ID  shift 32
+	'('  shift 33
+	')'  shift 199
+	'-'  shift 34
+	ASIGNACION  reduce 75
+
+	cte  goto 35
+	$$9  goto 36
+	expresion  goto 37
+	termino  goto 38
+	factor  goto 39
+	factor_negado  goto 40
 
 
 state 196
-	seleccion : IF $$2 '(' condicion ')' $$3 bloque $$4 ELSE bloque . $$5 END_IF $$6  (76)
-	$$5 : .  (74)
+	error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ')' . $$3  (41)
+	$$3 : .  (40)
 
-	.  reduce 74
+	.  reduce 40
 
-	$$5  goto 200
+	$$3  goto 200
 
 
 state 197
-	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ID . ')'  (23)
-	error_clousure : ID . '(' ')' '{' bloque_sentencias '}' RETURN  (33)
-	asignacion : ID . $$7 ASIGNACION $$8 expresion $$9  (80)
-	error_asignacion : ID . expresion  (82)
-	$$7 : .  (77)
-
-	CTE_D  shift 31
-	CTE_USLINTEGER  shift 32
-	ID  shift 33
-	'('  shift 34
-	')'  shift 201
-	'-'  shift 35
-	ASIGNACION  reduce 77
-
-	cte  goto 36
-	$$7  goto 37
-	expresion  goto 38
-	termino  goto 39
-	factor  goto 40
-	factor_negado  goto 41
-
-
-state 198
-	error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ')' . $$1  (43)
-	$$1 : .  (42)
-
-	.  reduce 42
-
-	$$1  goto 202
-
-
-state 199
 	bloque_sentencias : bloque_sentencias . sentencia  (6)
-	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias . ')'  (22)
+	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias . ')'  (20)
 
 	ID  shift 2
 	IF  shift 3
@@ -2797,64 +2734,63 @@ state 199
 	ASIGNACION  shift 8
 	CASE  shift 9
 	VOID  shift 10
-	')'  shift 203
+	')'  shift 201
 	.  error
 
-	sentencia  goto 62
+	sentencia  goto 58
 	declaracion  goto 16
 	ejecucion  goto 17
-	error_sentencia_d  goto 18
-	tipo  goto 19
-	clousure  goto 20
-	error_clousure  goto 21
-	control  goto 22
-	seleccion  goto 23
-	print  goto 24
-	asignacion  goto 25
-	error_print  goto 26
-	error_control  goto 27
-	error_asignacion  goto 28
+	tipo  goto 18
+	clousure  goto 19
+	error_clousure  goto 20
+	control  goto 21
+	seleccion  goto 22
+	print  goto 23
+	asignacion  goto 24
+	error_print  goto 25
+	error_control  goto 26
+	error_asignacion  goto 27
+
+
+state 198
+	seleccion : IF $$4 '(' condicion ')' $$5 bloque $$6 ELSE bloque $$7 . END_IF $$8  (74)
+
+	END_IF  shift 202
+	.  error
+
+
+state 199
+	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ID ')' .  (21)
+
+	.  reduce 21
 
 
 state 200
-	seleccion : IF $$2 '(' condicion ')' $$3 bloque $$4 ELSE bloque $$5 . END_IF $$6  (76)
+	error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ')' $$3 .  (41)
 
-	END_IF  shift 204
-	.  error
+	.  reduce 41
 
 
 state 201
-	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ID ')' .  (23)
+	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')' .  (20)
 
-	.  reduce 23
+	.  reduce 20
 
 
 state 202
-	error_clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ')' $$1 .  (43)
+	seleccion : IF $$4 '(' condicion ')' $$5 bloque $$6 ELSE bloque $$7 END_IF . $$8  (74)
+	$$8 : .  (73)
 
-	.  reduce 43
+	.  reduce 73
+
+	$$8  goto 203
 
 
 state 203
-	clousure : FUN ID '(' ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')' .  (22)
+	seleccion : IF $$4 '(' condicion ')' $$5 bloque $$6 ELSE bloque $$7 END_IF $$8 .  (74)
 
-	.  reduce 22
-
-
-state 204
-	seleccion : IF $$2 '(' condicion ')' $$3 bloque $$4 ELSE bloque $$5 END_IF . $$6  (76)
-	$$6 : .  (75)
-
-	.  reduce 75
-
-	$$6  goto 205
+	.  reduce 74
 
 
-state 205
-	seleccion : IF $$2 '(' condicion ')' $$3 bloque $$4 ELSE bloque $$5 END_IF $$6 .  (76)
-
-	.  reduce 76
-
-
-37 terminals, 44 nonterminals
-105 grammar rules, 206 states
+37 terminals, 45 nonterminals
+103 grammar rules, 204 states
