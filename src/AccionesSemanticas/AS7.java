@@ -19,11 +19,11 @@ public class AS7 extends AccSemantica{
     public int ejecutar(char c, ArchController ac) {
         if(c == '='){
          ac.setBuffer(ac.getBuffer()+c); 
-         ac.creaToken(ac.getBuffer());
+         ac.creaToken(ac.getBuffer(),ac.getFuente().getLinea());
         }
         else{
              ac.setConcateno(false);
-             ac.creaTokenSingular(ac.getBuffer().charAt(0));
+             ac.creaTokenSingular(ac.getBuffer().charAt(0),ac.getFuente().getLinea());
              //ac.token().setLexemaSingular(ac.getBuffer().charAt(0));
             }
         ac.añadirTokenTS(ac.getBuffer(),"comparador");

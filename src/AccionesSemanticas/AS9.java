@@ -16,11 +16,13 @@ public class AS9 extends AccSemantica{
 
     @Override
     public int ejecutar(char c, ArchController ac) {
-        ac.setEsComentario(true);
+        if((ac.getBuffer().startsWith("_")))      {
+        System.out.println("en la linea "+ac.getFuente().getLinea()+" se leyo un comentario");
+        ac.setEsComentario(true);}
        if(c != '\n')
           if(c != '-')
              ac.setBuffer(ac.getBuffer()+c);   
-             
+       
     return 0;   
     }
     

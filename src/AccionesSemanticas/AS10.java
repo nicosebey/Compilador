@@ -25,7 +25,7 @@ public class AS10 extends AccSemantica {
             if(!ac.getTS().existeL(ac.getBuffer())){
                 ac.setEstadofinal();
                 //System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaa  "+ac.getBuffer());
-               ac.creaToken(ac.getBuffer());
+               ac.creaToken(ac.getBuffer(),ac.getFuente().getLinea());
                 //System.out.println(ac.getListaTokens().get(0).getId()+"iddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
                ac.añadirTokenTS(ac.getBuffer(),"identificador");
                ac.termino();

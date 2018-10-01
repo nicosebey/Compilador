@@ -16,7 +16,7 @@
 
 
 
-//#line 2 "gramaticaULTIMA.y"
+//#line 2 "gramaticaULTIMA.Y"
  package ParserP; 
 import AnalizadorLexico.ArchController;
 import AnalizadorLexico.Token;
@@ -182,242 +182,264 @@ public final static short VOID=277;
 public final static short YYERRCODE=256;
 final static short yylhs[] = {                           -1,
     0,    1,    1,    1,    3,    3,    5,    4,    4,    2,
-    8,    2,    6,    6,   10,   10,   10,   12,   11,   11,
-   11,   11,   13,   13,   13,   13,   13,   13,   13,   13,
-   13,   13,   13,   13,   13,   13,   13,   13,   13,   14,
-   13,    9,    9,    7,    7,    7,    7,   17,   17,   19,
-   19,   19,   15,   15,   21,   21,   21,   21,   21,   21,
-   21,   20,   20,   22,   22,   24,   23,   23,   25,   27,
-   28,   29,   30,   16,   31,   33,   34,   18,   18,   35,
-   35,   37,   32,   32,   32,   36,   36,   36,   38,   38,
-   40,   38,   39,   41,   43,   26,   42,   42,   42,   42,
-   42,   42,
+    2,    2,    8,    8,    6,    6,   10,   12,   10,   10,
+   13,   11,   11,   11,   11,   14,   14,   14,   14,   14,
+   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,
+   14,   14,   15,   14,    9,    9,    7,    7,    7,    7,
+   18,   18,   20,   20,   20,   16,   16,   22,   22,   22,
+   22,   22,   22,   22,   21,   21,   23,   23,   25,   24,
+   24,   26,   26,   26,   26,   17,   17,   17,   28,   17,
+   29,   31,   32,   19,   19,   33,   33,   35,   30,   30,
+   30,   34,   34,   34,   36,   36,   38,   36,   37,   27,
+   39,   39,   39,   39,   39,   39,
 };
 final static short yylen[] = {                            2,
     1,    1,    3,    1,    1,    2,    0,    4,    3,    2,
-    0,    3,    2,    1,    3,    1,    1,    2,    8,   11,
-   11,    1,    7,    7,    7,    7,    6,    6,    7,    7,
-    7,    7,    7,    7,    7,    6,    6,    7,    7,    0,
-   11,    1,    1,    1,    1,    1,    1,    4,    1,    3,
-    3,    2,    7,    1,    6,    6,    6,    6,    5,    3,
-    5,    2,    1,    4,    1,    4,    1,    1,    0,    0,
-    0,    0,    0,   13,    0,    0,    0,    6,    1,    2,
-    2,    0,    4,    3,    1,    3,    3,    1,    1,    1,
-    0,    2,    2,    0,    0,    5,    1,    1,    1,    1,
-    1,    1,
+    2,    1,    2,    2,    2,    1,    3,    0,    2,    1,
+    2,    8,   11,   11,    1,    7,    7,    7,    7,    6,
+    6,    7,    7,    7,    7,    7,    7,    7,    6,    6,
+    7,    7,    0,   11,    1,    1,    1,    1,    1,    1,
+    4,    1,    3,    3,    2,    7,    1,    6,    6,    6,
+    6,    5,    3,    5,    2,    1,    4,    1,    4,    1,
+    1,    4,    4,    4,    3,    3,    5,    2,    0,    4,
+    0,    0,    0,    6,    1,    2,    2,    0,    4,    3,
+    1,    3,    3,    1,    1,    1,    0,    2,    2,    3,
+    1,    1,    1,    1,    1,    1,
 };
 final static short yydefred[] = {                         0,
-    0,    0,   69,    0,   43,   42,    0,    0,    0,    0,
-    0,    0,    1,    2,    4,    0,    0,    0,   14,   22,
-   44,   45,   46,   47,   49,   54,   79,    5,    0,   67,
-   68,   91,    0,    0,   89,    0,    0,    0,   88,   90,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,   10,   11,   16,    0,   17,    7,    6,   92,    0,
-   93,   76,    0,    0,    0,    0,   94,    0,    0,    0,
-    0,   50,    0,    0,    0,    0,   63,    0,   65,    0,
-    0,    0,    0,    0,    9,    3,   12,   18,    0,    8,
-    0,    0,    0,    0,   86,   87,    0,    0,    0,    0,
-    0,    0,    0,   48,    0,    0,   62,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,   15,    0,    0,   83,
-   70,    0,    0,    0,    0,    0,    0,    0,   59,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,   78,    0,    0,   37,    0,    0,   36,    0,
-    0,    0,   55,   66,   64,   56,    0,   57,   28,    0,
-    0,   27,    0,    0,    0,   31,   71,  100,  101,  102,
-   97,   98,   99,    0,   33,   35,    0,   34,   32,   39,
-   53,   24,   26,    0,   25,   23,   30,    0,    0,    0,
-   19,    0,    0,   72,    0,   40,    0,    0,   21,   41,
-   20,   73,   74,
+    0,    0,    0,    0,   46,   45,    0,    0,    0,    0,
+    0,    0,    1,    2,    4,    0,    0,   12,    0,   16,
+   25,   47,   48,   49,   50,   52,   57,    0,   85,    5,
+    0,   70,   71,   97,    0,    0,   95,    0,    0,    0,
+   94,   96,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,   13,   10,   14,   11,
+   18,    0,   20,    0,    0,    7,    6,   98,    0,   99,
+   82,    0,    0,    0,    0,    0,    0,   75,  104,  105,
+  106,  101,  102,  103,    0,    0,    0,    0,    0,   53,
+    0,    0,    0,    0,   66,    0,   68,    0,    0,    0,
+    0,    0,    9,    3,   19,   21,    0,   79,    0,   76,
+    8,    0,    0,    0,    0,   92,   93,   73,   74,   72,
+    0,    0,    0,    0,    0,    0,   51,    0,    0,   65,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,   17,
+   80,    0,    0,    0,   89,    0,    0,    0,    0,    0,
+    0,   62,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,   77,    0,   84,   40,    0,    0,
+   39,    0,    0,    0,   58,   69,   67,   59,    0,   60,
+   31,    0,    0,   30,    0,    0,    0,   34,   36,   38,
+    0,   37,   35,   42,   56,   27,   29,    0,   28,   26,
+   33,    0,   22,    0,    0,   43,    0,   24,   44,   23,
 };
 final static short yydgoto[] = {                         12,
-   13,   28,   29,   15,   90,   16,   17,   87,   18,   55,
-   19,   56,   20,  200,   21,   22,   23,   24,   25,   76,
-   26,   77,   78,   79,   41,   97,  144,  188,  198,  203,
-   36,   37,   92,  143,   27,   38,  120,   39,   40,   59,
-   98,  174,  145,
+   13,   30,   31,   15,  111,   16,   17,   18,   19,   62,
+   20,  105,   63,   21,  209,   22,   23,   24,   25,   26,
+   94,   27,   95,   37,   97,   28,   45,  141,   38,   46,
+  113,  167,   29,   40,  145,   41,   42,   68,   85,
 };
 final static short yysindex[] = {                      -111,
-  291,   -9,    0,  -37,    0,    0,  -24,   -7,  -36,  -32,
-  291,    0,    0,    0,    0,  -12,    4, -224,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    7,    0,
-    0,    0,    2, -207,    0, -215,   31,   17,    0,    0,
-   35,  -15,   37,   40, -181,   31,  -20, -175,   -6,   51,
-   60,    0,    0,    0,  -54,    0,    0,    0,    0,  -30,
-    0,    0,   -7,   -7,   -7,   -7,    0,  291,  -18,  -29,
-  -28,    0,   55, -232,  -25, -232,    0,  -45,    0,   -4,
-  291,   -2,  -22,  -21,    0,    0,    0,    0, -165,    0,
-  291,   -7,   17,   17,    0,    0,   63,   -7,  148,  291,
-  -96,  291,  291,    0, -110, -232,    0, -163, -156, -232,
-  -90,  166,  291,  -82,  291,  291,    0,  180,   31,    0,
-    0,   31, -158,  194,  291,   74,  208,  227,    0, -103,
- -111, -111,  -60, -232,  -56, -157,  246,  291,   93,  260,
-  274, -147,    0, -111,  -51,    0, -146,  117,    0, -145,
- -144, -143,    0,    0,    0,    0,   15,    0,    0, -142,
-  131,    0, -140, -138, -137,    0,    0,    0,    0,    0,
-    0,    0,    0,   -7,    0,    0, -136,    0,    0,    0,
-    0,    0,    0, -135,    0,    0,    0, -126,   31,  102,
-    0, -111,  -41,    0,  -39,    0,  -27, -122,    0,    0,
-    0,    0,    0,
+ -147,   -7,  -39,  -38,    0,    0,  -31,   -2,  -37,  -36,
+ -147,    0,    0,    0,    0,  -10,    5,    0, -240,    0,
+    0,    0,    0,    0,    0,    0,    0,  -88,    0,    0,
+  237,    0,    0,    0,  -13, -230,    0, -229,    2,   -5,
+    0,    0,   -2,   -2, -202,   20,  -23,   25,   50, -157,
+    2,  -21, -156,  -18,   71,   84,    0,    0,    0,    0,
+    0,  -54,    0, -147, -227,    0,    0,    0,   -8,    0,
+    0,   -2,   -2,   -2,   -2,   72,  -15,    0,    0,    0,
+    0,    0,    0,    0,   -2, -147,  -26,   -4,   -3,    0,
+   73, -166,    3, -166,    0,  -51,    0,  -22, -147,  -16,
+    9,   16,    0,    0,    0,    0, -148,    0, -111,    0,
+    0, -147,   -2,   -5,   -5,    0,    0,    0,    0,    0,
+    2,  251, -147,   49, -147, -147,    0, -117, -166,    0,
+ -138, -129, -166, -110,  265, -147,   67, -147, -147,    0,
+    0, -127,  279,    2,    0, -131,  293, -147,  135,  307,
+  322,    0,  -86, -111, -111,  -81, -166,  -66, -121,  339,
+ -147,  181,  353,  373,    0, -116,    0,    0, -106,  197,
+    0, -104, -103, -100,    0,    0,    0,    0,  -61,    0,
+    0,  -95,  220,    0,  -92,  -82,  -80,    0,    0,    0,
+  -75,    0,    0,    0,    0,    0,    0,  -72,    0,    0,
+    0,  116,    0,  -41,   -9,    0,  -27,    0,    0,    0,
 };
 final static short yyrindex[] = {                         0,
-    0, -127,    0,    0,    0,    0,    0,    0,    0,    0,
+    0, -113,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,  105,    1,    0,    0,
-    0,    0,    0,  -12,    0,  108,    0,    0,    0,    0,
-    0,    0,    0,    0,  111,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,   26,    7,
+    0,    0,    0,    0,    0,    0,    0,    0,   27,    0,
+   31,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,   32,    0,   39,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,  112,    0,    0,  128,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    6,   11,    0,    0,    0,    0,    0,    0,
+   40,    0,    0,   41,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,  133,    0,
-    0,  -43,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,  140,    0,    0,    0,    0,    0,
+    0,    0,    0,   12,   17,    0,    0,    0,    0,    0,
+  -14,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,  142,    0,    0,    0,
+    0,    0,    0,   42,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,   43,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,  143,    0,    0,    0,
-    0,    0,    0,  153,    0,    0,    0,    0,  157,    0,
-    0,    0,    0,    0, -127,    0,    0,    0,    0,    0,
-    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,   44,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+   45,    0,    0,    0,    0,    0,    0,   46,    0,    0,
+    0,    0,    0,    0, -113,    0,    0,    0,    0,    0,
 };
 final static short yygindex[] = {                         0,
-  -74,  162,    9,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,   33,
-    0,  424,   22,    0,    0,    0,    0,    0,    0,    0,
-    0,   -1,    0,    0,    0,   16,    0,   18,    0,    0,
-    0,    0,    0,
+  -17,  280,   10,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+   63,    0,  222,  528,    0,    0,   55,    0,    0,    8,
+    0,    0,    0,   38,    0,   29,    0,    0,    0,
 };
-final static int YYTABLESIZE=581;
+final static int YYTABLESIZE=707;
 static short yytable[];
 static { yytable();}
 static void yytable(){
-yytable = new short[]{                        196,
-   33,  199,   43,   48,   89,   34,   46,   50,  171,  173,
-  172,   11,  109,  201,  129,   45,   95,   95,   95,   51,
-   75,  153,  101,   35,   69,   70,  125,   30,   31,   35,
-   33,   52,  134,   82,   83,   34,  111,   34,  114,   54,
-  138,   85,   60,   85,   85,   85,   82,   53,   82,   82,
-   82,   84,   61,   84,   84,   84,  154,  155,   65,   62,
-   85,   85,   85,   66,  156,   82,   82,   82,  158,  167,
-   84,   84,   84,   63,   67,   64,   99,   71,   93,   94,
-   72,   73,   95,   96,   35,   35,   35,   35,   80,  112,
-  119,   84,   91,  102,  103,  104,  122,  106,  117,  118,
-  115,  116,   74,  121,  100,  131,  105,   68,  124,  126,
-  127,  128,  132,   35,  146,  159,   81,  194,  110,   35,
-  113,  137,  139,  140,  141,  166,  175,  178,  179,  180,
-  182,   57,  185,  148,  186,  187,  190,  191,  130,  181,
-  192,  193,  133,  135,    1,  202,  161,   75,   80,   30,
-   31,   81,    2,    3,   13,   51,   30,   31,    4,    5,
-    6,   14,    7,    8,    9,   10,  157,    2,    3,   30,
-   31,   60,  189,    4,    5,    6,   77,    7,    8,    9,
-   10,    2,    3,   61,   86,   58,   38,    4,    5,    6,
-   58,    7,    8,    9,   10,   35,   29,   96,  150,   30,
-   31,  197,    0,   30,   31,  168,  169,  170,    0,   88,
-  108,    0,   58,   95,   95,   95,   35,  163,    0,    0,
-   30,   31,  195,    3,   32,    0,   42,   47,    4,    5,
-    6,   49,    7,    8,    9,   10,    2,    3,   44,   30,
-   31,  177,    4,    5,    6,    0,    7,    8,    9,   10,
-   30,   31,   30,   31,   32,  184,   32,   85,   85,   85,
-   58,    0,   82,   82,   82,    0,    0,   84,   84,   84,
-    2,    3,  123,   58,   30,   31,    4,    5,    6,   58,
-    7,    8,    9,   10,    0,   58,    0,   58,   58,   58,
-  136,    0,   14,   14,    0,    0,    0,    0,   58,    0,
-   58,   58,   58,    0,  142,   14,    0,    0,    0,   58,
-    0,    0,    0,    0,    0,   85,    0,    0,  147,    0,
-    0,    0,   58,    2,    3,    0,    0,    0,    0,    4,
-    5,    6,  151,    7,    8,    9,   10,    2,    3,    0,
-    0,    0,    0,    4,    5,    6,  149,    7,    8,    9,
-   10,  152,    0,   14,    0,    0,    2,    3,   58,    0,
-    0,    0,    4,    5,    6,  162,    7,    8,    9,   10,
-  160,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    2,    3,    0,    0,  164,    0,    4,    5,    6,  176,
-    7,    8,    9,   10,    2,    3,    0,    0,  165,    0,
-    4,    5,    6,  183,    7,    8,    9,   10,    0,    0,
-    0,    2,    3,    0,    0,    0,    0,    4,    5,    6,
-    0,    7,    8,    9,   10,    0,    0,    0,    0,    2,
-    3,    0,    0,    0,    0,    4,    5,    6,    0,    7,
-    8,    9,   10,    2,    3,    0,    0,    0,    0,    4,
-    5,    6,    0,    7,    8,    9,   10,    2,    3,    0,
+yytable = new short[]{                        206,
+   44,   48,   53,   55,  107,   36,  132,  152,   50,   39,
+   65,   11,  157,  210,  124,   51,   87,   88,  134,   93,
+   56,  100,  101,   61,  137,  120,  100,   69,  108,   70,
+   35,  208,   35,   58,   11,   36,   74,   36,  175,  109,
+  110,   75,   36,  178,   72,   71,   73,   91,   60,   91,
+   91,   91,   88,   78,   88,   88,   88,   90,  180,   90,
+   90,   90,   72,  195,   73,   89,   91,   91,   91,   86,
+   55,   88,   88,   88,   87,   15,   90,   90,   90,   82,
+   84,   83,   78,   54,   63,   83,   64,   61,   41,   32,
+   90,  142,  121,   32,   33,  122,  123,   76,   77,   86,
+  133,   92,  116,  117,   99,   91,  136,   98,  135,  114,
+  115,  102,  118,  127,  112,  140,    2,    3,  125,  126,
+  144,  143,    4,    5,    6,  129,    7,    8,    9,   10,
+  154,  138,  147,  149,  150,  151,  176,  177,  139,  155,
+  165,  168,   32,   33,    1,  160,  162,  163,  164,   32,
+   33,  181,    2,    3,  128,  204,  188,  170,    4,    5,
+    6,   81,    7,    8,    9,   10,  189,   64,  192,  193,
+  183,  148,  194,   32,   33,    2,    3,  196,   32,   33,
+  199,    4,    5,    6,    0,    7,    8,    9,   10,  161,
+  200,  153,  201,   32,   33,  156,  158,  202,   32,   33,
+  203,    0,    0,    0,  131,    0,    0,    0,  104,  106,
+    0,    0,   39,  207,    0,    0,   43,    0,    0,  179,
+   32,   33,  205,    3,   34,   47,   52,   54,    4,    5,
+    6,   49,    7,    8,    9,   10,    2,    3,   32,   33,
+  119,  100,    4,    5,    6,   57,    7,    8,    9,   10,
+   32,   33,   32,   33,   34,    0,   34,   32,   33,  172,
+   59,   34,   91,   91,   91,   91,    0,   88,   88,   88,
+   88,    0,   90,   90,   90,   90,   79,   80,   81,   14,
+    0,   86,   55,    0,    0,    0,   87,   15,    0,    0,
+    0,    0,    0,    0,   78,   54,   63,   83,   64,   61,
+   41,   32,    0,    0,    0,  185,    0,   14,    0,    0,
+   67,    0,    2,    3,    0,  130,    0,    0,    4,    5,
+    6,  191,    7,    8,    9,   10,    0,    0,    0,    0,
+    2,    3,    0,    0,    0,   67,    4,    5,    6,  103,
+    7,    8,    9,   10,  198,    0,    0,    2,    3,  130,
     0,    0,    0,    4,    5,    6,    0,    7,    8,    9,
-   10,    2,    3,    0,    0,    0,    0,    4,    5,    6,
-    0,    7,    8,    9,   10,    0,    0,    0,    0,    0,
-    2,    3,    0,    0,    0,    0,    4,    5,    6,  107,
-    7,    8,    9,   10,    0,    0,    0,    0,    0,    2,
-    3,    0,    0,    0,    0,    4,    5,    6,    0,    7,
-    8,    9,   10,    2,    3,    0,    0,    0,  107,    4,
-    5,    6,    0,    7,    8,    9,   10,    2,    3,    0,
-    0,    0,    0,    4,    5,    6,    0,    7,    8,    9,
-   10,    0,    0,  107,    2,    3,  107,    0,  107,    0,
-    4,    5,    6,    0,    7,    8,    9,   10,    0,    0,
+   10,   66,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,  130,  146,    0,  130,    0,  130,
+    0,    0,    0,    0,    0,    0,    0,    0,   14,  159,
+    0,    0,    0,    0,    0,    0,    0,    0,    2,    3,
+  130,   67,    0,  166,    4,    5,    6,  171,    7,    8,
+    9,   10,    0,    0,   67,    0,    0,  169,    0,    0,
+    0,    0,   67,    0,    0,    0,   67,    0,   67,   67,
+   67,  173,    0,   14,   14,    0,    0,    0,    0,   67,
+    0,   67,   67,   67,    2,    3,  174,    0,    0,   67,
+    4,    5,    6,  184,    7,    8,    9,   10,    0,    0,
+    2,    3,   67,  182,    0,    0,    4,    5,    6,  190,
+    7,    8,    9,   10,    0,    0,    0,  186,    0,    0,
+    0,    0,    0,    2,    3,    0,   67,    0,    0,    4,
+    5,    6,  197,    7,    8,    9,   10,  187,    0,    0,
+    2,    3,    0,    0,    0,    0,    4,    5,    6,    0,
+    7,    8,    9,   10,    2,    3,    0,    0,    0,    0,
+    4,    5,    6,    0,    7,    8,    9,   10,    2,    3,
+    0,    0,    0,    0,    4,    5,    6,    0,    7,    8,
+    9,   10,    2,    3,    0,    0,    0,    0,    4,    5,
+    6,    0,    7,    8,    9,   10,    2,    3,    0,    0,
+    0,    0,    4,    5,    6,    0,    7,    8,    9,   10,
+    2,    3,    0,    0,    0,    0,    4,    5,    6,   96,
+    7,    8,    9,   10,    0,    2,    3,    0,    0,    0,
+    0,    4,    5,    6,    0,    7,    8,    9,   10,    0,
+    0,    0,    2,    3,    0,    0,    0,    0,    4,    5,
+    6,    0,    7,    8,    9,   10,    2,    3,    0,   96,
+    0,   96,    4,    5,    6,    0,    7,    8,    9,   10,
+    0,    0,    0,    0,    0,    0,    2,    3,    0,    0,
+    0,    0,    4,    5,    6,    0,    7,    8,    9,   10,
+    0,    0,    0,    0,    0,   96,   96,    0,    0,    0,
+   96,   96,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-  107,
+   96,    0,    0,   96,   96,   96,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,   96,
 };
 }
 static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
 yycheck = new short[] {                         41,
-   40,   41,   40,   40,   59,   45,    8,   40,   60,   61,
-   62,  123,   58,   41,  125,   40,   60,   61,   62,   11,
-   41,  125,   41,    2,   40,   41,  123,  260,  261,    8,
-   40,   44,  123,   40,   41,   45,   41,   45,   41,  264,
-  123,   41,   41,   43,   44,   45,   41,   44,   43,   44,
-   45,   41,  260,   43,   44,   45,  131,  132,   42,  275,
-   60,   61,   62,   47,  125,   60,   61,   62,  125,  144,
-   60,   61,   62,   43,   40,   45,   68,   41,   63,   64,
-   41,  263,   65,   66,   63,   64,   65,   66,  264,   81,
-   92,   41,  123,  123,  123,   41,   98,  123,  264,   91,
-  123,  123,  123,   41,  123,  269,   74,  123,  100,  101,
-  102,  103,  269,   92,  273,  273,  123,  192,  123,   98,
-  123,  113,  114,  115,  116,  273,  273,  273,  273,  273,
-  273,  125,  273,  125,  273,  273,  273,  273,  106,  125,
-  267,   40,  110,  111,  256,  268,  138,  275,   44,  260,
-  261,   44,  264,  265,   44,   44,  260,  261,  270,  271,
-  272,    0,  274,  275,  276,  277,  134,  264,  265,  260,
-  261,   44,  174,  270,  271,  272,   44,  274,  275,  276,
-  277,  264,  265,   44,  125,   44,   44,  270,  271,  272,
-   29,  274,  275,  276,  277,  174,   44,   41,  125,  260,
-  261,  193,   -1,  260,  261,  257,  258,  259,   -1,  264,
-  256,   -1,   51,  257,  258,  259,  195,  125,   -1,   -1,
-  260,  261,  264,  265,  264,   -1,  264,  264,  270,  271,
-  272,  264,  274,  275,  276,  277,  264,  265,  263,  260,
-  261,  125,  270,  271,  272,   -1,  274,  275,  276,  277,
-  260,  261,  260,  261,  264,  125,  264,  257,  258,  259,
-   99,   -1,  257,  258,  259,   -1,   -1,  257,  258,  259,
-  264,  265,  125,  112,  260,  261,  270,  271,  272,  118,
-  274,  275,  276,  277,   -1,  124,   -1,  126,  127,  128,
-  125,   -1,  131,  132,   -1,   -1,   -1,   -1,  137,   -1,
-  139,  140,  141,   -1,  125,  144,   -1,   -1,   -1,  148,
-   -1,   -1,   -1,   -1,   -1,  256,   -1,   -1,  125,   -1,
-   -1,   -1,  161,  264,  265,   -1,   -1,   -1,   -1,  270,
-  271,  272,  125,  274,  275,  276,  277,  264,  265,   -1,
-   -1,   -1,   -1,  270,  271,  272,  273,  274,  275,  276,
-  277,  125,   -1,  192,   -1,   -1,  264,  265,  197,   -1,
-   -1,   -1,  270,  271,  272,  273,  274,  275,  276,  277,
-  125,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-  264,  265,   -1,   -1,  125,   -1,  270,  271,  272,  273,
-  274,  275,  276,  277,  264,  265,   -1,   -1,  125,   -1,
+   40,   40,   40,   40,   59,   45,   58,  125,   40,    2,
+   28,  123,  123,   41,   41,    8,   40,   41,   41,   41,
+   11,   40,   41,  264,   41,   41,   41,   41,  256,  260,
+   40,   41,   40,   44,  123,   45,   42,   45,  125,  267,
+  268,   47,   45,  125,   43,  275,   45,   41,   44,   43,
+   44,   45,   41,  256,   43,   44,   45,   41,  125,   43,
+   44,   45,   43,  125,   45,   41,   60,   61,   62,   44,
+   44,   60,   61,   62,   44,   44,   60,   61,   62,   60,
+   61,   62,   44,   44,   44,   44,   44,   44,   44,   44,
+   41,  109,   85,  260,  261,   86,  123,   43,   44,  123,
+  123,  123,   74,   75,  123,  263,  123,  264,   99,   72,
+   73,   41,   41,   41,  123,  264,  264,  265,  123,  123,
+  113,  112,  270,  271,  272,  123,  274,  275,  276,  277,
+  269,  123,  123,  124,  125,  126,  154,  155,  123,  269,
+  268,  273,  260,  261,  256,  136,  137,  138,  139,  260,
+  261,  273,  264,  265,   92,   40,  273,  148,  270,  271,
+  272,  275,  274,  275,  276,  277,  273,  256,  273,  273,
+  161,  123,  273,  260,  261,  264,  265,  273,  260,  261,
+  273,  270,  271,  272,   -1,  274,  275,  276,  277,  123,
+  273,  129,  273,  260,  261,  133,  134,  273,  260,  261,
+  273,   -1,   -1,   -1,  256,   -1,   -1,   -1,  125,  264,
+   -1,   -1,  205,  204,   -1,   -1,  256,   -1,   -1,  157,
+  260,  261,  264,  265,  264,  264,  264,  264,  270,  271,
+  272,  263,  274,  275,  276,  277,  264,  265,  260,  261,
+  256,  256,  270,  271,  272,  256,  274,  275,  276,  277,
+  260,  261,  260,  261,  264,   -1,  264,  260,  261,  125,
+  256,  264,  256,  257,  258,  259,   -1,  256,  257,  258,
+  259,   -1,  256,  257,  258,  259,  257,  258,  259,    0,
+   -1,  256,  256,   -1,   -1,   -1,  256,  256,   -1,   -1,
+   -1,   -1,   -1,   -1,  256,  256,  256,  256,  256,  256,
+  256,  256,   -1,   -1,   -1,  125,   -1,   28,   -1,   -1,
+   31,   -1,  264,  265,   -1,   94,   -1,   -1,  270,  271,
+  272,  125,  274,  275,  276,  277,   -1,   -1,   -1,   -1,
+  264,  265,   -1,   -1,   -1,   56,  270,  271,  272,  256,
+  274,  275,  276,  277,  125,   -1,   -1,  264,  265,  128,
+   -1,   -1,   -1,  270,  271,  272,   -1,  274,  275,  276,
+  277,  125,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,  153,  125,   -1,  156,   -1,  158,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,  109,  125,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,  264,  265,
+  179,  122,   -1,  125,  270,  271,  272,  273,  274,  275,
+  276,  277,   -1,   -1,  135,   -1,   -1,  125,   -1,   -1,
+   -1,   -1,  143,   -1,   -1,   -1,  147,   -1,  149,  150,
+  151,  125,   -1,  154,  155,   -1,   -1,   -1,   -1,  160,
+   -1,  162,  163,  164,  264,  265,  125,   -1,   -1,  170,
   270,  271,  272,  273,  274,  275,  276,  277,   -1,   -1,
-   -1,  264,  265,   -1,   -1,   -1,   -1,  270,  271,  272,
-   -1,  274,  275,  276,  277,   -1,   -1,   -1,   -1,  264,
-  265,   -1,   -1,   -1,   -1,  270,  271,  272,   -1,  274,
-  275,  276,  277,  264,  265,   -1,   -1,   -1,   -1,  270,
-  271,  272,   -1,  274,  275,  276,  277,  264,  265,   -1,
-   -1,   -1,   -1,  270,  271,  272,   -1,  274,  275,  276,
-  277,  264,  265,   -1,   -1,   -1,   -1,  270,  271,  272,
-   -1,  274,  275,  276,  277,   -1,   -1,   -1,   -1,   -1,
-  264,  265,   -1,   -1,   -1,   -1,  270,  271,  272,   76,
-  274,  275,  276,  277,   -1,   -1,   -1,   -1,   -1,  264,
-  265,   -1,   -1,   -1,   -1,  270,  271,  272,   -1,  274,
-  275,  276,  277,  264,  265,   -1,   -1,   -1,  105,  270,
-  271,  272,   -1,  274,  275,  276,  277,  264,  265,   -1,
-   -1,   -1,   -1,  270,  271,  272,   -1,  274,  275,  276,
-  277,   -1,   -1,  130,  264,  265,  133,   -1,  135,   -1,
-  270,  271,  272,   -1,  274,  275,  276,  277,   -1,   -1,
+  264,  265,  183,  125,   -1,   -1,  270,  271,  272,  273,
+  274,  275,  276,  277,   -1,   -1,   -1,  125,   -1,   -1,
+   -1,   -1,   -1,  264,  265,   -1,  207,   -1,   -1,  270,
+  271,  272,  273,  274,  275,  276,  277,  125,   -1,   -1,
+  264,  265,   -1,   -1,   -1,   -1,  270,  271,  272,   -1,
+  274,  275,  276,  277,  264,  265,   -1,   -1,   -1,   -1,
+  270,  271,  272,   -1,  274,  275,  276,  277,  264,  265,
+   -1,   -1,   -1,   -1,  270,  271,  272,   -1,  274,  275,
+  276,  277,  264,  265,   -1,   -1,   -1,   -1,  270,  271,
+  272,   -1,  274,  275,  276,  277,  264,  265,   -1,   -1,
+   -1,   -1,  270,  271,  272,   -1,  274,  275,  276,  277,
+  264,  265,   -1,   -1,   -1,   -1,  270,  271,  272,   52,
+  274,  275,  276,  277,   -1,  264,  265,   -1,   -1,   -1,
+   -1,  270,  271,  272,   -1,  274,  275,  276,  277,   -1,
+   -1,   -1,  264,  265,   -1,   -1,   -1,   -1,  270,  271,
+  272,   -1,  274,  275,  276,  277,  264,  265,   -1,   92,
+   -1,   94,  270,  271,  272,   -1,  274,  275,  276,  277,
+   -1,   -1,   -1,   -1,   -1,   -1,  264,  265,   -1,   -1,
+   -1,   -1,  270,  271,  272,   -1,  274,  275,  276,  277,
+   -1,   -1,   -1,   -1,   -1,  128,  129,   -1,   -1,   -1,
+  133,  134,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-  157,
+  153,   -1,   -1,  156,  157,  158,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,  179,
 };
 }
 final static short YYFINAL=12;
@@ -455,12 +477,15 @@ final static String yyrule[] = {
 "error_bloque : error bloque_sentencias '}' $$1",
 "error_bloque : '{' bloque_sentencias error",
 "sentencia : declaracion ','",
-"$$2 :",
-"sentencia : ejecucion ',' $$2",
+"sentencia : ejecucion ','",
+"sentencia : error_sentencia_d",
+"error_sentencia_d : declaracion error",
+"error_sentencia_d : ejecucion error",
 "declaracion : tipo lista_de_variables",
 "declaracion : clousure",
 "lista_de_variables : lista_de_variables ';' ID",
-"lista_de_variables : ID",
+"$$2 :",
+"lista_de_variables : ID $$2",
 "lista_de_variables : error_lista_de_variables",
 "error_lista_de_variables : lista_de_variables ID",
 "clousure : VOID ID '(' ')' '{' bloque_sentencias '}' RETURN",
@@ -513,21 +538,24 @@ final static String yyrule[] = {
 "error_accion : cte error DO bloque",
 "cte : CTE_D",
 "cte : CTE_USLINTEGER",
+"if_condicion : IF '(' condicion ')'",
+"if_condicion : IF error condicion ')'",
+"if_condicion : IF '(' condicion error",
+"if_condicion : IF condicion error",
+"seleccion : if_condicion bloque END_IF",
+"seleccion : if_condicion bloque ELSE bloque END_IF",
+"seleccion : if_condicion error",
 "$$4 :",
+"seleccion : if_condicion bloque error $$4",
 "$$5 :",
 "$$6 :",
 "$$7 :",
-"$$8 :",
-"seleccion : IF $$4 '(' condicion ')' $$5 bloque $$6 ELSE bloque $$7 END_IF $$8",
-"$$9 :",
-"$$10 :",
-"$$11 :",
-"asignacion : ID $$9 ASIGNACION $$10 expresion $$11",
+"asignacion : ID $$5 ASIGNACION $$6 expresion $$7",
 "asignacion : error_asignacion",
 "error_asignacion : ID expresion",
 "error_asignacion : ASIGNACION expresion",
-"$$12 :",
-"expresion : expresion '+' termino $$12",
+"$$8 :",
+"expresion : expresion '+' termino $$8",
 "expresion : expresion '-' termino",
 "expresion : termino",
 "termino : termino '*' factor",
@@ -535,12 +563,10 @@ final static String yyrule[] = {
 "termino : factor",
 "factor : cte",
 "factor : factor_negado",
-"$$13 :",
-"factor : ID $$13",
+"$$9 :",
+"factor : ID $$9",
 "factor_negado : '-' CTE_D",
-"$$14 :",
-"$$15 :",
-"condicion : $$14 expresion $$15 comparador expresion",
+"condicion : expresion comparador expresion",
 "comparador : '<'",
 "comparador : '>'",
 "comparador : '='",
@@ -549,7 +575,7 @@ final static String yyrule[] = {
 "comparador : S_DISTINTO",
 };
 
-//#line 236 "gramaticaULTIMA.y"
+//#line 258 "gramaticaULTIMA.Y"
 
 
 
@@ -576,7 +602,7 @@ public void yyerror(String s){
 }
 
 
-//#line 508 "Parser.java"
+//#line 534 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -731,316 +757,327 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 2:
-//#line 36 "gramaticaULTIMA.y"
+//#line 36 "gramaticaULTIMA.Y"
 {System.out.println("se cargo una sentencia");}
 break;
 case 7:
-//#line 48 "gramaticaULTIMA.y"
+//#line 48 "gramaticaULTIMA.Y"
 {lexico.getLexico().agregarError("en la linea "+" (aca va el numero de la linea)"+" Error sintactico: falta '{' ");}
 break;
 case 8:
-//#line 49 "gramaticaULTIMA.y"
+//#line 49 "gramaticaULTIMA.Y"
 {/*  | error bloque_sentencias error  {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+" Error sintactico: falta '{'y '}' ");}*/}
 break;
 case 9:
-//#line 50 "gramaticaULTIMA.y"
+//#line 50 "gramaticaULTIMA.Y"
 {lexico.getLexico().agregarError( "en la linea "+"(aca va el numero de la linea)"+" Error sintactico: falta '}' ");}
 break;
 case 10:
-//#line 55 "gramaticaULTIMA.y"
-{System.out.println("se cargo una declaracion");}
+//#line 55 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se cargo una lista de variables");}
 break;
 case 11:
-//#line 56 "gramaticaULTIMA.y"
+//#line 56 "gramaticaULTIMA.Y"
 {}
 break;
-case 12:
-//#line 58 "gramaticaULTIMA.y"
-{/*  | error_sentencia_d 
-            ;
-
-
-
-
-error_sentencia_d : declaracion error { lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"Error sintactico: falta la coma");}
-		   | ejecucion error {	lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"Error sintactico: falta la coma");}
-                */}
+case 13:
+//#line 64 "gramaticaULTIMA.Y"
+{ lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"Error sintactico: falta la coma");}
 break;
-case 16:
-//#line 78 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego el identificador"+ID);}
+case 14:
+//#line 65 "gramaticaULTIMA.Y"
+{	lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"Error sintactico: falta la coma");}
+break;
+case 15:
+//#line 72 "gramaticaULTIMA.Y"
+{System.out.println("llegue a esta puta declaracion");}
 break;
 case 18:
-//#line 82 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta el ; que separa las variables");}
+//#line 78 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego el identificador"+ID);}
 break;
 case 19:
-//#line 87 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure VOID");}
-break;
-case 20:
-//#line 88 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure FUN");}
+//#line 78 "gramaticaULTIMA.Y"
+{System.out.println("lei un ID");}
 break;
 case 21:
-//#line 89 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure FUN");}
+//#line 82 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta el ; que separa las variables");}
+break;
+case 22:
+//#line 87 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure VOID");}
 break;
 case 23:
-//#line 94 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure void"+ " (aca va el numero de la linea)"+"falta el primer parentesis");}
+//#line 88 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure FUN");}
 break;
 case 24:
-//#line 95 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta el segundo parentesis");}
-break;
-case 25:
-//#line 96 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta la primer llave");}
+//#line 89 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure FUN");}
 break;
 case 26:
-//#line 97 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure void"+ "(aca va el numero de la linea)"+"falta la segunda llave");}
+//#line 94 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure void"+ " (aca va el numero de la linea)"+"falta el primer parentesis");}
 break;
 case 27:
-//#line 98 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"faltan ambas llaves");}
+//#line 95 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta el segundo parentesis");}
 break;
 case 28:
-//#line 99 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta ambos parentesis");}
+//#line 96 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta la primer llave");}
 break;
 case 29:
-//#line 100 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta return");}
+//#line 97 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure void"+ "(aca va el numero de la linea)"+"falta la segunda llave");}
 break;
 case 30:
-//#line 101 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta identificador");}
+//#line 98 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"faltan ambas llaves");}
 break;
 case 31:
-//#line 102 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure "+  "(aca va el numero de la linea)"+"falta tipofuncion");}
+//#line 99 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta ambos parentesis");}
 break;
 case 32:
-//#line 103 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure fun"+ " (aca va el numero de la linea)"+"falta el primer parentesis");}
+//#line 100 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta return");}
 break;
 case 33:
-//#line 104 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta el segundo parentesis");}
+//#line 101 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta identificador");}
 break;
 case 34:
-//#line 105 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta la primer llave");}
+//#line 102 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure "+  "(aca va el numero de la linea)"+"falta tipofuncion");}
 break;
 case 35:
-//#line 106 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure fun"+ "(aca va el numero de la linea)"+"falta la segunda llave");}
+//#line 103 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure fun"+ " (aca va el numero de la linea)"+"falta el primer parentesis");}
 break;
 case 36:
-//#line 107 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"faltan ambas llaves");}
+//#line 104 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta el segundo parentesis");}
 break;
 case 37:
-//#line 108 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta ambos parentesis");}
+//#line 105 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta la primer llave");}
 break;
 case 38:
-//#line 109 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta return");}
+//#line 106 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure fun"+ "(aca va el numero de la linea)"+"falta la segunda llave");}
 break;
 case 39:
-//#line 110 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta identificador");}
+//#line 107 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"faltan ambas llaves");}
 break;
 case 40:
-//#line 111 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"faltan las sentencias del return");}
+//#line 108 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta ambos parentesis");}
 break;
 case 41:
-//#line 114 "gramaticaULTIMA.y"
+//#line 109 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta return");}
+break;
+case 42:
+//#line 110 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta identificador");}
+break;
+case 43:
+//#line 111 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"faltan las sentencias del return");}
+break;
+case 44:
+//#line 114 "gramaticaULTIMA.Y"
 {/*
 tipofuncion : FUN 
             | VOID 
             ;
 */}
 break;
-case 48:
-//#line 132 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se hizo un print");}
+case 45:
+//#line 120 "gramaticaULTIMA.Y"
+{ System.out.println("lei un uslinteger ");}
 break;
-case 50:
-//#line 138 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta el '(' ");}
+case 46:
+//#line 121 "gramaticaULTIMA.Y"
+{ System.out.println("lei un double" );}
 break;
 case 51:
-//#line 139 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta el ')'");}
-break;
-case 52:
-//#line 140 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta los '(' ')' ");}
+//#line 132 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se hizo un print");}
 break;
 case 53:
-//#line 144 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se creo un case");}
+//#line 138 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta el '(' ");}
+break;
+case 54:
+//#line 139 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta el ')'");}
 break;
 case 55:
-//#line 148 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("en la linea "+" (aca va el numero de la linea)"+"falta algun parentesis o llave");}
+//#line 140 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta los '(' ')' ");}
 break;
 case 56:
-//#line 149 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+" falta algun parentesis o llave");}
-break;
-case 57:
-//#line 150 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta algun parentesis o llave ");}
+//#line 144 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se creo un case");}
 break;
 case 58:
-//#line 151 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("en la linea "+"(aca va el numero de la linea)"+"falta algun parentesis o llave");}
+//#line 148 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("en la linea "+" (aca va el numero de la linea)"+"falta algun parentesis o llave");}
 break;
 case 59:
-//#line 152 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta algun parentesis o llave ");}
+//#line 149 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+" falta algun parentesis o llave");}
 break;
 case 60:
-//#line 153 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta algun parentesis o llave");}
+//#line 150 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta algun parentesis o llave ");}
 break;
 case 61:
-//#line 154 "gramaticaULTIMA.y"
+//#line 151 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("en la linea "+"(aca va el numero de la linea)"+"falta algun parentesis o llave");}
+break;
+case 62:
+//#line 152 "gramaticaULTIMA.Y"
 {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta algun parentesis o llave ");}
 break;
 case 63:
-//#line 158 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una accion");}
+//#line 153 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta algun parentesis o llave");}
+break;
+case 64:
+//#line 154 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta algun parentesis o llave ");}
 break;
 case 66:
-//#line 166 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ':' ");}
-break;
-case 67:
-//#line 174 "gramaticaULTIMA.y"
-{System.out.println("leida DOUBLE");}
-break;
-case 68:
-//#line 175 "gramaticaULTIMA.y"
-{System.out.println("Leida CTE");}
+//#line 158 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una accion");}
 break;
 case 69:
-//#line 179 "gramaticaULTIMA.y"
-{System.out.println("cargue un if");}
+//#line 166 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ':' ");}
 break;
 case 70:
-//#line 179 "gramaticaULTIMA.y"
-{System.out.println("cargue una condicion");}
+//#line 174 "gramaticaULTIMA.Y"
+{System.out.println("leida DOUBLE");}
 break;
 case 71:
-//#line 179 "gramaticaULTIMA.y"
-{System.out.println("cargue un BLOQUE1");}
-break;
-case 72:
-//#line 179 "gramaticaULTIMA.y"
-{System.out.println("cargue un BLOQUE ELSE");}
+//#line 175 "gramaticaULTIMA.Y"
+{System.out.println("Leida CTE");}
 break;
 case 73:
-//#line 179 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una condicion IF");}
+//#line 181 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el '(' de la condicion ");}
 break;
 case 74:
-//#line 180 "gramaticaULTIMA.y"
-{/*	  | error_seleccion
+//#line 182 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ')' de la condicion ");}
+break;
+case 75:
+//#line 183 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"faltan los parentesis de la condicion");}
+break;
+case 76:
+//#line 186 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una condicion IF");}
+break;
+case 77:
+//#line 187 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una condicion IF con ELSE");}
+break;
+case 78:
+//#line 188 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"faltan el bloque de la condicion");}
+break;
+case 79:
+//#line 189 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"faltan end_if");}
+break;
+case 80:
+//#line 197 "gramaticaULTIMA.Y"
+{/* 
+seleccion : IF {System.out.println("cargue un if");}'(' condicion ')'{System.out.println("cargue una condicion");} bloque {System.out.println("cargue un BLOQUE1");} ELSE bloque {System.out.println("cargue un BLOQUE ELSE");}END_IF {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una condicion IF");}
+         | IF {System.out.println("cargue un if");}'(' condicion ')'{System.out.println("cargue una condicion");} bloque 
+	  | error_seleccion
 	   ;
 
-{/*
+
 error_seleccion : 
-                 IF '('condicion')' {System.out.println("LOGRE ENTRAR ACA PERO PUTO");} error_bloque ELSE bloque END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el BLOQUE de la condicion ");}
+                
                  
                 IF  condicion ')' bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el '(' de la condicion ");}
 		| IF '(' condicion   bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ')' de la condicion ");}
 		| IF  condicion  bloque_sentencias ELSE bloque_sentencias END_IF    {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"faltan los parentesis de la condicion");}
-             */;}
-break;
-case 75:
-//#line 192 "gramaticaULTIMA.y"
-{System.out.println("lei id");}
-break;
-case 76:
-//#line 192 "gramaticaULTIMA.y"
-{System.out.println("lei asig");}
-break;
-case 77:
-//#line 192 "gramaticaULTIMA.y"
-{System.out.println("lei exp");}
-break;
-case 78:
-//#line 192 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una asignacion");System.out.println("realice una asignacion");}
-break;
-case 80:
-//#line 197 "gramaticaULTIMA.y"
-{ System.out.println("Error"); lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el := de la asignacion ");}
+        */;}
 break;
 case 81:
-//#line 198 "gramaticaULTIMA.y"
-{ System.out.println("Error"); lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ID de la asignacion ");}
+//#line 214 "gramaticaULTIMA.Y"
+{System.out.println("lei id");}
 break;
 case 82:
-//#line 204 "gramaticaULTIMA.y"
-{System.out.println("se hizo una suma ");}
+//#line 214 "gramaticaULTIMA.Y"
+{System.out.println("lei asig");}
 break;
 case 83:
-//#line 204 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una suma");}
+//#line 214 "gramaticaULTIMA.Y"
+{System.out.println("lei exp");}
 break;
 case 84:
-//#line 205 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una resta");}
-break;
-case 85:
-//#line 206 "gramaticaULTIMA.y"
-{System.out.println("TERMINO a EXPR");}
+//#line 214 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una asignacion");System.out.println("realice una asignacion");}
 break;
 case 86:
-//#line 209 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una multiplicacion");}
+//#line 219 "gramaticaULTIMA.Y"
+{ System.out.println("Error"); lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el := de la asignacion ");}
 break;
 case 87:
-//#line 210 "gramaticaULTIMA.y"
-{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una division");}
+//#line 220 "gramaticaULTIMA.Y"
+{ System.out.println("Error"); lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ID de la asignacion ");}
 break;
 case 88:
-//#line 211 "gramaticaULTIMA.y"
-{ System.out.println("FACTOR a TERMINO"); }
+//#line 226 "gramaticaULTIMA.Y"
+{System.out.println("se hizo una suma ");}
 break;
 case 89:
-//#line 214 "gramaticaULTIMA.y"
-{ System.out.println("CTE a FACTOR"); }
+//#line 226 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una suma");}
+break;
+case 90:
+//#line 227 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una resta");}
 break;
 case 91:
-//#line 216 "gramaticaULTIMA.y"
-{System.out.println("cargue un identificador");}
+//#line 228 "gramaticaULTIMA.Y"
+{System.out.println("TERMINO a EXPR");}
 break;
 case 92:
-//#line 217 "gramaticaULTIMA.y"
-{/*| error { System.out.println("Error"); lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el token ");}*/}
+//#line 231 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una multiplicacion");}
+break;
+case 93:
+//#line 232 "gramaticaULTIMA.Y"
+{lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una division");}
 break;
 case 94:
-//#line 224 "gramaticaULTIMA.y"
-{System.out.println("llegue aca pero no lee exp");}
+//#line 233 "gramaticaULTIMA.Y"
+{ System.out.println("FACTOR a TERMINO"); }
 break;
 case 95:
-//#line 224 "gramaticaULTIMA.y"
-{System.out.println("encontre un puta expresion");}
+//#line 236 "gramaticaULTIMA.Y"
+{ System.out.println("CTE a FACTOR"); }
 break;
 case 97:
-//#line 227 "gramaticaULTIMA.y"
-{System.out.println("cargue un menor");}
+//#line 238 "gramaticaULTIMA.Y"
+{System.out.println("cargue un identificador");}
 break;
-//#line 967 "Parser.java"
+case 98:
+//#line 239 "gramaticaULTIMA.Y"
+{/*| error { System.out.println("Error"); lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el token ");}*/}
+break;
+//#line 1004 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

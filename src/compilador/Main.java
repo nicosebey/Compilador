@@ -23,7 +23,9 @@ public class Main {
     private static BufferedReader codigo;
     
     private static String direccion;
-
+    public Main(String direccion){
+        this.direccion = direccion;
+    }
     private static StringBuilder getCodigo(BufferedReader ubicacion){
         StringBuilder buffer = new StringBuilder();
         try{
@@ -45,11 +47,11 @@ public class Main {
     }
 
     
-      public static void main (String [] args) {
+      public static void mainr () {
        
          //-------------------------------carga del codigo fuente en un StringBuilder ------------------------------------------------// 
           
-        String direccion = new String("C:\\Users\\nicol\\Desktop\\aa.txt");
+        //String direccion = args[0];//new String("C:\\Users\\nicol\\Desktop\\aa.txt");
         InputStream is = new ByteArrayInputStream(direccion.getBytes());
         
 
@@ -82,6 +84,8 @@ public class Main {
         controlador.mostrarErrores();*/
         
         }
+
+    
       public void setDireccion (String direccion){
           this.direccion = direccion;
       }

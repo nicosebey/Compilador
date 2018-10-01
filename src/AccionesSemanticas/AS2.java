@@ -18,9 +18,10 @@ public class AS2 extends AccSemantica{
     public int ejecutar(char c, ArchController ac) {
         ac.inicBuffer(c);
         
-        ac.creaTokenSingular(c);
+        ac.creaTokenSingular(c,ac.getFuente().getLinea());
         ac.token().setTipo(c);
         ac.añadirTokenTS(ac.getBuffer(),"unarios");
+        ac.token().setLinea(ac.getFuente().getLinea());
         /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
          //----------------------------------------/*/

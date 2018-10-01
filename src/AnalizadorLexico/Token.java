@@ -12,7 +12,7 @@ package AnalizadorLexico;
 public class Token {
    private String id;
    private int tipo;
-   
+   private int linea;
    
    
    
@@ -22,6 +22,7 @@ public class Token {
    }
    public Token (){
        this.id= null;
+       this.linea = 1;
    }
    
    public String getId(){
@@ -40,7 +41,13 @@ public class Token {
     public int getTipo(){
         return this.tipo;
     }
-   
+
+    public void setLinea(int linea) {
+        this.linea = linea;
+    }
+   public int getLinea(){
+       return linea;
+   }
     
    
 }

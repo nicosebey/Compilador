@@ -68,7 +68,7 @@ public class ArchController {
     
     //posicion dentro del buffer
         //private int pos;
-    
+        
     int [][] matrizTE ={
         //d  _  l  +  *  /  -  =  :  (  )  {  }  ;   ,  !  <  > .  u  l  '  /n D  ´ ´ 
         //0  1  2  3  4  5  6  7  8  9 10  11 12 13 14 15 16 17 18 19 20 21 22 23 24
@@ -106,8 +106,8 @@ public class ArchController {
         { as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7, as7,as7 },//8
         { as3,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11, as3,as11},//9
         { as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as8, as9, as9,as9 },//10
-        { as3,as10, as3,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10, as9, as9,as10,as10, as3,as10},//11
-        { as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as8, as9, as9,as9 },//12
+        { as3,as10, as3,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10,as10, as3, as3,as10,as10, as3,as10},//11
+        { as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9, as9,as9 },//12
         { as3,err5,err5, as3,err5,err5, as3,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5,err5},//13
         { as3,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11,as11},//14
         {as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,as13,err6,as13,as13,as13},//15
@@ -210,7 +210,7 @@ public class ArchController {
         char c = codigoF.getChar();
          System.out.println(c);
         int simbolo = codigoF.getCol(c);
-       //System.out.println(c);
+       // System.out.println(c);
         System.out.println("matriz["+estado+"]"+"["+simbolo+"]");
         AccSemantica as = matrizAS[estado][simbolo];
          
@@ -319,7 +319,7 @@ public class ArchController {
                     return ID;
                 else{/*
                 if(lexema.charAt(0)==''' && valor.charAt(valor.length()-1)=='\'')*/
-                    //System.out.println("salio aca");
+                   // System.out.println("salio aca");
                     return CADENA;
                 }
             }
@@ -332,7 +332,9 @@ public class ArchController {
         
         
         
-        
+     public Fuente getFuente(){
+         return codigoF;
+     }   
     
     public boolean getComentario(){
         return esComentario;
@@ -391,13 +393,29 @@ public class ArchController {
         ltokens.add(token);
        
     }
+     public void creaToken(String lexema,int linea){
+        Token token = new Token(lexema);
+        token.setTipo(getIdentificador(lexema));
+        token.setLexema(lexema);
+        token.setLinea(linea);
+        ltokens.add(token);
+        
+       
+    }
+    
     public void creaTokenSingular(char c){
         Token token2 = new Token();
          token2.setTipo(getIdentificador(String.valueOf(c)));
         token2.setLexemaSingular(c);
         ltokens.add(token2);
     }
-
+    public void creaTokenSingular(char c,int linea){
+        Token token2 = new Token();
+         token2.setTipo(getIdentificador(String.valueOf(c)));
+        token2.setLexemaSingular(c);
+        token2.setLinea(linea);
+        ltokens.add(token2);
+    }
     public void añadirTokenTS(String buffer,String tipo) {
         tablaS.agregar(buffer,tipo);
         
@@ -434,8 +452,9 @@ public class ArchController {
     public void mostrarTokens(){
         System.out.println(ltokens.size()+"TOKENS ENCONTRADOS");
         for (Token t :ltokens) {
+            System.out.println("En la linea "+t.getLinea()+" se encontro un "+t.getId());
             System.out.println(t.getId());
-            System.out.println(tablaS.getL(t.getId()));
+            
             System.out.println(t.getTipo());
             
             }

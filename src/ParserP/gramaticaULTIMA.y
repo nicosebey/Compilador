@@ -52,10 +52,10 @@ error_bloque : error bloque_sentencias '}' {lexico.getLexico().agregarError("en 
  ;
 
 
-sentencia   : declaracion ','{System.out.println("se cargo una declaracion");}
+sentencia   : declaracion ',' {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se cargo una lista de variables");}
             | ejecucion   ',' {}
            
-          {/*  | error_sentencia_d 
+           | error_sentencia_d 
             ;
 
 
@@ -63,19 +63,19 @@ sentencia   : declaracion ','{System.out.println("se cargo una declaracion");}
 
 error_sentencia_d : declaracion error { lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"Error sintactico: falta la coma");}
 		   | ejecucion error {	lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"Error sintactico: falta la coma");}
-                */}    
+                  
               	;
 
 
 
 
-declaracion  :  tipo lista_de_variables 
-	     | clousure 
+declaracion  :  tipo lista_de_variables {System.out.println("llegue a esta puta declaracion");}
+    	     | clousure 
             ;
 
 
 lista_de_variables : lista_de_variables ';' ID 
-		    | ID  {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego el identificador"+ID);}
+		    | ID  {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego el identificador"+ID);}{System.out.println("lei un ID");}
 		    |error_lista_de_variables 
 	            ;
 
@@ -117,8 +117,8 @@ tipofuncion : FUN
             ;
 */}
 
-tipo :  USLINTEGER
-	| DOUBLE
+tipo :  USLINTEGER { System.out.println("lei un uslinteger ");}
+	| DOUBLE    { System.out.println("lei un double" );}
         ;
 
 
@@ -176,18 +176,40 @@ cte : CTE_D {System.out.println("leida DOUBLE");}
 	;
 
 
-seleccion : IF {System.out.println("cargue un if");}'(' condicion ')'{System.out.println("cargue una condicion");} bloque {System.out.println("cargue un BLOQUE1");}ELSE bloque {System.out.println("cargue un BLOQUE ELSE");}END_IF {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una condicion IF");}
-{/*	  | error_seleccion
+
+if_condicion : IF '(' condicion ')' 
+             | IF error condicion ')' {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el '(' de la condicion ");}
+             | IF '(' condicion error {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ')' de la condicion ");}
+             | IF condicion  error   {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"faltan los parentesis de la condicion");}
+            ;
+
+seleccion : if_condicion bloque END_IF            {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una condicion IF");}
+          | if_condicion bloque ELSE bloque END_IF {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una condicion IF con ELSE");}
+          | if_condicion error                      {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"faltan el bloque de la condicion");}
+          | if_condicion bloque error               {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"faltan end_if");}
+          ;
+
+
+
+
+
+
+{/* 
+seleccion : IF {System.out.println("cargue un if");}'(' condicion ')'{System.out.println("cargue una condicion");} bloque {System.out.println("cargue un BLOQUE1");} ELSE bloque {System.out.println("cargue un BLOQUE ELSE");}END_IF {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una condicion IF");}
+         | IF {System.out.println("cargue un if");}'(' condicion ')'{System.out.println("cargue una condicion");} bloque 
+	  | error_seleccion
 	   ;
 
-{/*
+
 error_seleccion : 
-                 IF '('condicion')' {System.out.println("LOGRE ENTRAR ACA PERO PUTO");} error_bloque ELSE bloque END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el BLOQUE de la condicion ");}
+                
                  
                 IF  condicion ')' bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el '(' de la condicion ");}
 		| IF '(' condicion   bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ')' de la condicion ");}
 		| IF  condicion  bloque_sentencias ELSE bloque_sentencias END_IF    {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"faltan los parentesis de la condicion");}
-             */;}   ;
+        */;}      ;
+
+
 
 asignacion : ID {System.out.println("lei id");} ASIGNACION {System.out.println("lei asig");} expresion{System.out.println("lei exp");} {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego una asignacion");System.out.println("realice una asignacion");}
            | error_asignacion
@@ -221,10 +243,10 @@ factor_negado : '-' CTE_D
               ;
 
 
-condicion :  {System.out.println("llegue aca pero no lee exp");}expresion {System.out.println("encontre un puta expresion");}comparador expresion 
+condicion :  expresion comparador expresion 
            ;
 
-comparador : '<'{System.out.println("cargue un menor");}
+comparador : '<'
 	   |  '>'
 	   |   '=' 
            |  S_MAYOR_IGUAL

@@ -20,7 +20,7 @@ public class AS6 extends AccSemantica{
     public int ejecutar(char c, ArchController ac) {
         if(c == '='){
          ac.setBuffer(ac.getBuffer()+c);
-         ac.creaToken(ac.getBuffer());
+         ac.creaToken(ac.getBuffer(),ac.getFuente().getLinea());
          ac.añadirTokenTS(ac.getBuffer(),"Se Vuelve");
          /*/---------------PRUEBA--------------------//
                                          System.out.println(ac.getBuffer());
@@ -35,7 +35,7 @@ public class AS6 extends AccSemantica{
            
         
             ac.setConcateno(false);
-            ac.creaTokenSingular(ac.getBuffer().charAt(0));
+            ac.creaTokenSingular(ac.getBuffer().charAt(0),ac.getFuente().getLinea());
             ac.añadirTokenTS(ac.getBuffer(),"Dos puntos");
             //ac.añadirTokenLista(ac.token());
             ac.termino();

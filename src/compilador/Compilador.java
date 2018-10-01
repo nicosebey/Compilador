@@ -16,6 +16,9 @@ public class Compilador {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        String direccion = args[0];
+        Main main = new Main(direccion);
+        main.mainr();
     }
     
 }

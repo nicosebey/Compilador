@@ -5,6 +5,8 @@
  */
 package AnalizadorLexico;
 
+import com.sun.jmx.snmp.internal.SnmpTools;
+
 /**
  *
  * @author nicol
@@ -12,7 +14,7 @@ package AnalizadorLexico;
 public class Fuente {
     static final char saltoLinea =    '\n';
     static final char finArch = '$';
-    private int linea;
+    public int linea;
     private char actual;
 
     
@@ -36,6 +38,7 @@ public class Fuente {
     
     
     public int getLinea (){
+      //  System.out.println("estoy devolviendo la linea"+linea);
         return linea;
     }
     
@@ -53,6 +56,9 @@ public class Fuente {
             return 19;
         if (c == 'l')
             return 20;
+        if (39 == (int) c)
+        
+            return 21;
         if (Character.isDigit(c))
             return 0;
         if (Character.isLetter(c))

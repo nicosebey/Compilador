@@ -19,7 +19,7 @@ public class AS5 extends AccSemantica {
     public int ejecutar(char c, ArchController ac) {
         //System.out.println(ac.getBuffer());
         if(ac.esReservada(ac.getBuffer())){//si es reservada agrego token sino no
-            ac.creaToken(ac.getBuffer());
+            ac.creaToken(ac.getBuffer(),ac.getFuente().getLinea());
             ac.termino();
             ac.setConcateno(false);
             ac.añadirTokenTS(ac.getBuffer(),"palReserv");
