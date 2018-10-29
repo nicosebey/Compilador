@@ -28,7 +28,7 @@ public class AS11 extends AccSemantica{
                         
                         //System.out.println(constante+"anibaaaaaaaaaaaaaaaaaal");
                         String constanteR=constante.replace("D","E");
-                        System.out.println(constanteR+"a4aaaaaaa");
+                        //System.out.println(constanteR+"a4aaaaaaa");
 			if (constante.startsWith(".")){
                             constanteR = "0" + constanteR;
                         
@@ -37,9 +37,10 @@ public class AS11 extends AccSemantica{
                             
                         }
                         doble = Double.parseDouble(constanteR);
-                        System.out.println(doble+"anibaaaaaaaaaaaaaaaaal");
+                       // doble = Double.parseDouble(constanteR);
+                        
 			if (((doble>=limite_inf) && (doble <= limite_sup))|| doble==cero) {
-				                        System.out.println(doble+"JORGEEEEEEEEEEEEEEEEEEE");
+				                       
                                  ac.creaToken(String.valueOf(doble),ac.getFuente().getLinea());  //ACA EL TOKEN SIGUE TENIENDO LA D en vez de la E DEL EXPONENTE QUE ESTA BIEN?
                                  ac.token().setTipo(ac.getIdentificador(constanteR));
                                  ac.añadirTokenTS(String.valueOf(doble),"double");

@@ -70,9 +70,10 @@ error_sentencia_d : declaracion error { lexico.getLexico().agregarError( "(aca v
 
 
 declaracion  :  tipo lista_de_variables {System.out.println("llegue a esta puta declaracion");}
-    	     | clousure 
+             | funcion
             ;
 
+funcion : FUN  ID '(' ')' '{' bloque_sentencias clousure RETURN '(' ID ')' '}' {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure FUN");}
 
 lista_de_variables : lista_de_variables ';' ID 
 		    | ID  {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego el identificador"+ID);}{System.out.println("lei un ID");}
@@ -84,29 +85,29 @@ error_lista_de_variables : lista_de_variables  ID {lexico.getLexico().agregarErr
 
 
 
-clousure : VOID ID '(' ')' '{' bloque_sentencias '}' RETURN  {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure VOID");}
-         | FUN  ID '(' ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')' {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure FUN");}
-         | FUN  ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ID ')' {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure FUN");}
+clousure : VOID ID '(' ')' '{' bloque_sentencias '}' {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure VOID");}
+        {/* | FUN  ID '(' ')' '{' bloque_sentencias '}' RETURN '(' bloque_sentencias ')' {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure FUN");}
+         | FUN  ID '(' ')' '{' bloque_sentencias '}' RETURN '(' ID ')' {lexico.getLexico().agregarEstructura( "en la linea "+"(aca va el numero de la linea)"+" se agrego un clousure FUN");} */}
          | error_clousure
           ;
 
 
-error_clousure : VOID ID  ')' '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure void"+ " (aca va el numero de la linea)"+"falta el primer parentesis");}
-               | VOID ID '('  '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta el segundo parentesis");}
-               | VOID ID '(' ')'  bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta la primer llave");}
-               | VOID ID '(' ')' '{' bloque_sentencias  RETURN {lexico.getLexico().agregarError("error en la creacion del clousure void"+ "(aca va el numero de la linea)"+"falta la segunda llave");}
+error_clousure : VOID  ID error ')' '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure void"+ " (aca va el numero de la linea)"+"falta el primer parentesis");}
+               | VOID ID '(' error '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta el segundo parentesis");}
+               | VOID ID '(' ')' error bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta la primer llave");}
+               | VOID ID '(' ')' '{' bloque_sentencias error RETURN {lexico.getLexico().agregarError("error en la creacion del clousure void"+ "(aca va el numero de la linea)"+"falta la segunda llave");}
                | VOID ID '(' ')'  bloque_sentencias  RETURN {lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"faltan ambas llaves");}
                | VOID ID  '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta ambos parentesis");}
-               | VOID ID '(' ')' '{' bloque_sentencias '}' {lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta return");}
-               | VOID  '(' ')' '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta identificador");}
-               | ID '(' ')' '{' bloque_sentencias '}' RETURN  {lexico.getLexico().agregarError("error en la creacion del clousure "+  "(aca va el numero de la linea)"+"falta tipofuncion");}
-               | FUN ID  ')' '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure fun"+ " (aca va el numero de la linea)"+"falta el primer parentesis");}
-               | FUN ID '('  '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta el segundo parentesis");}
-               | FUN ID '(' ')'  bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta la primer llave");}
-               | FUN ID '(' ')' '{' bloque_sentencias  RETURN {lexico.getLexico().agregarError("error en la creacion del clousure fun"+ "(aca va el numero de la linea)"+"falta la segunda llave");}
+               | VOID ID '(' ')' '{' bloque_sentencias '}' error {lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta return");}
+               | VOID error  '(' ')' '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure void"+  "(aca va el numero de la linea)"+"falta identificador");}
+               |  ID '(' ')' '{' bloque_sentencias '}' RETURN  {lexico.getLexico().agregarError("error en la creacion del clousure "+  "(aca va el numero de la linea)"+"falta tipofuncion");}
+               | FUN ID error ')' '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure fun"+ " (aca va el numero de la linea)"+"falta el primer parentesis");}
+               | FUN ID '(' error  '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta el segundo parentesis");}
+               | FUN ID '(' ')' error bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta la primer llave");}
+               | FUN ID '(' ')' '{' bloque_sentencias error RETURN {lexico.getLexico().agregarError("error en la creacion del clousure fun"+ "(aca va el numero de la linea)"+"falta la segunda llave");}
                | FUN ID '(' ')'  bloque_sentencias  RETURN {lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"faltan ambas llaves");}
                | FUN ID  '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta ambos parentesis");}
-               | FUN ID '(' ')' '{' bloque_sentencias '}' {lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta return");}
+               | FUN ID '(' ')' '{' bloque_sentencias '}' error {lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta return");}
                | FUN  '(' ')' '{' bloque_sentencias '}' RETURN {lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"falta identificador");}
                | FUN  ID '(' ')' '{' bloque_sentencias '}' RETURN '('  ')'{lexico.getLexico().agregarError("error en la creacion del clousure fun"+  "(aca va el numero de la linea)"+"faltan las sentencias del return");} 
 ;
@@ -135,8 +136,8 @@ print : PRINT '(' CADENA ')'  {lexico.getLexico().agregarEstructura( "en la line
 
 
 
-error_print : PRINT CADENA ')' {lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta el '(' ");}
-	     | PRINT '(' CADENA {lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta el ')'");} 
+error_print : PRINT error CADENA ')' {lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta el '(' ");}
+	     | PRINT '(' CADENA error {lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta el ')'");} 
 	     | PRINT CADENA {lexico.getLexico().agregarError( "(aca va el numero de la linea)"+"falta los '(' ')' ");}
 	     ;
 
@@ -145,13 +146,13 @@ control : CASE '(' ID ')' '{' lista_acciones '}' {lexico.getLexico().agregarEstr
 	| error_control
 	 ;
 
-error_control : CASE  ID ')' '{' lista_acciones '}' {lexico.getLexico().agregarError("en la linea "+" (aca va el numero de la linea)"+"falta algun parentesis o llave");}
-  	      |	CASE '(' ID  '{' lista_acciones '}' {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+" falta algun parentesis o llave");}
-	      |	CASE '(' ID ')'  lista_acciones '}' {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta algun parentesis o llave ");}
-	      |	CASE '(' ID ')' '{' lista_acciones  {lexico.getLexico().agregarError("en la linea "+"(aca va el numero de la linea)"+"falta algun parentesis o llave");}
-	      |	CASE  ID  '{' lista_acciones '}'    {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta algun parentesis o llave ");}
-	      |	CASE  ID   lista_acciones  	    {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta algun parentesis o llave");}      
-	      |	CASE  '('ID ')'  lista_acciones     {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta algun parentesis o llave ");}
+error_control : CASE  error ID ')' '{' lista_acciones '}' {lexico.getLexico().agregarError("en la linea "+" (aca va el numero de la linea)"+"falta parentesis inicio");}
+  	      |	CASE '(' ID error '{' lista_acciones '}' {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+" falta parentesis de cierre");}
+	      |	CASE '(' ID ')' error lista_acciones '}' {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta llave inicio ");}
+	      |	CASE '(' ID ')' '{' lista_acciones error {lexico.getLexico().agregarError("en la linea "+"(aca va el numero de la linea)"+"falta llave cierre");}
+	      |	CASE  ID error '{' lista_acciones '}'    {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta  parentesis  ");}
+	      |	CASE  ID   lista_acciones  	error    {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta parentesis y llave");}      
+	      |	CASE  '('ID ')'  lista_acciones   error  {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"faltan llaves ");}
 	      ;
 
 lista_acciones : lista_acciones accion 
@@ -204,8 +205,8 @@ seleccion : IF {System.out.println("cargue un if");}'(' condicion ')'{System.out
 error_seleccion : 
                 
                  
-                IF  condicion ')' bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el '(' de la condicion ");}
-		| IF '(' condicion   bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ')' de la condicion ");}
+                IF  error condicion ')' bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el '(' de la condicion ");}
+		| IF '(' condicion  error  bloque_sentencias ELSE bloque_sentencias END_IF {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"falta el ')' de la condicion ");}
 		| IF  condicion  bloque_sentencias ELSE bloque_sentencias END_IF    {lexico.getLexico().agregarError("en la linea "+ "(aca va el numero de la linea)"+"faltan los parentesis de la condicion");}
         */;}      ;
 

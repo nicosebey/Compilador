@@ -23,17 +23,24 @@ public class AS12 extends AccSemantica{
     private long largo =0;
     @Override
     public int ejecutar(char c, ArchController ac) {
-        System.out.println(limite_sup+"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        //System.out.println(limite_sup+"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
         //ac.setConcateno(false);
         //System.out.println(c);
          boolean error = false;
-		try {	
+		//try {	
+                 if(ac.getBuffer().length()>9){
+                          ac.agregarError("el token que quiere crear esta fuera de rango y su valor es "+ac.getBuffer()+c);
+                          ac.termino(); 
+                          ac.setEstadofinal();
+                          return 1;
+        }else{
 			String constante = ac.getBuffer();
                         //System.out.println(ac.getBuffer()+"kjhkjhkjhkjhkjhkjh");
-
+                        
 			 largo = Long.parseLong(constante.substring(0, constante.length()-2));
                         //System.out.println(largo);
 			if (((largo>=limite_inf) && (largo <=limite_sup))) {
+                            
 				 ac.creaToken(String.valueOf(largo)+"_ul" ,ac.getFuente().getLinea());
                                  ac.setBuffer(ac.getBuffer());
                                  ac.token().setTipo(ac.getIdentificador(ac.getBuffer()));
@@ -51,13 +58,15 @@ public class AS12 extends AccSemantica{
                                  ac.setEstadofinal();
                                  return 0;
 			}
-			else
+                        else{
+                                
+                        
 				error = true;
 		}
-		catch (Exception ex) {
+		/*catch (Exception ex) {
 			error = true;
                         Logger.getLogger(ArchController.class.getName()).log(Level.SEVERE, null, ex);
-			}
+			}*/
 		if (error){
                         
 			//ac.addError("Linea: " + a.getCode().getLine() + ": Constante double fuera de rango.");
@@ -73,5 +82,5 @@ public class AS12 extends AccSemantica{
 	return 0;	
     }
  
-    
+    }
 }

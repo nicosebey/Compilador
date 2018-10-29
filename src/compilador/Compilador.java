@@ -16,7 +16,8 @@ public class Compilador {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        String direccion = args[0];
+//        String direccion = args[0];     PARA EL EJECUTABLE DESCOMENTAR ESTO Y COMENTAR LA DE ABAJO
+        String direccion = new String("C:\\Users\\nicol\\Desktop\\aa.txt");
         Main main = new Main(direccion);
         main.mainr();
     }

@@ -202,7 +202,7 @@ public class ArchController {
      buffer = "";
      int prueba = 0;
         
-     while ((codigoF.hasFinished()==false)/*&&(estado != F))*/){ 
+     while ((codigoF.hasFinished()==false)){ 
         
         
         concateno = true;
@@ -211,7 +211,7 @@ public class ArchController {
          System.out.println(c);
         int simbolo = codigoF.getCol(c);
        // System.out.println(c);
-        System.out.println("matriz["+estado+"]"+"["+simbolo+"]");
+       // System.out.println("matriz["+estado+"]"+"["+simbolo+"]");
         AccSemantica as = matrizAS[estado][simbolo];
          
          /*/-----------------PRUEBA----------------
@@ -240,13 +240,21 @@ public class ArchController {
                             }
                     }
                // else return null;//getIdentificador(buffer);
-                }
+                }else{
+                    
+                    //return null;
+                    estado = 0; //Estado inicial.  
+                    repetido = null;
+                    buffer = "";
+                    prueba = 0;
+                    
+                      }
             }
             else{
                 if(concateno){
                     
                     codigoF.siguiente();
-                    System.out.println(codigoF.getChar());
+                   // System.out.println(codigoF.getChar());
                     
                 }
             estado = matrizTE[estado][simbolo];
@@ -324,7 +332,7 @@ public class ArchController {
                 }
             }
         
-         System.out.println(lexema.charAt(0)+"aaaTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTaa");
+         //System.out.println(lexema.charAt(0)+"aaaTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTaa");
          return (int) lexema.charAt(0);//ESTE ES EL CASO DE LOS TOKEN SIMPLES ( { ) } ; ETC
         }
         
@@ -350,7 +358,7 @@ public class ArchController {
     public void recorrerCodFuente(){
         
         while(!codigoF.hasFinished()){
-           // System.out.println("token n1: "+getToken());
+           System.out.println("token n1: "+getToken());
            token = getToken();
          
             
