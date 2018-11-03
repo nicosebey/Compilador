@@ -8,7 +8,6 @@
  * of the yacc/C 'union' directive
  */
 package ParserP;
-
 public class ParserVal
 {
 /**

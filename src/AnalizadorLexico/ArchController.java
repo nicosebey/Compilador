@@ -495,6 +495,14 @@ public class ArchController {
     public void setRepetido(String buffer) {
         repetido = buffer; //To change body of generated methods, choose Tools | Templates.
     }
+    public Token getTokenFromList(String lexema){
+        for(Token t : ltokens)
+            if (t.getId().equals((String)lexema))
+                   return t;
+            
+        return null;
+                    
+    }
 }
     
 

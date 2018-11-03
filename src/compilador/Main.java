@@ -7,6 +7,7 @@ package compilador;
 
 import AnalizadorLexico.ArchController;
 import AnalizadorLexico.Fuente;
+import AnalizadorLexico.TablaSimbolos;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
@@ -15,6 +16,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import ParserP.*;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import javax.sound.midi.Soundbank;
 /**
  *
  * @author nicol
@@ -76,12 +80,19 @@ public class Main {
         controlador.getEstructuras();
         controlador.mostrarErrores();
         controlador.mostrarTokens();
-        //AHORA TENDRIA QUE PEDIR LOS TOKENS Y LOS ERRRORES
+        /*
+        //IMPRIMIR TABLA DE SIMBOLOS//
+          Hashtable<String, String> ts = controlador.getTS().gettSimbol();
+          Enumeration e = ts.keys();
+          String clave;
+          while( e.hasMoreElements() ){
+          clave = (String) e.nextElement();
+          System.out.println( "Clave : " + clave );
+          System.out.println(ts.get(clave));
+          }
         
+        */
         
-        
-       /* controlador.recorrerCodFuente();
-        controlador.mostrarErrores();*/
         
         }
 
