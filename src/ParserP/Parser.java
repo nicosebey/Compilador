@@ -24,7 +24,8 @@ import AnalizadorLexico.TablaSimbolos;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
-//#line 25 "Parser.java"
+import CodigoIntermedio.*;
+//#line 26 "Parser.java"
 
 
 
@@ -491,7 +492,7 @@ final static String yyrule[] = {
 "comparador : S_DISTINTO",
 };
 
-//#line 259 "gramaticaFinal.y"
+//#line 355 "gramaticaFinal.y"
 
 
 
@@ -499,20 +500,26 @@ final static String yyrule[] = {
 
 private ArchController lexico;
 private TablaSimbolos tSimbolos;
+private CtrlTercetos ctrlTercetos;
 public Parser(ArchController lexico)
 {
   this.lexico= lexico;
   this.tSimbolos = lexico.getTS();
+  this.ctrlTercetos = new CtrlTercetos();
 } 
 
 public int yylex(){
     Token token = this.lexico.getToken();
    if(token != null ){ 
     int val =token.getTipo();
-    yyval = new ParserVal(token);
+    yylval = new ParserVal(token);
     return val;
 }
-   else return 0;
+   else{
+        for (Terceto t : ctrlTercetos.getTercetos())
+                t.getNro();
+        return 0;
+        }
 }
 
 public void yyerror(String s){
@@ -520,7 +527,7 @@ public void yyerror(String s){
 }
 
 
-//#line 452 "Parser.java"
+//#line 459 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -675,283 +682,381 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 2:
-//#line 40 "gramaticaFinal.y"
+//#line 41 "gramaticaFinal.y"
 {System.out.println("se cargo una sentencia");}
 break;
 case 7:
-//#line 52 "gramaticaFinal.y"
+//#line 53 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" Error sintactico: falta '{' ");}
 break;
 case 8:
-//#line 53 "gramaticaFinal.y"
+//#line 54 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" Error sintactico: falta '}' ");}
 break;
 case 9:
-//#line 57 "gramaticaFinal.y"
+//#line 58 "gramaticaFinal.y"
 {lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se cargo una lista de variables");}
 break;
 case 10:
-//#line 58 "gramaticaFinal.y"
+//#line 59 "gramaticaFinal.y"
 {}
 break;
 case 12:
-//#line 65 "gramaticaFinal.y"
+//#line 66 "gramaticaFinal.y"
 { lexico.getLexico().agregarError( "en la linea "+lexico.getFuente().getLinea()+"Error sintactico: falta la coma");}
 break;
 case 13:
-//#line 66 "gramaticaFinal.y"
+//#line 67 "gramaticaFinal.y"
 {	lexico.getLexico().agregarError( "en la linea "+lexico.getFuente().getLinea()+"Error sintactico: falta la coma");}
 break;
 case 14:
-//#line 71 "gramaticaFinal.y"
-{ /*  String tipo = ((Token) $1.obj).getId();
-                                                
-                                                for(Token t : (ArrayList<Token>)$2.obj){
-                                                   Token nuevo = lexico.getTokenFromList(t.getId());
-                                                   if(lexico.getTS().fueDeclarada(nuevo.getId())){
-                                                      lexico.getTS().setDeclaracion(nuevo.getId(),tipo);
+//#line 72 "gramaticaFinal.y"
+{   String tipo = ((Token) val_peek(1).obj).getId();
+                                               /* System.out.println("el tipo de las variables es "+tipo);*/
+                                                for(Token t : (ArrayList<Token>)val_peek(0).obj){
+                                                   
+                                                   t.setTipoReal(tipo);
+
+                                                   if(!lexico.getTS().fueDeclarada(t.getId())){
+                                                      lexico.getTS().setDeclaracion(t.getId(),t);
                                                       System.out.println("se agrego el id "+t.getId()+"del tipo "+tipo);
                                                      }
                                                     else
                                                       System.out.println("el id ya existe");
-                                                   }
+                                                   }/*
                                                 System.out.println("imprimo las variables de la tablaaaaaaaaaaaaaaaaaaa");   
-                                                Hashtable<String, String> ts = lexico.getTS().getDeclaradas();
+                                                Hashtable<String, Token> ts = lexico.getTS().getDeclaradas();
                                                 Enumeration e = ts.keys();
                                                 String clave;
                                                 while( e.hasMoreElements() ){
                                                 clave = (String) e.nextElement();
                                                 System.out.println( "Clave : " + clave );
-                                                System.out.println(ts.get(clave)); 
-                                                }
-                                            */}
+                                                System.out.println(ts.get(clave).getId()); 
+                                                }*/
+                                           }
 break;
 case 16:
-//#line 96 "gramaticaFinal.y"
-{/* ArrayList<Token> lista  = (ArrayList<Token>) $1.obj;
-                                                  System.out.println(((Token) $3.obj).getId()+"AASDADASDASDADADADASDADADADADASDASDADASDASDASDASDASD");
-                                                  lista.add((Token)$3.obj);
-                                                  $$ = new ParserVal(lista);   
-                                                */}
+//#line 99 "gramaticaFinal.y"
+{ ArrayList<Token> lista  = (ArrayList<Token>) val_peek(2).obj;
+                                                 /* System.out.println(((Token) $3.obj).getId()+" SE AGREGO A LA LISTA DE VARIABLES");*/
+                                                  lista.add((Token)val_peek(0).obj);
+                                                  yyval = new ParserVal(lista);   
+                                                }
 break;
 case 17:
-//#line 101 "gramaticaFinal.y"
+//#line 104 "gramaticaFinal.y"
 {lexico.getLexico().agregarEstructura( "en la linea "+lexico.getFuente().getLinea() +" se agrego el identificador"+ID);
-                           /*  System.out.println(((Token) $1.obj).getId()+"AASDADASDASDADADADASDADADADADASDASDADASDASDASDASDASD");
+                           /* System.out.println(((Token) $1.obj).getId()+" SE AGREGO A LA LISTA DE VARIABLES ");*/
                             ArrayList<Token> lista = new ArrayList<>();
-                            lista.add((Token)$1.obj);
-                            $$ = new ParserVal(lista);*/
+                            lista.add((Token)val_peek(0).obj);
+                            yyval = new ParserVal(lista);
                             }
 break;
 case 19:
-//#line 110 "gramaticaFinal.y"
+//#line 113 "gramaticaFinal.y"
 {lexico.getLexico().agregarError( " en la linea "+lexico.getFuente().getLinea() +" falta el ; que separa las variables");}
 break;
 case 20:
-//#line 113 "gramaticaFinal.y"
+//#line 116 "gramaticaFinal.y"
 {lexico.getLexico().agregarEstructura( "en la linea "+lexico.getFuente().getLinea()+" se agrego un clousure FUN");}
 break;
 case 21:
-//#line 114 "gramaticaFinal.y"
+//#line 117 "gramaticaFinal.y"
 {lexico.getLexico().agregarEstructura( "en la linea "+lexico.getFuente().getLinea()+" se agrego un FUN");}
 break;
 case 22:
-//#line 115 "gramaticaFinal.y"
+//#line 118 "gramaticaFinal.y"
 {lexico.getLexico().agregarError("error en la creacion del clousure fun"+" en la linea "+lexico.getFuente().getLinea() +" falta alguna llave");}
 break;
 case 23:
-//#line 116 "gramaticaFinal.y"
+//#line 119 "gramaticaFinal.y"
 {lexico.getLexico().agregarError("error en la creacion del clousure fun"+" en la linea "+lexico.getFuente().getLinea() +" falta alguna llave");}
 break;
 case 26:
-//#line 124 "gramaticaFinal.y"
+//#line 127 "gramaticaFinal.y"
 {lexico.getLexico().agregarEstructura( "en la linea "+lexico.getFuente().getLinea()+" se agrego una funcion VOID");}
 break;
 case 27:
-//#line 125 "gramaticaFinal.y"
+//#line 128 "gramaticaFinal.y"
 {lexico.getLexico().agregarError("error en la creacion del clousure void"+" en la linea "+lexico.getFuente().getLinea() +"falta la primer llave");}
 break;
 case 28:
-//#line 126 "gramaticaFinal.y"
+//#line 129 "gramaticaFinal.y"
 {lexico.getLexico().agregarError("error en la creacion del clousure void"+" en la linea " + lexico.getFuente().getLinea() +"falta la segunda llave");}
 break;
 case 29:
-//#line 127 "gramaticaFinal.y"
+//#line 130 "gramaticaFinal.y"
 {lexico.getLexico().agregarError("error en la creacion del clousure void"+" en la linea "+lexico.getFuente().getLinea() +"falta el primer parentesis");}
 break;
 case 30:
-//#line 128 "gramaticaFinal.y"
+//#line 131 "gramaticaFinal.y"
 {lexico.getLexico().agregarError("error en la creacion del clousure void"+" en la linea "+lexico.getFuente().getLinea() +"falta el segundo parentesis");}
 break;
 case 31:
-//#line 129 "gramaticaFinal.y"
+//#line 132 "gramaticaFinal.y"
 {lexico.getLexico().agregarError("error en la creacion del clousure void"+" en la linea "+lexico.getFuente().getLinea() +"falta return");}
 break;
 case 32:
-//#line 135 "gramaticaFinal.y"
+//#line 138 "gramaticaFinal.y"
 { System.out.println(" lei un uslinteger ");}
 break;
 case 33:
-//#line 136 "gramaticaFinal.y"
+//#line 139 "gramaticaFinal.y"
 { yyval = new ParserVal ( new Token("USLINTEGER"));
-                        
                     }
 break;
 case 34:
-//#line 139 "gramaticaFinal.y"
+//#line 141 "gramaticaFinal.y"
 { System.out.println(" lei un double" );}
 break;
 case 35:
-//#line 140 "gramaticaFinal.y"
+//#line 142 "gramaticaFinal.y"
 { yyval = new ParserVal ( new Token("DOUBLE"));}
 break;
 case 40:
-//#line 151 "gramaticaFinal.y"
+//#line 153 "gramaticaFinal.y"
 {lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se hizo un print");}
 break;
 case 42:
-//#line 157 "gramaticaFinal.y"
+//#line 159 "gramaticaFinal.y"
 {lexico.getLexico().agregarError( "en la linea "+lexico.getFuente().getLinea() +" falta el '(' ");}
 break;
 case 43:
-//#line 158 "gramaticaFinal.y"
+//#line 160 "gramaticaFinal.y"
 {lexico.getLexico().agregarError( " en la linea "+lexico.getFuente().getLinea() +" falta el ')'");}
 break;
 case 44:
-//#line 159 "gramaticaFinal.y"
+//#line 161 "gramaticaFinal.y"
 {lexico.getLexico().agregarError( " en la linea "+lexico.getFuente().getLinea() +" falta los '(' ')' ");}
 break;
 case 45:
-//#line 163 "gramaticaFinal.y"
+//#line 165 "gramaticaFinal.y"
 {lexico.getLexico().agregarEstructura( "en la linea "+lexico.getFuente().getLinea() +" se creo un case");}
 break;
 case 47:
-//#line 167 "gramaticaFinal.y"
+//#line 169 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta parentesis inicio");}
 break;
 case 48:
-//#line 168 "gramaticaFinal.y"
+//#line 170 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta parentesis de cierre");}
 break;
 case 49:
-//#line 169 "gramaticaFinal.y"
+//#line 171 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta llave inicio ");}
 break;
 case 50:
-//#line 170 "gramaticaFinal.y"
+//#line 172 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta llave cierre");}
 break;
 case 51:
-//#line 171 "gramaticaFinal.y"
+//#line 173 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta  parentesis  ");}
 break;
 case 52:
-//#line 172 "gramaticaFinal.y"
+//#line 174 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta parentesis y llave");}
 break;
 case 53:
-//#line 173 "gramaticaFinal.y"
+//#line 175 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" faltan llaves ");}
 break;
 case 55:
-//#line 177 "gramaticaFinal.y"
+//#line 179 "gramaticaFinal.y"
 {lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una accion");}
 break;
 case 58:
-//#line 185 "gramaticaFinal.y"
+//#line 187 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta el ':' ");}
 break;
 case 59:
-//#line 193 "gramaticaFinal.y"
-{System.out.println("leida DOUBLE");}
+//#line 195 "gramaticaFinal.y"
+{System.out.println("leida DOUBLE");
+             Token nuevo = (Token) val_peek(0).obj;
+             lexico.getTS().setDeclaracion(nuevo.getId(),nuevo);
+             nuevo.setTipoReal("double");
+             yyval = new ParserVal(nuevo);
+             }
 break;
 case 60:
-//#line 194 "gramaticaFinal.y"
-{System.out.println("Leida CTE");}
+//#line 202 "gramaticaFinal.y"
+{System.out.println("Leida CTE");
+                        Token nuevo = (Token) val_peek(0).obj;
+                        lexico.getTS().setDeclaracion(nuevo.getId(),nuevo);
+                        nuevo.setTipoReal("uslinteger");  
+                        yyval = new ParserVal(nuevo);
+                        }
 break;
 case 62:
-//#line 200 "gramaticaFinal.y"
+//#line 213 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta el '(' de la condicion ");}
 break;
 case 63:
-//#line 201 "gramaticaFinal.y"
+//#line 214 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta el ')' de la condicion ");}
 break;
 case 64:
-//#line 202 "gramaticaFinal.y"
+//#line 215 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" faltan los parentesis de la condicion");}
 break;
 case 65:
-//#line 205 "gramaticaFinal.y"
+//#line 218 "gramaticaFinal.y"
 {lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una condicion IF");}
 break;
 case 66:
-//#line 206 "gramaticaFinal.y"
+//#line 219 "gramaticaFinal.y"
 {lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una condicion IF con ELSE");}
 break;
 case 67:
-//#line 207 "gramaticaFinal.y"
+//#line 220 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" faltan el bloque de la condicion");}
 break;
 case 68:
-//#line 208 "gramaticaFinal.y"
+//#line 221 "gramaticaFinal.y"
 {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" faltan end_if");}
 break;
 case 69:
-//#line 213 "gramaticaFinal.y"
+//#line 226 "gramaticaFinal.y"
 {lexico.getLexico().agregarEstructura( "en la linea "+lexico.getFuente().getLinea()+" se agrego una asignacion");System.out.println("realice una asignacion");}
 break;
 case 70:
-//#line 214 "gramaticaFinal.y"
-{ }
+//#line 227 "gramaticaFinal.y"
+{ 
+                   Token id = (Token) val_peek(3).obj;
+                   Token exp = (Token) val_peek(1).obj;
+                   if( id.getTipoReal().equals(exp.getTipoReal())){ 
+                        
+                      }
+                    else
+                        System.out.println("TIPOS INCOMPATIBLES");
+                    
+                }
 break;
 case 72:
-//#line 219 "gramaticaFinal.y"
+//#line 241 "gramaticaFinal.y"
 { System.out.println("Error"); lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta el := de la asignacion ");}
 break;
 case 73:
-//#line 220 "gramaticaFinal.y"
+//#line 242 "gramaticaFinal.y"
 { System.out.println("Error"); lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta el ID de la asignacion ");}
 break;
 case 74:
-//#line 226 "gramaticaFinal.y"
+//#line 248 "gramaticaFinal.y"
 {System.out.println("se hizo una suma ");}
 break;
 case 75:
-//#line 226 "gramaticaFinal.y"
-{lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una suma");}
+//#line 248 "gramaticaFinal.y"
+{lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una suma");
+                                    Token termino1 = (Token) val_peek(3).obj;
+                                    Token factor = (Token) val_peek(1).obj;
+                                    if(termino1.getTipoReal().equals(factor.getTipoReal())){
+                                    /*ACA CREO EL TERCETO*/
+                                            String simbolo = "+";
+                                            String tipo = termino1.getTipoReal();
+                                            Terceto terceto = new Terceto(simbolo,termino1,factor);
+                                            ctrlTercetos.agregarTerceto(terceto);
+                                            Token resultado = new Token(true,String.valueOf(terceto.getNro()));
+                                            resultado.setTipoReal(factor.getTipoReal());
+                                            System.out.println("estoy imprimiendo el tipo del resultado"+ resultado.getTipoReal());
+                                            yyval = new ParserVal(resultado);
+                                       }
+                                    else
+                                    System.out.println("ERROR, TIPOS INCOMPATIBLES");
+                                    }
 break;
 case 76:
-//#line 227 "gramaticaFinal.y"
-{lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una resta");}
+//#line 265 "gramaticaFinal.y"
+{lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una resta");
+                                        Token termino1 = (Token) val_peek(2).obj;
+                                        Token factor = (Token) val_peek(0).obj;
+                                        if(termino1.getTipoReal().equals(factor.getTipoReal())){
+                                        /*ACA CREO EL TERCETO*/
+                                            String simbolo = "-" ;
+                                            String tipo = termino1.getTipoReal();
+                                            Terceto terceto = new Terceto(simbolo,termino1,factor);
+                                            ctrlTercetos.agregarTerceto(terceto);
+                                            Token resultado = new Token(true,String.valueOf(terceto.getNro()));
+                                            resultado.setTipoReal(factor.getTipoReal());
+                                            yyval = new ParserVal(resultado);
+                                        }
+                                        else
+                                        System.out.println("ERROR, TIPOS INCOMPATIBLES"); 
+                                  yyval= null;    
+                                 }
 break;
 case 77:
-//#line 228 "gramaticaFinal.y"
-{System.out.println("TERMINO a EXPR");}
+//#line 282 "gramaticaFinal.y"
+{System.out.println("TERMINO a EXPR");
+                     yyval = new ParserVal ( (Token) val_peek(0).obj);
+                    }
 break;
 case 78:
-//#line 231 "gramaticaFinal.y"
-{lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una multiplicacion");}
+//#line 287 "gramaticaFinal.y"
+{lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una multiplicacion");
+                               Token termino1 = (Token) val_peek(2).obj;
+                               Token factor = (Token) val_peek(0).obj;
+                               if(termino1.getTipoReal().equals(factor.getTipoReal())){
+                                 /*ACA CREO EL TERCETO*/
+                                            String simbolo = "*";
+                                            String tipo = termino1.getTipoReal();
+                                            Terceto terceto = new Terceto(simbolo,termino1,factor);
+                                            ctrlTercetos.agregarTerceto(terceto);
+                                            Token resultado = new Token(true,String.valueOf(terceto.getNro()));
+                                            resultado.setTipoReal(factor.getTipoReal());
+                                            System.out.println("estoy imprimiendo el tipo del resultado"+ resultado.getTipoReal());
+                                            yyval = new ParserVal(resultado);
+                                }
+                                else
+                                System.out.println("ERROR, TIPOS INCOMPATIBLES");
+                                    
+                                
+                             }
 break;
 case 79:
-//#line 232 "gramaticaFinal.y"
-{lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una division");}
+//#line 306 "gramaticaFinal.y"
+{lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una division");
+                              Token termino1 = (Token) val_peek(2).obj;
+                               Token factor = (Token) val_peek(0).obj;
+                               if(termino1.getTipoReal().equals(factor.getTipoReal())){
+                                 /*ACA CREO EL TERCETO*/
+                                            String simbolo = "/";
+                                            String tipo = termino1.getTipoReal();
+                                            Terceto terceto = new Terceto(simbolo,termino1,factor);
+                                            ctrlTercetos.agregarTerceto(terceto);
+                                            Token resultado = new Token(true,String.valueOf(terceto.getNro()));
+                                            resultado.setTipoReal(factor.getTipoReal());
+                                            yyval = new ParserVal(resultado);
+                                }
+                                else
+                                System.out.println("ERROR, TIPOS INCOMPATIBLES"); 
+                                }
 break;
 case 80:
-//#line 233 "gramaticaFinal.y"
-{ System.out.println("FACTOR a TERMINO"); }
+//#line 322 "gramaticaFinal.y"
+{ System.out.println("FACTOR a TERMINO"); 
+                    yyval =  new ParserVal((Token) val_peek(0).obj);
+                 }
 break;
 case 81:
-//#line 236 "gramaticaFinal.y"
+//#line 327 "gramaticaFinal.y"
 { System.out.println("CTE a FACTOR"); }
 break;
 case 83:
-//#line 238 "gramaticaFinal.y"
-{System.out.println("cargue un identificador");
-               System.out.println("El identificador que tengo en $1 es " + ((String) val_peek(0).obj)  );
+//#line 329 "gramaticaFinal.y"
+{ Token nuevo =(Token) val_peek(0).obj;
+                System.out.println(nuevo.getId()+"ESTE ES EL LEXEMA QUE VOY A BUSCAR EN LA TABLA DE SIMBOLOS");
+                  
+                if(lexico.getTS().fueDeclarada((nuevo.getId())))
+                yyval = new ParserVal(lexico.getTS().getToken(((nuevo.getId()))));
+               else
+                    System.out.println("el id nunca fue declarado");
              }
 break;
-//#line 878 "Parser.java"
+case 85:
+//#line 343 "gramaticaFinal.y"
+{System.out.println("cargue una condicion");}
+break;
+//#line 983 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

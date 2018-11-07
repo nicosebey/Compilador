@@ -5,6 +5,7 @@
  */
 package CodigoIntermedio;
 
+import AnalizadorLexico.Token;
 import java.util.ArrayList;
 
 /**
@@ -14,15 +15,23 @@ import java.util.ArrayList;
 public class Terceto {
     
     private int nroTerceto;
-    private ArrayList<TercetoSimple> terceto;
+    private Token t1;
+    private Token t2;
+    private String operador;
     
     
-    public Terceto(TercetoSimple uno, TercetoSimple dos, TercetoSimple tres, int nroTerceto){
-           terceto = new ArrayList<TercetoSimple>();
-           terceto.add(uno);
-           terceto.add(dos);
-           terceto.add(tres);
+    public Terceto(String uno, Token dos, Token tres){
+           
+           this.operador = uno;
+           this.t1 = dos;
+           this.t2 = tres;
            this.nroTerceto = nroTerceto;
     }
-            
+
+    void setNumero(int i) {
+        this.nroTerceto = i;
+    }
+    public int getNro(){
+        return  nroTerceto;
+    }  
 }

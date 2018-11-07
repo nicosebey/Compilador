@@ -80,8 +80,17 @@ public class Main {
         controlador.getEstructuras();
         controlador.mostrarErrores();
         controlador.mostrarTokens();
-        /*
-        //IMPRIMIR TABLA DE SIMBOLOS//
+        
+        
+        
+       
+       
+       
+       
+       
+       
+       /*
+       //IMPRIMIR TABLA DE SIMBOLOS//
           Hashtable<String, String> ts = controlador.getTS().gettSimbol();
           Enumeration e = ts.keys();
           String clave;

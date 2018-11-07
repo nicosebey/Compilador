@@ -6,6 +6,7 @@ import AnalizadorLexico.TablaSimbolos;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import CodigoIntermedio.*;
 %}
 
 %token S_MAYOR_IGUAL
@@ -42,7 +43,7 @@ bloque : sentencia {System.out.println("se cargo una sentencia");}
        | error_bloque
        ;
 bloque_sentencias  :   sentencia 
-                    |  bloque_sentencias sentencia
+                   |  bloque_sentencias sentencia
                     
                     ;
 
@@ -68,41 +69,43 @@ error_sentencia_d : declaracion error { lexico.getLexico().agregarError( "en la 
               	;
 
 
-    declaracion  :  tipo lista_de_variables { /*  String tipo = ((Token) $1.obj).getId();
-                                                
+    declaracion  :  tipo lista_de_variables {   String tipo = ((Token) $1.obj).getId();
+                                               // System.out.println("el tipo de las variables es "+tipo);
                                                 for(Token t : (ArrayList<Token>)$2.obj){
-                                                   Token nuevo = lexico.getTokenFromList(t.getId());
-                                                   if(lexico.getTS().fueDeclarada(nuevo.getId())){
-                                                      lexico.getTS().setDeclaracion(nuevo.getId(),tipo);
+                                                   
+                                                   t.setTipoReal(tipo);
+
+                                                   if(!lexico.getTS().fueDeclarada(t.getId())){
+                                                      lexico.getTS().setDeclaracion(t.getId(),t);
                                                       System.out.println("se agrego el id "+t.getId()+"del tipo "+tipo);
                                                      }
                                                     else
                                                       System.out.println("el id ya existe");
-                                                   }
+                                                   }/*
                                                 System.out.println("imprimo las variables de la tablaaaaaaaaaaaaaaaaaaa");   
-                                                Hashtable<String, String> ts = lexico.getTS().getDeclaradas();
+                                                Hashtable<String, Token> ts = lexico.getTS().getDeclaradas();
                                                 Enumeration e = ts.keys();
                                                 String clave;
                                                 while( e.hasMoreElements() ){
                                                 clave = (String) e.nextElement();
                                                 System.out.println( "Clave : " + clave );
-                                                System.out.println(ts.get(clave)); 
-                                                }
-                                            */}    
+                                                System.out.println(ts.get(clave).getId()); 
+                                                }*/
+                                           }    
              | funcion
             ;
 
 
-lista_de_variables : lista_de_variables ';' ID  {/* ArrayList<Token> lista  = (ArrayList<Token>) $1.obj;
-                                                  System.out.println(((Token) $3.obj).getId()+"AASDADASDASDADADADASDADADADADASDASDADASDASDASDASDASD");
+lista_de_variables : lista_de_variables ';' ID  { ArrayList<Token> lista  = (ArrayList<Token>) $1.obj;
+                                                 // System.out.println(((Token) $3.obj).getId()+" SE AGREGO A LA LISTA DE VARIABLES");
                                                   lista.add((Token)$3.obj);
                                                   $$ = new ParserVal(lista);   
-                                                */}
+                                                }
 		    | ID  {lexico.getLexico().agregarEstructura( "en la linea "+lexico.getFuente().getLinea() +" se agrego el identificador"+ID);
-                           /*  System.out.println(((Token) $1.obj).getId()+"AASDADASDASDADADADASDADADADADASDASDADASDASDASDASDASD");
+                           // System.out.println(((Token) $1.obj).getId()+" SE AGREGO A LA LISTA DE VARIABLES ");
                             ArrayList<Token> lista = new ArrayList<>();
                             lista.add((Token)$1.obj);
-                            $$ = new ParserVal(lista);*/
+                            $$ = new ParserVal(lista);
                             }
 		    |error_lista_de_variables 
 	            ;
@@ -134,7 +137,6 @@ clousure : VOID ID '(' ')' '{' bloque_sentencias '}' {lexico.getLexico().agregar
 
 tipo :  USLINTEGER { System.out.println(" lei un uslinteger ");}
                     { $$ = new ParserVal ( new Token("USLINTEGER"));
-                        
                     }
 	| DOUBLE    { System.out.println(" lei un double" );}
                     { $$ = new ParserVal ( new Token("DOUBLE"));}
@@ -190,8 +192,19 @@ error_accion : cte error DO bloque {lexico.getLexico().agregarError(" en la line
 
 
 
-cte : CTE_D {System.out.println("leida DOUBLE");}
-      | CTE_USLINTEGER{System.out.println("Leida CTE");}
+cte : CTE_D {System.out.println("leida DOUBLE");
+             Token nuevo = (Token) $1.obj;
+             lexico.getTS().setDeclaracion(nuevo.getId(),nuevo);
+             nuevo.setTipoReal("double");
+             $$ = new ParserVal(nuevo);
+             }
+
+      | CTE_USLINTEGER{System.out.println("Leida CTE");
+                        Token nuevo = (Token) $1.obj;
+                        lexico.getTS().setDeclaracion(nuevo.getId(),nuevo);
+                        nuevo.setTipoReal("uslinteger");  
+                        $$ = new ParserVal(nuevo);
+                        }
 	;
 
 
@@ -211,7 +224,16 @@ seleccion : if_condicion bloque END_IF            {lexico.getLexico().agregarEst
 
 
 asignacion : ID  ASIGNACION  expresion {lexico.getLexico().agregarEstructura( "en la linea "+lexico.getFuente().getLinea()+" se agrego una asignacion");System.out.println("realice una asignacion");}
-                { }
+                { 
+                   Token id = (Token) $1.obj;
+                   Token exp = (Token) $3.obj;
+                   if( id.getTipoReal().equals(exp.getTipoReal())){ 
+                        
+                      }
+                    else
+                        System.out.println("TIPOS INCOMPATIBLES");
+                    
+                }
            | error_asignacion
            ;
 
@@ -223,20 +245,94 @@ error_asignacion : ID expresion { System.out.println("Error"); lexico.getLexico(
 
 
 
-expresion : expresion '+' termino {System.out.println("se hizo una suma ");}{lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una suma");}
-	  | expresion '-' termino {lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una resta");}
-	  | termino {System.out.println("TERMINO a EXPR");}
+expresion : expresion '+' termino {System.out.println("se hizo una suma ");}{lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una suma");
+                                    Token termino1 = (Token) $1.obj;
+                                    Token factor = (Token) $3.obj;
+                                    if(termino1.getTipoReal().equals(factor.getTipoReal())){
+                                    //ACA CREO EL TERCETO
+                                            String simbolo = "+";
+                                            String tipo = termino1.getTipoReal();
+                                            Terceto terceto = new Terceto(simbolo,termino1,factor);
+                                            ctrlTercetos.agregarTerceto(terceto);
+                                            Token resultado = new Token(true,String.valueOf(terceto.getNro()));
+                                            resultado.setTipoReal(factor.getTipoReal());
+                                            System.out.println("estoy imprimiendo el tipo del resultado"+ resultado.getTipoReal());
+                                            $$ = new ParserVal(resultado);
+                                       }
+                                    else
+                                    System.out.println("ERROR, TIPOS INCOMPATIBLES");
+                                    }
+	  | expresion '-' termino {lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una resta");
+                                        Token termino1 = (Token) $1.obj;
+                                        Token factor = (Token) $3.obj;
+                                        if(termino1.getTipoReal().equals(factor.getTipoReal())){
+                                        //ACA CREO EL TERCETO
+                                            String simbolo = "-" ;
+                                            String tipo = termino1.getTipoReal();
+                                            Terceto terceto = new Terceto(simbolo,termino1,factor);
+                                            ctrlTercetos.agregarTerceto(terceto);
+                                            Token resultado = new Token(true,String.valueOf(terceto.getNro()));
+                                            resultado.setTipoReal(factor.getTipoReal());
+                                            $$ = new ParserVal(resultado);
+                                        }
+                                        else
+                                        System.out.println("ERROR, TIPOS INCOMPATIBLES"); 
+                                  $$= null;    
+                                 }
+	  | termino {System.out.println("TERMINO a EXPR");
+                     $$ = new ParserVal ( (Token) $1.obj);
+                    }
           ;
 
-termino : termino '*' factor {lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una multiplicacion");}
-	| termino '/' factor {lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una division");}
-	| factor { System.out.println("FACTOR a TERMINO"); }
+termino : termino '*' factor {lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una multiplicacion");
+                               Token termino1 = (Token) $1.obj;
+                               Token factor = (Token) $3.obj;
+                               if(termino1.getTipoReal().equals(factor.getTipoReal())){
+                                 //ACA CREO EL TERCETO
+                                            String simbolo = "*";
+                                            String tipo = termino1.getTipoReal();
+                                            Terceto terceto = new Terceto(simbolo,termino1,factor);
+                                            ctrlTercetos.agregarTerceto(terceto);
+                                            Token resultado = new Token(true,String.valueOf(terceto.getNro()));
+                                            resultado.setTipoReal(factor.getTipoReal());
+                                            System.out.println("estoy imprimiendo el tipo del resultado"+ resultado.getTipoReal());
+                                            $$ = new ParserVal(resultado);
+                                }
+                                else
+                                System.out.println("ERROR, TIPOS INCOMPATIBLES");
+                                    
+                                
+                             }
+	| termino '/' factor {lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una division");
+                              Token termino1 = (Token) $1.obj;
+                               Token factor = (Token) $3.obj;
+                               if(termino1.getTipoReal().equals(factor.getTipoReal())){
+                                 //ACA CREO EL TERCETO
+                                            String simbolo = "/";
+                                            String tipo = termino1.getTipoReal();
+                                            Terceto terceto = new Terceto(simbolo,termino1,factor);
+                                            ctrlTercetos.agregarTerceto(terceto);
+                                            Token resultado = new Token(true,String.valueOf(terceto.getNro()));
+                                            resultado.setTipoReal(factor.getTipoReal());
+                                            $$ = new ParserVal(resultado);
+                                }
+                                else
+                                System.out.println("ERROR, TIPOS INCOMPATIBLES"); 
+                                }
+	| factor { System.out.println("FACTOR a TERMINO"); 
+                    $$ =  new ParserVal((Token) $1.obj);
+                 }
         ;
 
 factor : cte { System.out.println("CTE a FACTOR"); }
 	| factor_negado
-	| ID {System.out.println("cargue un identificador");
-               System.out.println("El identificador que tengo en $1 es " + ((String) $1.obj)  );
+	| ID { Token nuevo =(Token) $1.obj;
+                System.out.println(nuevo.getId()+"ESTE ES EL LEXEMA QUE VOY A BUSCAR EN LA TABLA DE SIMBOLOS");
+                  
+                if(lexico.getTS().fueDeclarada((nuevo.getId())))
+                $$ = new ParserVal(lexico.getTS().getToken(((nuevo.getId()))));
+               else
+                    System.out.println("el id nunca fue declarado");
              }
 	;
 
@@ -244,15 +340,36 @@ factor_negado : '-' CTE_D
               ;
 
 
-condicion :  expresion comparador expresion 
+condicion :  expresion comparador expresion { String simbolo = ((Token) $2.obj).getId(); 
+                                              Token exp1 = (Token) $1.obj;
+                                              Token exp2 = (Token) $3.obj;
+                                              Terceto terceto = new Terceto(simbolo,exp1,exp2);
+                                              ctrlTercetos.agregarTerceto(terceto);
+                                              Token resultado = new Token(true,String.valueOf(terceto.getNro()));   
+                                              resultado.setTipoReal(exp1.getTipoReal());
+                                              $$ = new ParserVal(resultado);
+                                              
+                                            }
            ;
 
-comparador : '<'
-	   |  '>'
-	   |   '=' 
-           |  S_MAYOR_IGUAL
-	   |  S_MENOR_IGUAL
-	   |  S_DISTINTO 
+comparador : '<' { String comparador = ' <';
+                   $$ = new ParserVal(new Token(comparador));
+                   }
+	   |  '>'{ String comparador = ' >';
+                   $$ = new ParserVal(new Token(comparador));
+                   }
+	   |   '='{ String comparador = '=';
+                   $$ = new ParserVal(new Token(comparador));
+                   } 
+           |  S_MAYOR_IGUAL  {
+                                $$ = new ParserVal(new Token('>='));
+                                }
+	   |  S_MENOR_IGUAL  {
+                                $$ = new ParserVal(new Token('<='));
+                                }
+	   |  S_DISTINTO     {
+                                $$ = new ParserVal(new Token('!='));
+                                }
             ;
 
 %%
@@ -263,20 +380,26 @@ comparador : '<'
 
 private ArchController lexico;
 private TablaSimbolos tSimbolos;
+private CtrlTercetos ctrlTercetos;
 public Parser(ArchController lexico)
 {
   this.lexico= lexico;
   this.tSimbolos = lexico.getTS();
+  this.ctrlTercetos = new CtrlTercetos();
 } 
 
 public int yylex(){
     Token token = this.lexico.getToken();
    if(token != null ){ 
     int val =token.getTipo();
-    yyval = new ParserVal(token);
+    yylval = new ParserVal(token);
     return val;
 }
-   else return 0;
+   else{
+        for (Terceto t : ctrlTercetos.getTercetos())
+                t.getNro();
+        return 0;
+        }
 }
 
 public void yyerror(String s){

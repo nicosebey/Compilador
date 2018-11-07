@@ -13,22 +13,30 @@ public class Token {
    private String id;
    private int tipo;
    private int linea;
+   private boolean esTerceto;
+   private String tipoReal;
+   
+   
+   
    
    
    
    
    public Token(String id){
        this.id = id ;
+       esTerceto= false;
    }
    public Token (){
        this.id= null;
        this.linea = 1;
    }
-   
+   public Token(boolean terceto,String nroTerceto){
+       this.id = nroTerceto;
+       this.esTerceto = terceto;
+   }
    public String getId(){
        return id;
    }
-
     public void setLexema(String s){
         id = s;
     }
@@ -41,13 +49,22 @@ public class Token {
     public int getTipo(){
         return this.tipo;
     }
-
     public void setLinea(int linea) {
         this.linea = linea;
     }
    public int getLinea(){
        return linea;
    }
-    
-   
+    public void setTipoReal(String tipoReal) {
+        this.tipoReal = tipoReal;
+    }
+    public String getTipoReal() {
+        return tipoReal;
+    }
+   public String getNroTerceto(){
+       return id;
+   }
+   public boolean esTerceto(){
+       return esTerceto;
+   }
 }

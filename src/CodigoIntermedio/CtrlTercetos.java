@@ -27,8 +27,13 @@ public class CtrlTercetos {
     public ArrayList<Terceto> getTercetos() {
         return tercetos;
     }
-    
-    
+    public void agregarTerceto(Terceto t){
+        t.setNumero(tercetos.size());
+        tercetos.add(t);
+    }
+    public String getNroStringTerceto(){
+        return String.valueOf(nroTercetoActual);
+    }
     
     
 }

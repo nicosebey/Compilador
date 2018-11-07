@@ -13,7 +13,7 @@ import java.util.Hashtable;
  */
 public class TablaSimbolos {
  private static Hashtable<String,String> tSimbol = new Hashtable<String,String>();
- private static Hashtable<String,String> declaradas = new Hashtable<String,String>();
+ private static Hashtable<String,Token> declaradas = new Hashtable<String,Token>();
 
 
 public void agregar(String lexema,String tipo){
@@ -39,25 +39,29 @@ public boolean existeL(String s){
         return tSimbol;
     }
 
-public void setDeclaracion(String lexema, String tipo ){
-    declaradas.put(lexema, tipo);
+public void setDeclaracion(String lexema, Token token ){
+    declaradas.put(lexema, token);
 }
 
 public boolean fueDeclarada(String lexema){
-    return declaradas.contains(lexema);
+    if (declaradas.containsKey(lexema) == true)
+            
+               return true;
+    else 
+            return false;
 }
 
 
-public String getTipo(String lexema){
+public Token getToken(String lexema){
     return declaradas.get(lexema);
 }
 
-    public  Hashtable<String, String> getDeclaradas() {
+    public  Hashtable<String, Token> getDeclaradas() {
         return declaradas;
     }
 
     public TablaSimbolos() {
-        this.declaradas = new Hashtable<String,String>();
+        this.declaradas = new Hashtable<String,Token>();
     }
 
 
