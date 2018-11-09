@@ -34,4 +34,18 @@ public class Terceto {
     public int getNro(){
         return  nroTerceto;
     }  
+
+    public Token getToken(int i) {
+        if(i == 1)
+            return t1;
+        else
+            return t2;
+    }
+
+    void setElemento(int i, Token nuevo) {
+            if (i == 1)
+                t1 = nuevo;
+            else
+                t2 = nuevo;
+    }
 }

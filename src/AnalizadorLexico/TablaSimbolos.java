@@ -65,6 +65,8 @@ public Token getToken(String lexema){
     }
 
 
-
+public void setInvisibles(String ambito){
+    //por toda la lista de declaradas si el ambito == ambito setear visible(false);
+}
 
 }

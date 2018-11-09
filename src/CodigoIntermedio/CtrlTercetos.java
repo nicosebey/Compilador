@@ -5,6 +5,7 @@
  */
 package CodigoIntermedio;
 
+import AnalizadorLexico.Token;
 import java.util.ArrayList;
 
 /**
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 public class CtrlTercetos {
     private int nroTercetoActual;
     private ArrayList<Terceto> tercetos;
+    private ArrayList<Integer> pila;
 
     public CtrlTercetos() {
         nroTercetoActual = 0;
@@ -34,6 +36,22 @@ public class CtrlTercetos {
     public String getNroStringTerceto(){
         return String.valueOf(nroTercetoActual);
     }
-    
+    public void apilar(int nroTerceto){
+        pila.add(nroTerceto);
+    }
+    public void desapilar(){
+        int tercetoAcompletar = pila.get(pila.size()-1);
+        pila.remove(pila.size()-1);
+        Terceto nuevo = tercetos.get(tercetoAcompletar);
+        Token t = new Token( String.valueOf(tercetos.size()) ); 
+        t.setEsTerceto(false); 
+        if (nuevo.getToken(1) == null)
+            nuevo.setElemento(1, t);
+        else
+            nuevo.setElemento(2, t);
+        tercetos.set(tercetoAcompletar, nuevo);
+        
+        
+    }
     
 }

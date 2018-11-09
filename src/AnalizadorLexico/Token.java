@@ -15,6 +15,9 @@ public class Token {
    private int linea;
    private boolean esTerceto;
    private String tipoReal;
+   private String ambito;
+   private boolean visible;
+   
    
    
    
@@ -67,4 +70,32 @@ public class Token {
    public boolean esTerceto(){
        return esTerceto;
    }
+
+    public void setEsTerceto(boolean esTerceto) {
+        this.esTerceto = esTerceto;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public String getAmbito() {
+        return ambito;
+    }
+
+    public void setAmbito(String ambito) {
+        this.ambito = ambito;
+    }
+   
+   
+   
+   
+   
+   
+   
+   
 }
