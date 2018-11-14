@@ -8,6 +8,8 @@ package compilador;
 import AnalizadorLexico.ArchController;
 import AnalizadorLexico.Fuente;
 import AnalizadorLexico.TablaSimbolos;
+import CodigoIntermedio.CtrlTercetos;
+import CodigoIntermedio.GeneradorAssembler;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
@@ -51,7 +53,7 @@ public class Main {
     }
 
     
-      public static void mainr () {
+      public static void mainr () throws IOException {
        
          //-------------------------------carga del codigo fuente en un StringBuilder ------------------------------------------------// 
           
@@ -75,13 +77,16 @@ public class Main {
         
         Parser parser = new Parser(controlador);
         parser.run();
+        
+      
        
-          
+         
         controlador.getEstructuras();
         controlador.mostrarErrores();
         controlador.mostrarTokens();
         
-        
+       
+       parser.getCtrlTercetos().imprimirTercetos();
         
        
        
@@ -102,7 +107,10 @@ public class Main {
         
         */
         
-        
+        CtrlTercetos controladorTercetos = new CtrlTercetos();
+        GeneradorAssembler ga = new GeneradorAssembler(controladorTercetos);
+        ga.setTSimbolos(controlador.getTS());
+        ga.generarAssembler();
         }
 
     

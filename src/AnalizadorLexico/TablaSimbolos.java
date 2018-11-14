@@ -5,6 +5,8 @@
  */
 package AnalizadorLexico;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 
 /**
@@ -44,6 +46,7 @@ public void setDeclaracion(String lexema, Token token ){
 }
 
 public boolean fueDeclarada(String lexema){
+    System.out.println("aca estoy aca me tenes "+lexema+declaradas.containsKey(lexema));
     if (declaradas.containsKey(lexema) == true)
             
                return true;
@@ -68,5 +71,57 @@ public Token getToken(String lexema){
 public void setInvisibles(String ambito){
     //por toda la lista de declaradas si el ambito == ambito setear visible(false);
 }
+
+public Collection<Token> getTokens(){
+                return declaradas.values();
+        
+    }
+public String getAssembler() {
+        String assembler="";
+        Collection<Token> tokens= getTokens();
+        
+        for(Token t: tokens){
+            
+            if(t.getTipo() == ArchController.CTE_D){
+                /*String nomDecFloat = t.getNombre().replace(',','a').replace('-','n');
+                String nomInicFloat = t.getNombre().replace(',','.');
+                assembler = assembler + "auxf"+nomDecFloat+" "+ trentaydosBits +" "+nomInicFloat+'\n';*/
+            }
+            else{
+                if(t.getTipo()== ArchController.CTE_USLINTEGER){
+                    //String tipoAssembler = getTipoAssember(t);
+
+                }
+                else{  
+                    if (t.getTipo() == ArchController.CADENA){  
+                        
+                        
+                        assembler = assembler + "cadena1" + " " + "db" + " " + t.getId() + " " + "," + " " + "0";
+                    }
+                    else{
+                        //CASO VARIABLES
+                        
+                        String tipoAssembler = getTipoAssember(t);
+                        assembler = assembler + t.getId()+ " " + tipoAssembler + '\n';
+                    }
+                }
+            }
+        }
+        return assembler;
+    }
+
+    private String getTipoAssember(Token t) {
+        String tipo = "";
+        //AnalizadorLexico analizador = new AnalizadorLexico(null, null); //es para usar las constantes
+
+        if ( t.getTipoReal().equals("double") || t.getTipoReal().equals("uslinteger")){ //CASO DE VARIABLES
+            if (t.getTipoReal().equals("double"))
+                tipo = "dq"; //dq = 64 bits
+            else
+                tipo = "dd"; //dd = 32 bits
+
+        }
+        return tipo;
+    }
 
 }

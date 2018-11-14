@@ -170,6 +170,7 @@ clousure : VOID ID '(' ')' {
                                                     Token funcion = New Token(nombreFun);
                                                     lexico.getTS().setDeclaracion(nombreFun,funcion);
                                           }
+                                    }           
          | VOID ID '(' ')' error bloque_sentencias '}' {lexico.getLexico().agregarError("error en la creacion del clousure void"+" en la linea "+lexico.getFuente().getLinea() +"falta la primer llave");}
          | VOID ID '(' ')' '{' bloque_sentencias  error       {lexico.getLexico().agregarError("error en la creacion del clousure void"+" en la linea " + lexico.getFuente().getLinea() +"falta la segunda llave");}
          | VOID ID  error  {lexico.getLexico().agregarError("error en la creacion del clousure void"+" en la linea "+lexico.getFuente().getLinea() +"falta el primer parentesis");}

@@ -7,6 +7,7 @@ package AnalizadorLexico;
 
 /**
  *
+ * 
  * @author nicol
  */
 public class Token {
@@ -62,7 +63,7 @@ public class Token {
         this.tipoReal = tipoReal;
     }
     public String getTipoReal() {
-        return tipoReal;
+        return tipoReal.toLowerCase();
     }
    public String getNroTerceto(){
        return id;
