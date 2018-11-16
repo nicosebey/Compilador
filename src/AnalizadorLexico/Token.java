@@ -18,7 +18,8 @@ public class Token {
    private String tipoReal;
    private String ambito;
    private boolean visible;
-   
+   private boolean negativo;
+   private String nombreCte;
    
    
    
@@ -29,15 +30,26 @@ public class Token {
    public Token(String id){
        this.id = id ;
        esTerceto= false;
+       
    }
    public Token (){
        this.id= null;
        this.linea = 1;
+       this.negativo = false;
    }
    public Token(boolean terceto,String nroTerceto){
        this.id = nroTerceto;
        this.esTerceto = terceto;
    }
+
+    public void setNegativo(boolean esNegativo) {
+        this.negativo = esNegativo;
+    }
+
+    public boolean iszarpadNegativo() {
+        return negativo;
+    }
+   
    public String getId(){
        return id;
    }
@@ -90,6 +102,14 @@ public class Token {
 
     public void setAmbito(String ambito) {
         this.ambito = ambito;
+    }
+
+    public String getNombreCte() {
+        return nombreCte;
+    }
+
+    public void setNombreCte(String nombreCte) {
+        this.nombreCte = nombreCte;
     }
    
    

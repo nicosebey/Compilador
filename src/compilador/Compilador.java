@@ -5,6 +5,8 @@
  */
 package compilador;
 
+import java.io.IOException;
+
 /**
  *
  * @author nicol
@@ -14,7 +16,7 @@ public class Compilador {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
 //        String direccion = args[0];     PARA EL EJECUTABLE DESCOMENTAR ESTO Y COMENTAR LA DE ABAJO
         String direccion = new String("C:\\Users\\nicol\\Desktop\\aa.txt");

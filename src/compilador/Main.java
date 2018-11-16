@@ -89,7 +89,7 @@ public class Main {
        parser.getCtrlTercetos().imprimirTercetos();
         
        
-       
+          System.out.println(parser.getCtrlTercetos().getTercetos().size());
        
        
        
@@ -111,6 +111,7 @@ public class Main {
         GeneradorAssembler ga = new GeneradorAssembler(controladorTercetos);
         ga.setTSimbolos(controlador.getTS());
         ga.generarAssembler();
+          
         }
 
     

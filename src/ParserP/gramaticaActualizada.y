@@ -278,7 +278,7 @@ print : PRINT '(' CADENA ')'  {lexico.getLexico().agregarEstructura( " en la lin
                                Token t = new Token (((Token)$3.obj).getId()+"'");//ACA NO ME ANDA EL SVAL
                                Terceto terceto = new Terceto("Print",t,new Token("-"));
                                t.setTipo(lexico.CADENA);
-                               lexico.getTS().setDeclaradacion(t.getId(),t);
+                               lexico.getTS().setDeclaracion(t.getId(),t);
                                ctrlTercetos.agregarTerceto(terceto);
                                 }
 	|error_print{           // ESTO NO VA ACA VA EN LOS ERRORES
@@ -394,34 +394,48 @@ cte : CTE_D {System.out.println("leida DOUBLE");
              $$ = new ParserVal(nuevo);
              }
 
-      | CTE_USLINTEGER{System.out.println("Leida CTE");
+      | CTE_USLINTEGER{ System.out.println("Leida CTE");
                         Token nuevo = (Token) $1.obj;
-                        
+                        nuevo.setLexema(nuevo.getId().substring(0, nuevo.getid().length()-3));
                         lexico.getTS().setDeclaracion(nuevo.getId(),nuevo);
                         nuevo.setTipoReal("uslinteger");  
                         $$ = new ParserVal(nuevo);
                         }   
-	;
+      | '-'CTE_USLINTEGER{ System.out.println("Leida CTE jorgeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                            Token nuevo = (Token) $2.obj;
+                            nuevo.setNegativo(true);
+                            System.out.println(nuevo.getId()+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                            nuevo.setLexema("-"+nuevo.getId());
+                            
+                        lexico.getTS().setDeclaracion(nuevo.getId(),nuevo);
+                        nuevo.setTipoReal("uslinteger");  
+                        $$ = new ParserVal(nuevo);
+                        }     
+    ;
 
 
 
 if_condicion : IF '(' condicion ')' {
                                      Terceto terceto = new Terceto("bf",(Token) $3.obj,null);
+                                     terceto.setTipoSalto(ctrlTercetos.getTercetos().get(ctrlTercetos.getTercetos().size()-1).getOperador());
                                      ctrlTercetos.agregarTerceto(terceto);
                                      ctrlTercetos.apilar(terceto.getNro());
                                     }
              | IF error condicion ')' {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta el '(' de la condicion ");
                                         Terceto terceto = new Terceto("bf",(Token) $3.obj,null);
+                                        terceto.setTipoSalto(ctrlTercetos.getTercetos().get(ctrlTercetos.getTercetos().size()-1).getOperador());
                                           ctrlTercetos.agregarTerceto(terceto);
                                           ctrlTercetos.apilar(terceto.getNro());
                                            }
              | IF '(' condicion error {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" falta el ')' de la condicion ");
                                         Terceto terceto = new Terceto("bf",(Token) $3.obj,null);
+                                        terceto.setTipoSalto(ctrlTercetos.getTercetos().get(ctrlTercetos.getTercetos().size()-1).getOperador());
                                         ctrlTercetos.agregarTerceto(terceto);
                                         ctrlTercetos.apilar(terceto.getNro());
                                         }
              | IF condicion  error   {lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +" faltan los parentesis de la condicion");
                                              Terceto terceto = new Terceto("bf",(Token) $2.obj,null);
+                                             terceto.setTipoSalto(ctrlTercetos.getTercetos().get(ctrlTercetos.getTercetos().size()-1).getOperador());
                                            ctrlTercetos.agregarTerceto(terceto);
                                            ctrlTercetos.apilar(terceto.getNro());
                                            }
@@ -458,6 +472,9 @@ asignacion : ID  ASIGNACION  expresion {lexico.getLexico().agregarEstructura( "e
                    Terceto terceto;
                    terceto = new Terceto(":=",id,exp);
                    ctrlTercetos.agregarTerceto(terceto);
+                   System.out.println(id.getId()+" idddddddddddddddddddddddddddddddddddddddddddddddddddd"+lexico.getTS().fueDeclarada(id.getId()));
+                   System.out.println(exp.getId()+" idddddddddddddddddddddddddddddddddddddddddddddddddddd"+lexico.getTS().fueDeclarada(exp.getId()));
+                   
                    if((lexico.getTS().fueDeclarada(id.getId())&&(lexico.getTS().fueDeclarada(exp.getId())))){
                         if( id.getTipoReal().equals(exp.getTipoReal())){ 
                             //terceto = new Terceto(":=",id,exp);
@@ -469,8 +486,11 @@ asignacion : ID  ASIGNACION  expresion {lexico.getLexico().agregarEstructura( "e
                            //ctrlTercetos.agregarTerceto(terceto);  
                     }else{
                         //terceto= new Terceto(":=",id,exp);
-                        lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +"alguna de las variables no fue declarada");
-                        System.out.println(id.getId()+"HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+                        Character c= id.getId().charAt(0);
+                        Character cc= exp.getId().charAt(0);
+                        if(!(( Character.isDigit(c)) || (Character.isDigit(cc))))
+                            lexico.getLexico().agregarError(" en la linea "+lexico.getFuente().getLinea() +"alguna de las variables no fue declarada");
+                        //System.out.println(id.getId()+"HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
                         //ctrlTercetos.agregarTerceto(terceto);
                          }
                   
@@ -527,23 +547,29 @@ expresion : expresion '+' termino {System.out.println("se hizo una suma ");}{lex
                                     
 	  | expresion '-' termino {lexico.getLexico().agregarEstructura( " en la linea "+lexico.getFuente().getLinea() +" se agrego una resta");
                                         Token termino1 = (Token) $1.obj;
+                                        
                                         Token factor = (Token) $3.obj;
+                                        
                                         String tipo = "incompatibles"; 
                                         if(termino1.getTipoReal().equals(factor.getTipoReal())){
+                                                
                                                  tipo = termino1.getTipoReal();
                                             }
                                         else{
                                             System.out.println("ERROR, TIPOS INCOMPATIBLES"); 
                                             }
-                                        String simbolo = "-" ;                       
+                                        String simbolo = "-" ;     
+                 
                                         Terceto terceto = new Terceto(simbolo,termino1,factor);
+                                         
                                         ctrlTercetos.agregarTerceto(terceto);
                                         Token resultado = new Token(true,String.valueOf(terceto.getNro()));
                                         resultado.setTipoReal(factor.getTipoReal());
+
                                         $$ = new ParserVal(resultado);
                                         
                                        
-                                  $$= null;    
+                                  //$$= null;    
                                  }
 	  | termino {System.out.println("TERMINO a EXPR");
                      $$ = new ParserVal ( (Token) $1.obj);
@@ -597,22 +623,37 @@ termino : termino '*' factor {lexico.getLexico().agregarEstructura( " en la line
         ;
 
 factor : cte { System.out.println("CTE a FACTOR"); }
-	| factor_negado
+	//| factor_negado
 	| ID { Token nuevo =(Token) $1.obj;
                 System.out.println(nuevo.getId()+"ESTE ES EL LEXEMA QUE VOY A BUSCAR EN LA TABLA DE SIMBOLOS");
                   
                 if(lexico.getTS().fueDeclarada((nuevo.getId())))
-                $$ = new ParserVal(lexico.getTS().getToken(((nuevo.getId()))));
+                    $$ = new ParserVal(lexico.getTS().getToken(((nuevo.getId()))));
                else
                     System.out.println("el id nunca fue declarado");
              }
 	;
+/*
+factor_negado : '-' CTE_USLINTEGER { System.out.println("acaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                            Token nuevo =(Token) $1.obj;
+                            System.out.println(nuevo.getId()+"ESTE ES EL LEXEMA QUE VOY A BUSCAR EN LA TABLA DE SIMBOLOS");
+                            nuevo.setNegativo(true);
+                            if(lexico.getTS().fueDeclarada((nuevo.getId())))
+                                $$ = new ParserVal(nuevo);
+                           /* else{
+                                 lexico.getTS().setDeclaracion(nuevo.getId(),nuevo);
+                                 $$ =new ParserVal(nuevo);
+                                }
 
-factor_negado : '-' CTE_D
+                            //$$ = new ParserVal(lexico.getTS().getToken(((nuevo.getId()))));
+                        else
+                                System.out.println("el id nunca fue declarado");
+                }
               ;
+*/
 
-
-condicion :  expresion comparador expresion { String simbolo = ((Token) $2.obj).getId(); 
+condicion :  expresion comparador expresion { Terceto t = new Terceto("if",null,null);
+                                              String simbolo = ((Token) $2.obj).getId(); 
                                               Token exp1 = (Token) $1.obj;
                                               Token exp2 = (Token) $3.obj;
                                               if(!exp1.getTipoReal().equals(exp2.getTipoReal())){
@@ -621,6 +662,7 @@ condicion :  expresion comparador expresion { String simbolo = ((Token) $2.obj).
                                                }
                                                         
                                               Terceto terceto = new Terceto(simbolo,exp1,exp2);
+                                              terceto.setTipoSalto(simbolo);
                                               ctrlTercetos.agregarTerceto(terceto);
                                               Token resultado = new Token(true,String.valueOf(terceto.getNro()));   
                                               resultado.setTipoReal(exp1.getTipoReal());
@@ -629,10 +671,10 @@ condicion :  expresion comparador expresion { String simbolo = ((Token) $2.obj).
                                             }
            ;
 
-comparador : '<' { String comparador = " <";
+comparador : '<' { String comparador = "<";
                    $$ = new ParserVal(new Token(comparador));
                    }
-	   |  '>'{ String comparador = " >";
+	   |  '>'{ String comparador = ">";
                    $$ = new ParserVal(new Token(comparador));
                    }
 	   |   '='{ String comparador = "=";

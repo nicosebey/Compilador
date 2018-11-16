@@ -11,10 +11,10 @@ import java.util.ArrayList;
  */
 public class GeneradorAssembler {
 
-    /*public static final String labelDivCero = "DividirCero";
+    public static final String labelDivCero = "DividirCero";
     public static final String labelOverflowSuma = "OverflowSuma";
-    public static final String labelOverflowMult = "OverflowMultiplicacion";
-    */
+    //public static final String labelOverflowMult = "OverflowMultiplicacion";
+
     static CtrlTercetos controladorTercetos;
     static TablaSimbolos tablaSimb;
     static File arch;
@@ -69,26 +69,30 @@ public class GeneradorAssembler {
                 + "includelib \\masm32\\lib\\kernel32.lib" + '\n'
                 + "includelib \\masm32\\lib\\user32.lib" + '\n'
                 + '\n' +".data" + '\n');
-        String data = tablaSimb.getAssembler() ;
-        /*data = data + controladorTercetos.getPrintsAssembler();
+        String aux1= (String) controladorTercetos.generarAssembler();
+        String aux2=tablaSimb.getAssembler() ;
+
+        String data = aux2;
+       // data = data + controladorTercetos.getPrintsAssembler();
         data = data + labelDivCero + " db \"Error al dividir por cero!\", 0" + '\n';
         data = data + labelOverflowSuma + " db \"La suma ha generado un Overflow!\", 0" + '\n';
-        data = data + labelOverflowMult + " db \"La multiplicacion ha generado un Overflow!\", 0" + '\n';
+//      data = data + labelOverflowMult + " db \"La multiplicacion ha generado un Overflow!\", 0" + '\n';
 //		data = data + controladorTercetos.getVarAux();*/
         data = data + '\n' + ".code"+ "\n";
 
         bw.write( data );
 
         //Inicia el codigo
-        /*String code = "start:" + '\n' + (String) controladorTercetos.generarAssembler();
+        String code = "start:" + '\n' + aux1;
 
         code = code + "invoke ExitProcess, 0" + '\n';
 
         bw.write( code );
-        String errores = getErroresRunTime();
+       /* String errores = getErroresRunTime();
         bw.write(errores);
-        bw.write( "end start" );
+
 */
+        bw.write( "end start" );
         bw.close();
     }
 /*

@@ -5,6 +5,7 @@
  */
 package CodigoIntermedio;
 
+import AnalizadorLexico.TablaSimbolos;
 import AnalizadorLexico.Token;
 import java.util.ArrayList;
 
@@ -13,6 +14,9 @@ import java.util.ArrayList;
  * @author nicol
  */
 public class CtrlTercetos {
+    public static final String BF = "bf";
+    public static final String BI = "bi";
+
     private int nroTercetoActual;
     private ArrayList<Terceto> tercetos;
     private ArrayList<Integer> pila;
@@ -21,14 +25,23 @@ public class CtrlTercetos {
     private String tipoCase;
     private String funcionActual;
     private Terceto saltoCase;
-    public CtrlTercetos() {
+    private ArrayList<Integer> labelPendientes; // por el tema del if
+    private TablaSimbolos tablaSimbolos;
+    public CtrlTercetos(
+    ) {
         nroTercetoActual = 0;
         tercetos = new ArrayList<Terceto>();
         pila = new ArrayList<Integer>();
         tipoCase = null;
          pilaCase = new ArrayList<Terceto>();
           pilaVariablesCase = new ArrayList<Terceto>();
-          saltoCase = null;    
+          saltoCase = null;
+          tablaSimbolos=null;
+        labelPendientes = new ArrayList<Integer>();
+    }
+
+    public void setTablaSimbolos(TablaSimbolos tablaSimbolos) {
+        this.tablaSimbolos = tablaSimbolos;
     }
 
     public int getNroTercetoActual() {
@@ -129,17 +142,29 @@ public class CtrlTercetos {
         pilaVariablesCase.clear();
     }
     */
+    public void addLabelPendiente(int labelPendiente) {
+    this.labelPendientes.add( labelPendiente );
+}
+
+    public int borrarLabelPendiente() {
+        int l = labelPendientes.get( labelPendientes.size()-1 );
+        labelPendientes.remove( labelPendientes.size()-1 );
+        return l;
+    }
     public String generarAssembler(){
         String assembler="";
-        //num_terceto_actual = 1; //numero de terceto para colocar el label
+        nroTercetoActual = 1; //numero de terceto para colocar el label
         for (Terceto t: this.tercetos){
             t.setControladorTercetos(this);
+            t.setTablaSimbolos(tablaSimbolos);
             assembler = assembler + t.getAssembler();
-            /*num_terceto_actual ++;
-            if((!labelPendientes.isEmpty()) && (num_terceto_actual == labelPendientes.get(labelPendientes.size()-1))) {
-                assembler = assembler + "Label" + String.valueOf(labelPendientes.get(labelPendientes.size()-1))+ "\n");
+
+
+            nroTercetoActual++;
+            if((!labelPendientes.isEmpty()) && (nroTercetoActual == labelPendientes.get(labelPendientes.size()-1))) {
+                assembler = assembler + "Label" + String.valueOf(labelPendientes.get(labelPendientes.size()-1))+ "\n";
                 borrarLabelPendiente();
-            }*/
+            }
         }
         return assembler;
     }

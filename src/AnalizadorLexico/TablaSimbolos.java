@@ -16,6 +16,7 @@ import java.util.Hashtable;
 public class TablaSimbolos {
  private static Hashtable<String,String> tSimbol = new Hashtable<String,String>();
  private static Hashtable<String,Token> declaradas = new Hashtable<String,Token>();
+ private int contadorCte=0;
 
 
 public void agregar(String lexema,String tipo){
@@ -42,11 +43,15 @@ public boolean existeL(String s){
     }
 
 public void setDeclaracion(String lexema, Token token ){
+    if(Character.isDigit(lexema.charAt(0))){
+        token.setNombreCte("c"+this.contadorCte);
+        contadorCte++;
+    }
     declaradas.put(lexema, token);
 }
 
 public boolean fueDeclarada(String lexema){
-    System.out.println("aca estoy aca me tenes "+lexema+declaradas.containsKey(lexema));
+
     if (declaradas.containsKey(lexema) == true)
             
                return true;
@@ -83,26 +88,24 @@ public String getAssembler() {
         for(Token t: tokens){
             
             if(t.getTipo() == ArchController.CTE_D){
-                /*String nomDecFloat = t.getNombre().replace(',','a').replace('-','n');
-                String nomInicFloat = t.getNombre().replace(',','.');
-                assembler = assembler + "auxf"+nomDecFloat+" "+ trentaydosBits +" "+nomInicFloat+'\n';*/
+                assembler = assembler + t.getNombreCte() + " " + "DQ" + " " + t.getId()+'\n';
             }
             else{
                 if(t.getTipo()== ArchController.CTE_USLINTEGER){
-                    //String tipoAssembler = getTipoAssember(t);
 
+                    assembler = assembler +t.getNombreCte()  + " " + "DD"+ " " + t.getId() + '\n';
                 }
                 else{  
                     if (t.getTipo() == ArchController.CADENA){  
                         
                         
-                        assembler = assembler + "cadena1" + " " + "db" + " " + t.getId() + " " + "," + " " + "0";
+                        assembler = assembler + "cadena1" + " " + "db" + " " + t.getId() + " " + "," + " " + "0"+'\n';
                     }
                     else{
                         //CASO VARIABLES
                         
                         String tipoAssembler = getTipoAssember(t);
-                        assembler = assembler + t.getId()+ " " + tipoAssembler + '\n';
+                        assembler = assembler + t.getId()+ " " + tipoAssembler + " "+ "?" + '\n';
                     }
                 }
             }
@@ -116,9 +119,9 @@ public String getAssembler() {
 
         if ( t.getTipoReal().equals("double") || t.getTipoReal().equals("uslinteger")){ //CASO DE VARIABLES
             if (t.getTipoReal().equals("double"))
-                tipo = "dq"; //dq = 64 bits
+                tipo = "DQ"; //dq = 64 bits
             else
-                tipo = "dd"; //dd = 32 bits
+                tipo = "DD"; //dd = 32 bits
 
         }
         return tipo;
