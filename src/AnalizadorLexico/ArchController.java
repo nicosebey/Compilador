@@ -412,13 +412,13 @@ public class ArchController {
     }
     
     public void creaTokenSingular(char c){
-        Token token2 = new Token();
+        Token token2 = new Token(String.valueOf(c));
          token2.setTipo(getIdentificador(String.valueOf(c)));
         token2.setLexemaSingular(c);
         ltokens.add(token2);
     }
     public void creaTokenSingular(char c,int linea){
-        Token token2 = new Token();
+        Token token2 = new Token(String.valueOf(c));
          token2.setTipo(getIdentificador(String.valueOf(c)));
         token2.setLexemaSingular(c);
         token2.setLinea(linea);
