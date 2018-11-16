@@ -11,10 +11,19 @@ includelib \masm32\lib\user32.lib
 _c DQ ?
 _b DQ ?
 c2 DQ 2.2
+auxiliar1 DD ?
 DividirCero db "Error al dividir por cero!", 0
 OverflowSuma db "La suma ha generado un Overflow!", 0
 
 .code
 start:
+MOV EBX,2.2
+MOV _c,EBX
+FLD auxdc1
+FLD auxdc2
+FADD 
+FST auxiliar1
+MOV EBX,auxiliar1
+MOV _b,EBX
 invoke ExitProcess, 0
 end start
